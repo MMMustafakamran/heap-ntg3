@@ -1,0 +1,241 @@
+/**
+ * Chrome-free demo routes. Each one mounts exactly the feature its doc route
+ * documents, with nothing but a thin back-bar above it, so a demo can be
+ * screen-recorded on its own.
+ *
+ * All demos share the application-root CopilotKit provider, so a conversation
+ * started in one demo continues in another — the Quickstart, Frontend tools,
+ * A2UI, and Headless demos all drive the `default` agent and therefore show the
+ * same conversation through four different interfaces.
+ */
+import { Component } from '@angular/core';
+
+import { DemoFrame } from '../components/demo-frame';
+import { A2uiChatComponent } from '../features/a2ui/a2ui-chat.component';
+import { MediaChatComponent } from '../features/attachments/media-chat.component';
+import { ChatUiDemoComponent } from '../features/chat-ui/chat-ui-demo.component';
+import { HeadlessChatComponent } from '../features/headless/headless-chat.component';
+import { HitlChatComponent } from '../features/hitl/hitl-chat.component';
+import { InspectorChatComponent } from '../features/inspector/inspector-chat.component';
+import { MemoryDemoComponent } from '../features/memory/memory-demo.component';
+import { VoiceChatComponent } from '../features/media/voice-chat.component';
+import { QuickstartChat } from '../features/quickstart/quickstart-chat';
+import { SharedStateChatComponent } from '../features/shared-state/shared-state-chat.component';
+import { ThreadsDemoComponent } from '../features/threads/threads-demo.component';
+import { ToolsChatComponent } from '../features/tools/tools-chat.component';
+
+@Component({
+  selector: 'app-quickstart-demo',
+  imports: [DemoFrame, QuickstartChat],
+  template: `<app-demo-frame backTo="/quickstart"
+    ><app-quickstart-chat
+  /></app-demo-frame>`,
+})
+export class QuickstartDemo {}
+
+@Component({
+  selector: 'app-chat-ui-demo-page',
+  imports: [DemoFrame, ChatUiDemoComponent],
+  template: `<app-demo-frame backTo="/chat-ui"
+    ><app-chat-ui-demo
+  /></app-demo-frame>`,
+})
+export class ChatUiDemo {}
+
+@Component({
+  selector: 'app-tools-demo',
+  imports: [DemoFrame, ToolsChatComponent],
+  template: `<app-demo-frame backTo="/frontend-tools-generative-ui"
+    ><app-tools-chat
+  /></app-demo-frame>`,
+})
+export class ToolsDemo {}
+
+@Component({
+  selector: 'app-a2ui-demo',
+  imports: [DemoFrame, A2uiChatComponent],
+  template: `<app-demo-frame backTo="/a2ui"><app-a2ui-chat /></app-demo-frame>`,
+})
+export class A2uiDemo {}
+
+@Component({
+  selector: 'app-voice-demo',
+  imports: [DemoFrame, VoiceChatComponent],
+  template: `<app-demo-frame backTo="/voice-multimodal"
+    ><app-voice-chat
+  /></app-demo-frame>`,
+})
+export class VoiceDemo {}
+
+@Component({
+  selector: 'app-hitl-demo',
+  imports: [DemoFrame, HitlChatComponent],
+  template: `<app-demo-frame backTo="/human-in-the-loop"
+    ><app-hitl-chat
+  /></app-demo-frame>`,
+})
+export class HitlDemo {}
+
+@Component({
+  selector: 'app-shared-state-demo',
+  imports: [DemoFrame, SharedStateChatComponent],
+  template: `<app-demo-frame backTo="/shared-state"
+    ><app-shared-state-chat
+  /></app-demo-frame>`,
+})
+export class SharedStateDemo {}
+
+@Component({
+  selector: 'app-threads-demo-page',
+  imports: [DemoFrame, ThreadsDemoComponent],
+  template: `<app-demo-frame backTo="/threads"
+    ><app-threads-demo
+  /></app-demo-frame>`,
+})
+export class ThreadsDemo {}
+
+@Component({
+  selector: 'app-memory-demo-page',
+  imports: [DemoFrame, MemoryDemoComponent],
+  template: `<app-demo-frame backTo="/memory"
+    ><app-memory-demo
+  /></app-demo-frame>`,
+})
+export class MemoryDemo {}
+
+@Component({
+  selector: 'app-attachments-demo',
+  imports: [DemoFrame, MediaChatComponent],
+  template: `<app-demo-frame backTo="/attachments"
+    ><div style="height: 100%"><app-media-chat /></div
+  ></app-demo-frame>`,
+})
+export class AttachmentsDemo {}
+
+@Component({
+  selector: 'app-headless-demo',
+  imports: [DemoFrame, HeadlessChatComponent],
+  template: `<app-demo-frame backTo="/headless"
+    ><div style="height: 100%; overflow: auto; padding: 1rem">
+      <app-headless-chat /></div
+  ></app-demo-frame>`,
+})
+export class HeadlessDemo {}
+
+/**
+ * The Inspector has no surface of its own: the framework mounts `cpk-web-inspector` on
+ * `document.body` once a CopilotKit component is on the route, so the chat below is what brings it
+ * into existence. Nothing else is on the page (owner rule: no explanatory text of ours on screen).
+ */
+@Component({
+  selector: 'app-inspector-demo',
+  imports: [DemoFrame, InspectorChatComponent],
+  template: `<app-demo-frame backTo="/inspector">
+    <div style="height: 100%"><app-inspector-chat /></div>
+  </app-demo-frame>`,
+})
+export class InspectorDemo {}
+
+// HARNESS: demo routes for the pages added on 2026-11-09 (assignment.json).
+import { AuthChatComponent } from '../features/auth/auth-chat.component';
+import { GenUiChatComponent } from '../features/generative-ui/genui-chat.component';
+import { SubagentsChatComponent } from '../features/subagents/subagents-chat.component';
+import { OrderSearchComponent } from '../features/webmcp/order-search.component';
+import { CopilotChat } from '@copilotkit/angular';
+
+@Component({
+  selector: 'app-genui-demo',
+  imports: [DemoFrame, GenUiChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Native generative UI"><app-genui-chat /></app-demo-frame>`,
+})
+export class GenUiDemo {}
+
+@Component({
+  selector: 'app-subagents-demo',
+  imports: [DemoFrame, SubagentsChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Sub-agents"><app-subagents-chat /></app-demo-frame>`,
+})
+export class SubagentsDemo {}
+
+@Component({
+  selector: 'app-webmcp-demo',
+  imports: [DemoFrame, OrderSearchComponent, CopilotChat],
+  template: `<app-demo-frame backTo="/" heading="WebMCP"
+    ><app-order-search /><div style="height: 100%"><copilot-chat /></div
+  ></app-demo-frame>`,
+})
+export class WebmcpDemo {}
+
+@Component({
+  selector: 'app-auth-demo',
+  imports: [DemoFrame, AuthChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Authentication"><app-auth-chat /></app-demo-frame>`,
+})
+export class AuthDemo {}
+
+// HARNESS: demo routes for the nine Components and surfaces pages (/ag2/generative-ui/components*,
+// Angular tab), added 2026-11-09. One chat each; see features/components/cmp-chat.component.ts.
+import { CmpChatComponent } from '../features/components/cmp-chat.component';
+
+@Component({
+  selector: 'app-cmp-components-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Components and surfaces"><app-cmp-chat runtime="components" /></app-demo-frame>`,
+})
+export class CmpComponentsDemo {}
+
+@Component({
+  selector: 'app-cmp-surfaces-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Surfaces"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpSurfacesDemo {}
+
+@Component({
+  selector: 'app-cmp-catalogs-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Catalogs"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpCatalogsDemo {}
+
+@Component({
+  selector: 'app-cmp-standard-catalog-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Standard catalog"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpStandardCatalogDemo {}
+
+@Component({
+  selector: 'app-cmp-state-and-actions-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="State and actions"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpStateAndActionsDemo {}
+
+@Component({
+  selector: 'app-cmp-theming-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Theming"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpThemingDemo {}
+
+@Component({
+  selector: 'app-cmp-transports-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Transports"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpTransportsDemo {}
+
+@Component({
+  selector: 'app-cmp-markdown-mode-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Markdown mode"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpMarkdownModeDemo {}
+
+@Component({
+  selector: 'app-cmp-from-a2ui-demo',
+  imports: [DemoFrame, CmpChatComponent],
+  template: `<app-demo-frame backTo="/" heading="Adopt from A2UI"><app-cmp-chat /></app-demo-frame>`,
+})
+export class CmpFromA2uiDemo {}

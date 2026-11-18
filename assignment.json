@@ -1,0 +1,485 @@
+{
+ "framework": "Google Antigravity",
+ "ui": "angular",
+ "repo": "heap-ntg3",
+ "docBase": "https://docs.copilotkit.ai/angular/google-antigravity/",
+ "versions": {},
+ "testedContext": {
+  "os": "Microsoft Windows 11 Pro",
+  "packageManager": "npm 11 (Node 26.7.0)"
+ },
+ "report": {
+  "style": "team",
+  "h1": "Google Antigravity",
+  "title": "Google Antigravity Angular testing",
+  "quickstartHeading": "Quickstart",
+  "quickstartHeader": null,
+  "clipsToUpload": true,
+  "guidesHeading": "Angular Guides",
+  "columns": [
+   "Page/Section",
+   "Results"
+  ],
+  "resultColumn": 1
+ },
+ "sections": [],
+ "pages": [
+  {
+   "id": "quickstart",
+   "label": "Angular",
+   "kind": "quickstart",
+   "group": null,
+   "child": false,
+   "docPath": "",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "prebuilt-components",
+   "label": "Prebuilt Components",
+   "kind": "guide",
+   "group": "Chat",
+   "child": true,
+   "docPath": "prebuilt-components",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "multimodal-attachments",
+   "label": "Multimodal Attachments",
+   "kind": "guide",
+   "group": "Chat",
+   "child": true,
+   "docPath": "multimodal-attachments",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "voice",
+   "label": "Voice",
+   "kind": "guide",
+   "group": "Chat",
+   "child": true,
+   "docPath": "voice",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "clf-css",
+   "label": "CSS Customization",
+   "kind": "guide",
+   "group": "Custom Look and Feel",
+   "child": true,
+   "docPath": "custom-look-and-feel/css",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "clf-slots",
+   "label": "Slots (Subcomponents)",
+   "kind": "guide",
+   "group": "Custom Look and Feel",
+   "child": true,
+   "docPath": "custom-look-and-feel/slots",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "clf-headless-ui",
+   "label": "Headless UI",
+   "kind": "guide",
+   "group": "Custom Look and Feel",
+   "child": true,
+   "docPath": "custom-look-and-feel/headless-ui",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "threads-drawer",
+   "label": "Threads Drawer",
+   "kind": "guide",
+   "group": "Threads",
+   "child": true,
+   "docPath": "prebuilt-components/copilot-threads-drawer",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "headless-threads",
+   "label": "Headless Threads",
+   "kind": "guide",
+   "group": "Threads",
+   "child": true,
+   "docPath": "headless-threads",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "frontend-tools",
+   "label": "Frontend Tools",
+   "kind": "guide",
+   "group": "Basics",
+   "child": false,
+   "docPath": "frontend-tools",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "gen-ui-tool-based",
+   "label": "Components as Tools",
+   "kind": "guide",
+   "group": "Generative UI",
+   "child": true,
+   "docPath": "generative-ui/tool-based",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "gen-ui-tool-rendering",
+   "label": "Tool Call Rendering",
+   "kind": "guide",
+   "group": "Generative UI",
+   "child": true,
+   "docPath": "generative-ui/tool-rendering",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "a2ui",
+   "label": "A2UI",
+   "kind": "guide",
+   "group": "Generative UI",
+   "child": true,
+   "docPath": "generative-ui/a2ui",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "mcp-apps",
+   "label": "MCP Apps",
+   "kind": "guide",
+   "group": "Generative UI",
+   "child": true,
+   "docPath": "generative-ui/mcp-apps",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "open-generative-ui",
+   "label": "Open Generative UI",
+   "kind": "guide",
+   "group": "Generative UI",
+   "child": true,
+   "docPath": "generative-ui/open-generative-ui",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "shared-state",
+   "label": "Shared State",
+   "kind": "guide",
+   "group": "Shared state",
+   "child": true,
+   "docPath": "shared-state",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "agent-readonly",
+   "label": "Agent Read-Only Context",
+   "kind": "guide",
+   "group": "Shared state",
+   "child": true,
+   "docPath": "shared-state/agent-readonly",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "human-in-the-loop",
+   "label": "HITL Overview",
+   "kind": "guide",
+   "group": "Human-in-the-loop",
+   "child": true,
+   "docPath": "human-in-the-loop",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "use-interrupt",
+   "label": "Pausing the Agent for Input",
+   "kind": "guide",
+   "group": "Human-in-the-loop",
+   "child": true,
+   "docPath": "human-in-the-loop/useInterrupt",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "headless-interrupts",
+   "label": "Headless Interrupts",
+   "kind": "guide",
+   "group": "Human-in-the-loop",
+   "child": true,
+   "docPath": "human-in-the-loop/headless",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "webmcp",
+   "label": "WebMCP",
+   "kind": "guide",
+   "group": "Interactivity",
+   "child": false,
+   "docPath": "webmcp",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "multi-agent-subagents",
+   "label": "Sub-agents",
+   "kind": "guide",
+   "group": "Agent capabilities",
+   "child": false,
+   "docPath": "multi-agent/subagents",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "auth",
+   "label": "Authentication",
+   "kind": "guide",
+   "group": null,
+   "child": false,
+   "docPath": "auth",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  },
+  {
+   "id": "inspector",
+   "label": "Inspector",
+   "kind": "guide",
+   "group": "Debugging",
+   "child": true,
+   "docPath": "inspector",
+   "reachable": "sidebar",
+   "status": null,
+   "findings": [],
+   "notes": [],
+   "block": null,
+   "links": [],
+   "review": {
+    "verdict": null,
+    "approvedAt": null,
+    "by": null
+   }
+  }
+ ],
+ "quickstartBlocked": "the Angular quickstart's Antigravity backend is a fragment (_common.py with no imports or constants, build_registry never defined) and no runtime server is shown for Angular, so a reader has no working Angular app to build on"
+}

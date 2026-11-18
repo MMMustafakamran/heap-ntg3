@@ -1,0 +1,16 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Google Antigravity agent server for the CopilotKit Angular harness."
+requires-python = ">=3.13"
+# Doc install step: pip install ag-ui-antigravity google-antigravity.
+# HARNESS: fastapi/uvicorn to serve create_antigravity_app (the page never says how to run it).
+dependencies = [
+    "ag-ui-antigravity",
+    "google-antigravity",
+    "fastapi",
+    "uvicorn",
+]
+
+[tool.uv]
+package = false
