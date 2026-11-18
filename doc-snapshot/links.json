@@ -1,6 +1,6 @@
 {
- "root": "angular/ag2",
- "savedAt": "2026-11-16",
+ "root": "angular/google-antigravity",
+ "savedAt": "2026-11-18",
  "pages": {
   "/angular/ag2/build-with-agents": [],
   "/angular/ag2/webmcp": [
@@ -130,6 +130,57 @@
   "/ag2/generative-ui/components/surfaces": [],
   "/ag2/generative-ui/components/theming": [],
   "/ag2/generative-ui/components/transports": [],
-  "/generative-ui/components/standard-catalog": []
+  "/generative-ui/components/standard-catalog": [],
+  "/angular/google-antigravity/frontend-tools": [],
+  "/angular/google-antigravity": [
+   "/angular/google-antigravity/backend/copilot-runtime",
+   "/angular/google-antigravity/inspector",
+   "/angular/google-antigravity/intelligence/overview"
+  ],
+  "/angular/google-antigravity/webmcp": [
+   "/angular/google-antigravity/frontend-tools"
+  ],
+  "/angular/google-antigravity/generative-ui": [],
+  "/angular/google-antigravity/build-with-agents": [],
+  "/angular/google-antigravity/multi-agent/subagents": [
+   "/angular/google-antigravity/shared-state",
+   "/angular/google-antigravity/shared-state/streaming"
+  ],
+  "/angular/google-antigravity/telemetry": [],
+  "/angular/google-antigravity/community-frameworks": [],
+  "/angular/google-antigravity/custom-look-and-feel/css": [],
+  "/angular/google-antigravity/prebuilt-components": [],
+  "/angular/google-antigravity/custom-look-and-feel/slots": [],
+  "/angular/google-antigravity/custom-look-and-feel/headless-ui": [],
+  "/angular/google-antigravity/multimodal-attachments": [],
+  "/angular/google-antigravity/prebuilt-components/copilot-threads-drawer": [],
+  "/angular/google-antigravity/voice": [
+   "/angular/google-antigravity/voice"
+  ],
+  "/angular/google-antigravity/generative-ui/mcp-apps": [],
+  "/angular/google-antigravity/headless-threads": [],
+  "/angular/google-antigravity/generative-ui/tool-rendering": [],
+  "/angular/google-antigravity/generative-ui/a2ui": [],
+  "/angular/google-antigravity/generative-ui/tool-based": [],
+  "/angular/google-antigravity/generative-ui/open-generative-ui": [],
+  "/angular/google-antigravity/shared-state": [],
+  "/angular/google-antigravity/shared-state/agent-readonly": [],
+  "/angular/google-antigravity/auth": [
+   "/angular/google-antigravity/backend/copilot-runtime",
+   "/angular/google-antigravity/backend/runtime-endpoints",
+   "/angular/google-antigravity/runtime-server-adapter"
+  ],
+  "/angular/google-antigravity/inspector": [
+   "/angular/google-antigravity/troubleshooting/event-inspector"
+  ],
+  "/angular/google-antigravity/human-in-the-loop/useInterrupt": [],
+  "/angular/google-antigravity/human-in-the-loop": [],
+  "/angular/google-antigravity/runtime-server-adapter": [
+   "/angular/google-antigravity/intelligence/quickstart"
+  ],
+  "/angular/google-antigravity/human-in-the-loop/headless": [],
+  "/angular/google-antigravity/vs-code-extension": [
+   "/angular/google-antigravity/troubleshooting/event-inspector"
+  ]
  }
 }

@@ -3,6 +3,34 @@
 What the CopilotKit Angular + AG2 docs changed under this repo.
 Only pages that actually moved are recorded — a sync that finds everything unchanged writes nothing here at all.
 
+## 2026-11-18
+
+- custom-look-and-feel/slots: NEW new (+68 / -0)
+- multimodal-attachments: NEW new (+116 / -0)
+- voice: NEW new (+63 / -0)
+- custom-look-and-feel/css: NEW new (+32 / -0)
+- prebuilt-components: NEW new (+106 / -0)
+- custom-look-and-feel/headless-ui: NEW new (+81 / -0)
+- prebuilt-components/copilot-threads-drawer: NEW new (+34 / -0)
+- headless-threads: NEW new (+67 / -0)
+- frontend-tools: NEW new (+48 / -0)
+- generative-ui/tool-based: NEW new (+65 / -0)
+- generative-ui/tool-rendering: NEW new (+75 / -0)
+- shared-state: NEW new (+92 / -0)
+- generative-ui/mcp-apps: NEW new (+27 / -0)
+- generative-ui/open-generative-ui: NEW new (+48 / -0)
+- (root): NEW new (+342 / -0)
+- generative-ui/a2ui: NEW new (+192 / -0)
+- shared-state/agent-readonly: NEW new (+81 / -0)
+- human-in-the-loop: NEW new (+107 / -0)
+- human-in-the-loop/useInterrupt: NEW new (+89 / -0)
+- human-in-the-loop/headless: NEW new (+50 / -0)
+- webmcp: NEW new (+169 / -0)
+- auth: NEW new (+164 / -0)
+- multi-agent/subagents: NEW new (+399 / -0)
+- inspector: NEW new (+74 / -0)
+- sidebar: added /angular/google-antigravity, /angular/google-antigravity/build-with-agents, /angular/google-antigravity/intelligence/overview, /angular/google-antigravity/frontend-tools, /angular/google-antigravity/generative-ui, /angular/google-antigravity/webmcp, /angular/google-antigravity/multi-agent/subagents, /angular/google-antigravity/telemetry, /angular/google-antigravity/community-frameworks, /angular/google-antigravity/prebuilt-components, /angular/google-antigravity/custom-look-and-feel/css, /angular/google-antigravity/custom-look-and-feel/slots, /angular/google-antigravity/custom-look-and-feel/headless-ui, /angular/google-antigravity/multimodal-attachments, /angular/google-antigravity/voice, /angular/google-antigravity/prebuilt-components/copilot-threads-drawer, /angular/google-antigravity/headless-threads, /angular/google-antigravity/generative-ui/tool-based, /angular/google-antigravity/generative-ui/tool-rendering, /angular/google-antigravity/generative-ui/mcp-apps, /angular/google-antigravity/generative-ui/open-generative-ui, /angular/google-antigravity/generative-ui/a2ui, /angular/google-antigravity/shared-state, /angular/google-antigravity/shared-state/agent-readonly, /angular/google-antigravity/human-in-the-loop, /angular/google-antigravity/human-in-the-loop/useInterrupt, /angular/google-antigravity/human-in-the-loop/headless, /angular/google-antigravity/backend/copilot-runtime, /angular/google-antigravity/backend/runtime-endpoints, /angular/google-antigravity/backend/custom-agent, /angular/google-antigravity/backend/custom-ag-ui-agent, /angular/google-antigravity/backend/agent-runner, /angular/google-antigravity/backend/message-history, /angular/google-antigravity/backend/self-managed-agents, /angular/google-antigravity/backend/ag-ui, /angular/google-antigravity/runtime-server-adapter, /angular/google-antigravity/auth, /angular/google-antigravity/inspector, /angular/google-antigravity/vs-code-extension; removed /angular/ag2, /angular/ag2/quickstart, /angular/ag2/build-with-agents, /angular/ag2/intelligence/overview, /angular/ag2/webmcp, /angular/ag2/auth, /angular/ag2/multi-agent/subagents, /angular/ag2/intelligence/quickstart, /angular/ag2/intelligence/intelligence-platform, /angular/ag2/intelligence/plans, /angular/ag2/intelligence/bring-your-own-thread-system, /angular/ag2/intelligence/threads-explained, /angular/ag2/learning, /angular/ag2/intelligence/learned-skills, /angular/ag2/intelligence/memories, /angular/ag2/intelligence/trajectories, /angular/ag2/intelligence/captured-data, /angular/ag2/intelligence/trajectories-reference, /angular/ag2/intelligence/standalone-collector, /angular/ag2/intelligence/analytics, /angular/ag2/intelligence/channels, /angular/ag2/intelligence/managed-intelligence-platform, /angular/ag2/intelligence/self-hosting, /angular/ag2/intelligence/self-hosting-ecs, /angular/ag2/intelligence/self-hosting-local, /angular/ag2/copilot-runtime, /angular/ag2/ag-ui, /angular/ag2/inspector, /angular/ag2/using-these-docs, /angular/ag2/features, /angular/ag2/guides/chat-ui, /angular/ag2/guides/frontend-tools-generative-ui, /angular/ag2/guides/a2ui, /angular/ag2/guides/voice-multimodal, /angular/ag2/guides/human-in-the-loop, /angular/ag2/guides/shared-state, /angular/ag2/guides/threads-memory-attachments-headless, /angular/ag2/guides/troubleshooting, /angular/ag2/contributing/code-contributions/package-linking, /angular/ag2/contributing/docs-contributions, /angular/ag2/troubleshooting/common-issues, /angular/ag2/telemetry, /angular/ag2/community-frameworks
+
 ## 2026-11-16 (guides/a2ui, https://docs.copilotkit.ai/ag2/generative-ui/components, https://docs.copilotkit.ai/ag2/generative-ui/components/catalogs, https://docs.copilotkit.ai/ag2/generative-ui/components/from-a2ui, https://docs.copilotkit.ai/ag2/generative-ui/components/markdown-mode, https://docs.copilotkit.ai/ag2/generative-ui/components/state-and-actions, https://docs.copilotkit.ai/ag2/generative-ui/components/surfaces, https://docs.copilotkit.ai/ag2/generative-ui/components/theming, https://docs.copilotkit.ai/ag2/generative-ui/components/transports, https://docs.copilotkit.ai/generative-ui/components/standard-catalog)
 
 - guides/a2ui: HIGH code (+9 / -9)

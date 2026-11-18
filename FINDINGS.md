@@ -86,6 +86,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 - Authentication: `readSessionToken()` and `verifySession()` are never defined.
 - MCP Apps, Open Generative UI: `runtimeUrl: "/api/copilotkit"` assumes a same-origin runtime the Angular setup doesn't have.
 - Sub-agents: the file is called `subagents.py` in one place and `src/agents/subagents.py` in another.
+- Sub-agents: links to `/angular/google-antigravity/shared-state/streaming`, which is a 404.
 - "Next steps" links drop `/google-antigravity` (e.g. `/angular/prebuilt-components`).
 
 ## Build-only

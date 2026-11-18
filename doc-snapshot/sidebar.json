@@ -1,221 +1,201 @@
 {
- "root": "angular/ag2",
- "savedAt": "2026-11-08",
+ "root": "angular/google-antigravity",
+ "savedAt": "2026-11-18",
  "pages": [
   {
-   "url": "/angular/ag2",
-   "name": "Introduction",
-   "group": ""
-  },
-  {
-   "url": "/angular/ag2/quickstart",
+   "url": "/angular/google-antigravity",
    "name": "Quickstart",
-   "group": ""
+   "group": "Search⌘K"
   },
   {
-   "url": "/angular/ag2/build-with-agents",
+   "url": "/angular/google-antigravity/build-with-agents",
    "name": "Build with agents",
-   "group": ""
+   "group": "Search⌘K"
   },
   {
-   "url": "/angular/ag2/intelligence/overview",
+   "url": "/angular/google-antigravity/intelligence/overview",
    "name": "Intelligence",
-   "group": ""
+   "group": "Search⌘K"
   },
   {
-   "url": "/angular/ag2/webmcp",
+   "url": "/angular/google-antigravity/frontend-tools",
+   "name": "Frontend Tools",
+   "group": "Basics > Threads"
+  },
+  {
+   "url": "/angular/google-antigravity/generative-ui",
+   "name": "Overview",
+   "group": "Generative UI"
+  },
+  {
+   "url": "/angular/google-antigravity/webmcp",
    "name": "WebMCP",
-   "group": "Interactivity"
+   "group": "Interactivity > Human-in-the-loop"
   },
   {
-   "url": "/angular/ag2/auth",
-   "name": "Authentication",
-   "group": "Agent capabilities > AG2"
-  },
-  {
-   "url": "/angular/ag2/multi-agent/subagents",
+   "url": "/angular/google-antigravity/multi-agent/subagents",
    "name": "Sub-agents",
    "group": "Agent capabilities"
   },
   {
-   "url": "/angular/ag2/intelligence/quickstart",
-   "name": "Quickstart",
-   "group": "Intelligence > Get started"
-  },
-  {
-   "url": "/angular/ag2/intelligence/intelligence-platform",
-   "name": "Architecture",
-   "group": "Intelligence > Get started"
-  },
-  {
-   "url": "/angular/ag2/intelligence/plans",
-   "name": "Plans",
-   "group": "Intelligence > Get started"
-  },
-  {
-   "url": "/angular/ag2/intelligence/bring-your-own-thread-system",
-   "name": "Bring your own thread system",
-   "group": "Intelligence > Features > AG-UI Streams"
-  },
-  {
-   "url": "/angular/ag2/intelligence/threads-explained",
-   "name": "Streams & Framework Threads",
-   "group": "Intelligence > Features > AG-UI Streams"
-  },
-  {
-   "url": "/angular/ag2/learning",
-   "name": "Automatic Learning",
-   "group": "Intelligence > Features > Automatic Learning"
-  },
-  {
-   "url": "/angular/ag2/intelligence/learned-skills",
-   "name": "Skill delivery",
-   "group": "Intelligence > Features > Automatic Learning"
-  },
-  {
-   "url": "/angular/ag2/intelligence/memories",
-   "name": "User Memories",
-   "group": "Intelligence > Features"
-  },
-  {
-   "url": "/angular/ag2/intelligence/trajectories",
-   "name": "Trajectories",
-   "group": "Intelligence > Features > Trajectories"
-  },
-  {
-   "url": "/angular/ag2/intelligence/captured-data",
-   "name": "Captured data",
-   "group": "Intelligence > Features > Trajectories"
-  },
-  {
-   "url": "/angular/ag2/intelligence/trajectories-reference",
-   "name": "API reference",
-   "group": "Intelligence > Features > Trajectories"
-  },
-  {
-   "url": "/angular/ag2/intelligence/standalone-collector",
-   "name": "Standalone collector",
-   "group": "Intelligence > Features"
-  },
-  {
-   "url": "/angular/ag2/intelligence/analytics",
-   "name": "Product Analytics",
-   "group": "Intelligence > Features"
-  },
-  {
-   "url": "/angular/ag2/intelligence/channels",
-   "name": "Channels",
-   "group": "Intelligence > Features"
-  },
-  {
-   "url": "/angular/ag2/intelligence/managed-intelligence-platform",
-   "name": "Cloud-hosted",
-   "group": "Intelligence > Hosting"
-  },
-  {
-   "url": "/angular/ag2/intelligence/self-hosting",
-   "name": "Self-hosted",
-   "group": "Intelligence > Hosting"
-  },
-  {
-   "url": "/angular/ag2/intelligence/self-hosting-ecs",
-   "name": "AWS ECS/Fargate",
-   "group": "Intelligence > Hosting"
-  },
-  {
-   "url": "/angular/ag2/intelligence/self-hosting-local",
-   "name": "Local evaluation",
-   "group": "Intelligence > Hosting"
-  },
-  {
-   "url": "/angular/ag2/copilot-runtime",
-   "name": "Copilot Runtime",
-   "group": "Backend > Runtime > Runtime"
-  },
-  {
-   "url": "/angular/ag2/ag-ui",
-   "name": "AG-UI",
-   "group": "Backend > Runtime > Runtime"
-  },
-  {
-   "url": "/angular/ag2/inspector",
-   "name": "Inspector",
-   "group": "Backend > Runtime > Debugging"
-  },
-  {
-   "url": "/angular/ag2/using-these-docs",
-   "name": "Using the Angular docs",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/features",
-   "name": "Feature examples",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/chat-ui",
-   "name": "Chat UI and customization",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/frontend-tools-generative-ui",
-   "name": "Frontend tools and generative UI",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/a2ui",
-   "name": "A2UI schemas, styling, and recovery",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/voice-multimodal",
-   "name": "Voice and multimodal input",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/human-in-the-loop",
-   "name": "Human-in-the-loop and interrupts",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/shared-state",
-   "name": "Shared state and agent context",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/threads-memory-attachments-headless",
-   "name": "Threads, memory, attachments, and headless UI",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/guides/troubleshooting",
-   "name": "Troubleshooting Angular apps",
-   "group": "Learn > Angular guides"
-  },
-  {
-   "url": "/angular/ag2/contributing/code-contributions/package-linking",
-   "name": "Advanced: Package Linking",
-   "group": "Other > Contributing > Code contributions"
-  },
-  {
-   "url": "/angular/ag2/contributing/docs-contributions",
-   "name": "Documentation Contributions",
-   "group": "Other > Contributing"
-  },
-  {
-   "url": "/angular/ag2/troubleshooting/common-issues",
-   "name": "Common Copilot Issues",
+   "url": "/angular/google-antigravity/telemetry",
+   "name": "Open-source telemetry",
    "group": "Other > Troubleshooting"
   },
   {
-   "url": "/angular/ag2/telemetry",
-   "name": "Open-source telemetry",
-   "group": "Other"
+   "url": "/angular/google-antigravity/community-frameworks",
+   "name": "Community frameworks",
+   "group": "Other > Troubleshooting"
   },
   {
-   "url": "/angular/ag2/community-frameworks",
-   "name": "Community frameworks",
-   "group": "Other"
+   "url": "/angular/google-antigravity/prebuilt-components",
+   "name": "Prebuilt Components",
+   "group": "Basics > Chat"
+  },
+  {
+   "url": "/angular/google-antigravity/custom-look-and-feel/css",
+   "name": "CSS Customization",
+   "group": "Basics > Custom Look and Feel"
+  },
+  {
+   "url": "/angular/google-antigravity/custom-look-and-feel/slots",
+   "name": "Slots (Subcomponents)",
+   "group": "Basics > Custom Look and Feel"
+  },
+  {
+   "url": "/angular/google-antigravity/custom-look-and-feel/headless-ui",
+   "name": "Headless UI",
+   "group": "Basics > Custom Look and Feel"
+  },
+  {
+   "url": "/angular/google-antigravity/multimodal-attachments",
+   "name": "Multimodal Attachments",
+   "group": "Basics > Custom Look and Feel"
+  },
+  {
+   "url": "/angular/google-antigravity/voice",
+   "name": "Voice",
+   "group": "Basics > Custom Look and Feel"
+  },
+  {
+   "url": "/angular/google-antigravity/prebuilt-components/copilot-threads-drawer",
+   "name": "Threads Drawer",
+   "group": "Basics > Threads"
+  },
+  {
+   "url": "/angular/google-antigravity/headless-threads",
+   "name": "Headless Threads",
+   "group": "Basics > Threads"
+  },
+  {
+   "url": "/angular/google-antigravity/generative-ui/tool-based",
+   "name": "Components as Tools",
+   "group": "Generative UI > Controlled"
+  },
+  {
+   "url": "/angular/google-antigravity/generative-ui/tool-rendering",
+   "name": "Tool Call Rendering",
+   "group": "Generative UI > Controlled"
+  },
+  {
+   "url": "/angular/google-antigravity/generative-ui/mcp-apps",
+   "name": "MCP Apps",
+   "group": "Generative UI > Open-ended"
+  },
+  {
+   "url": "/angular/google-antigravity/generative-ui/open-generative-ui",
+   "name": "Open Generative UI",
+   "group": "Generative UI > Open-ended"
+  },
+  {
+   "url": "/angular/google-antigravity/generative-ui/a2ui",
+   "name": "A2UI",
+   "group": "Generative UI > Declarative"
+  },
+  {
+   "url": "/angular/google-antigravity/shared-state",
+   "name": "Shared State",
+   "group": "Interactivity > Shared state"
+  },
+  {
+   "url": "/angular/google-antigravity/shared-state/agent-readonly",
+   "name": "Agent Read-Only Context",
+   "group": "Interactivity > Shared state"
+  },
+  {
+   "url": "/angular/google-antigravity/human-in-the-loop",
+   "name": "HITL Overview",
+   "group": "Interactivity > Human-in-the-loop"
+  },
+  {
+   "url": "/angular/google-antigravity/human-in-the-loop/useInterrupt",
+   "name": "Pausing the Agent for Input",
+   "group": "Interactivity > Human-in-the-loop"
+  },
+  {
+   "url": "/angular/google-antigravity/human-in-the-loop/headless",
+   "name": "Headless Interrupts",
+   "group": "Interactivity > Human-in-the-loop"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/copilot-runtime",
+   "name": "Copilot Runtime",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/runtime-endpoints",
+   "name": "Runtime HTTP endpoints",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/custom-agent",
+   "name": "Use any model router",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/custom-ag-ui-agent",
+   "name": "Write your own AG-UI agent",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/agent-runner",
+   "name": "AgentRunner and persistence",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/message-history",
+   "name": "Message history",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/self-managed-agents",
+   "name": "Self-managed agents",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/backend/ag-ui",
+   "name": "Connect AG-UI agents",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/runtime-server-adapter",
+   "name": "Deploy to any runtime",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/auth",
+   "name": "Authentication",
+   "group": "Backend > Runtime"
+  },
+  {
+   "url": "/angular/google-antigravity/inspector",
+   "name": "Inspector",
+   "group": "Backend > Debugging"
+  },
+  {
+   "url": "/angular/google-antigravity/vs-code-extension",
+   "name": "VS Code Extension",
+   "group": "Backend > Debugging"
   }
  ]
 }
