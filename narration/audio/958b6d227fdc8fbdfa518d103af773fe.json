@@ -1,0 +1,9 @@
+{
+ "text": "Moving on to the demo. After chatting, the thread list should show the conversation, but it only shows the new conversation button.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 8.406,
+ "file": "958b6d227fdc8fbdfa518d103af773fe.mp3",
+ "clip": "ANTIGRAVITY-angular-09-HeadlessThreads",
+ "at": "demo"
+}

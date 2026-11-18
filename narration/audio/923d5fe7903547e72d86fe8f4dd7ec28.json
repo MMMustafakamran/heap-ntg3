@@ -1,0 +1,9 @@
+{
+ "text": "Moving on to the demo. After clicking mark high priority, the panel shows high, but the agent says it can't tell the priority.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 9.242,
+ "file": "923d5fe7903547e72d86fe8f4dd7ec28.mp3",
+ "clip": "ANTIGRAVITY-angular-16-SharedState",
+ "at": "demo"
+}

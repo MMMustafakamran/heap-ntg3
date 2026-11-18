@@ -32,7 +32,7 @@ type Delegation = { id: string; sub_agent: string; task: string; status: string;
 })
 export class SubagentsChatComponent {
   private readonly agentStore = injectAgentStore('subagents');
-  protected readonly delegations = computed(
+  protected readonly delegations = computed( // HARNESS: the delegation log the page never shows (readDelegations is undefined)
     () => ((this.agentStore().state() as { delegations?: Delegation[] } | undefined)?.delegations ?? []),
   );
 }

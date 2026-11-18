@@ -63,6 +63,8 @@ export const PAGES = definePages([
     startLine: 1,
     endLine: 29,
     prompt: 'What is the title of this chart, and which quarter has the highest value?',
+    // Image turns through the pool's OpenAI fallback took ~60 s in CI (review 2026-11-18).
+    timeouts: { replyStartMs: 120_000, replyStreamMs: 90_000 },
     waitAfterPromptMs: 3000,
   },
   {
@@ -73,7 +75,7 @@ export const PAGES = definePages([
     route: 'voice',
     ideFile: 'frontend/src/app/features/media/voice-chat.component.ts',
     startLine: 1,
-    endLine: 30,
+    endLine: 35,
     prompt: 'Hi, can you hear me? Reply in one short sentence.',
     waitAfterPromptMs: 3000,
   },
@@ -136,7 +138,7 @@ export const PAGES = definePages([
     ideFile: 'frontend/src/app/features/threads/thread-list.component.ts',
     startLine: 1,
     endLine: 45,
-    extraTabs: [{ filePath: 'frontend/src/app/features/headless-threads/headless-threads-demo.component.ts', startLine: 1, endLine: 32 }],
+    extraTabs: [{ filePath: 'frontend/src/app/features/headless-threads/headless-threads-demo.component.ts', startLine: 1, endLine: 32, addedText: '  readonly selectedThreadId = signal<string | undefined>(undefined); // HARNESS: never defined on the page' }],
     prompt: 'Hi! Give me a one-line tip for learning a new language.',
     waitAfterPromptMs: 3000,
   },
@@ -319,7 +321,7 @@ export const PAGES = definePages([
     endLine: 60,
     extraTabs: [
       { filePath: 'frontend/doc-verbatim/multi-agent-subagents/agent-state-feature.component.ts', startLine: 1, endLine: 17 },
-      { filePath: 'frontend/src/app/features/subagents/subagents-chat.component.ts', startLine: 1, endLine: 39 },
+      { filePath: 'frontend/src/app/features/subagents/subagents-chat.component.ts', startLine: 1, endLine: 38, addedText: '  protected readonly delegations = computed( // HARNESS: the delegation log the page never shows (readDelegations is undefined)' },
       { filePath: 'start-all.sh', startLine: 14, endLine: 20, addedText: '(cd backend && uv run --env-file .env --with httpx python interrupts_server.py > ../logs/backend-8284.log 2>&1) &' },
     ],
     prompt: 'Write a short blog post about solar panels: research it, draft it, then critique it.',

@@ -28,7 +28,7 @@ import { glideClick, glideTo } from './glide-click';
 export const FINDING_EVIDENCE: Record<string, DocEvidence[]> = {
   quickstart: [
     { text: 'AGENT_REGISTRY = build_registry()', caption: 'build_registry is never defined; _common.py has no imports or constants (FINDINGS.md #1)' },
-    { text: 'Configure Copilot Runtime to register this backend', caption: 'The runtime step is only a callout; the linked guide shows a Next.js route, no Angular server' },
+    { text: 'Expose the selected backend through Copilot Runtime', caption: 'The runtime step is only this (collapsed) callout; the linked guide shows a Next.js route, no Angular server' },
   ],
   'gen-ui-tool-rendering': [
     { text: 'fetch(`/api/weather?city=${encodeURIComponent(city)}`', caption: 'The handler fetches /api/weather; the page never shows or links that endpoint' },
@@ -88,7 +88,7 @@ export const FINDING_NOTES: Record<string, string> = {
   ].join('\n'),
   'open-generative-ui': [
     "page says add openGenerativeUI with sandboxFunctions and the agent streams sandboxed html into the chat",
-    "asked for 3 filter buttons,no sandbox iframe ever shows,just plain text buttons in the reply",
+    "asked for 3 filter buttons,no sandbox iframe ever shows,agent just writes html buttons into the message and they dont do anything",
     "asked straight out and the agent says it has no generatesandboxedui tool",
     "page only shows the angular provider,nothing about turning open generative ui on in the runtime",
   ].join('\n'),
@@ -107,7 +107,7 @@ export const FINDING_NOTES: Record<string, string> = {
   ].join('\n'),
   'agent-readonly': [
     'page says connectAgentContext sends app values like name and timezone to the agent',
-    'clicked use london time and asked,agent answers some other name and timezone,not ada or london',
+    'clicked use london time and asked, agent doesnt know ada or london or the selected record',
     'the context is registered in the browser but the antigravity agent never gets it',
     'no backend step on the page to read the context',
   ].join('\n'),
@@ -136,7 +136,8 @@ async function writeFinding(page: Page, id: string, config: Parameters<PageActio
 
 async function settle(page: Page, msgCount: number, ctx: ActionContext, quietMs = 3000): Promise<void> {
   try {
-    await waitForAgentResponseCompletion(page, quietMs, msgCount);
+    // Page `timeouts` (pages.config.ts) apply here too, not only in runStandardAction.
+    await waitForAgentResponseCompletion(page, quietMs, msgCount, undefined, { startTimeoutMs: ctx.timeouts.replyStartMs, streamTimeoutMs: ctx.timeouts.replyStreamMs });
   } catch (e) {
     ctx.warn(`Reply did not complete cleanly: ${String(e).slice(0, 160)}`);
   }
@@ -381,7 +382,8 @@ export const runOpenGenUiAction: PageActionHandler = async (page, config, _root,
   const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 15000 });
   const sel = '[data-testid="open-generative-ui-final-sandbox"]';
   const frame = page.locator(sel).last();
-  const shown = await frame.waitFor({ state: 'visible', timeout: 120000 }).then(() => true).catch(() => false);
+  // 75 s: under the 90 s freeze limit (review 2026-11-18)
+  const shown = await frame.waitFor({ state: 'visible', timeout: 75000 }).then(() => true).catch(() => false);
   await settle(page, msgCount, ctx, 5000);
   if (!shown) {
     mark('error');
@@ -478,6 +480,7 @@ export const runCssAction: PageActionHandler = async (page, config, _root, ctx) 
   if (user !== 'rgb(37, 99, 235)') ctx.fail(`The user message is not restyled: background ${user || 'element missing'}`);
   if (assistant !== 'rgb(239, 246, 255)') ctx.fail(`The assistant message is not restyled: background ${assistant || 'element missing'}`);
   await glideTo(page, page.locator('copilot-chat-assistant-message').last(), 2500);
+  await sleep(3000); // hold on the styled reply so the clip doesn't stop mid-glide (end mark landed past the video, review 2026-11-18)
 };
 
 /** Slots: every assistant reply renders through the custom component ("Assistant" label). */
@@ -666,7 +669,7 @@ export const runInterruptAction: PageActionHandler = async (page, config, _root,
     await settle(page, msgCount, ctx, 5000);
     resumed = gone && (await lastReply(page)).length > 0;
     const r = await lastReply(page);
-    if (resumed && !/\bapproved\b|cancel|declined|ship it|\bhold\b/i.test(r)) decisionLost = r.slice(0, 160);
+    if (resumed && !/\bapprov|cancel|declin|reject|ship|\bhold\b/i.test(r)) decisionLost = r.slice(0, 160);
     if (resumed) await glideTo(page, page.locator('copilot-chat-assistant-message').last(), 2500);
   }
   await finish(page, config, ctx,
@@ -734,5 +737,6 @@ Object.assign(FINDING_NOTES, {
     'page says injectthreads gives u the saved conversations for a custom list',
     'after chatting on agent support the list only shows the new conversation button, no threads',
     'runtime info says thread list false, page doesnt say what backend or platform provides the list',
+    'had to add selectedthreadid myself,page never defines it',
   ].join('\n'),
 });

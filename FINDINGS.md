@@ -44,7 +44,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 ### [Open Generative UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/open-generative-ui)
 **#8 No sandboxed UI renders with the page's setup.**
 - **Doc:** `provideCopilotKit({ …, openGenerativeUI: { sandboxFunctions: [setDashboardFilter] } })`.
-- **Result:** no sandbox iframe ever appears (3/3, also with the config at the app root); the agent says the dashboard filter is ready, or answers in text, and nothing is written to `sessionStorage`. The page shows no other step (e.g. the runtime's `openGenerativeUI` option).
+- **Result:** no sandbox iframe ever appears (3/3, also with the config at the app root); the agent writes plain HTML `<button>`s into its chat message instead (rendered static, "This chat may display the controls as static HTML"), so clicking does nothing and nothing is written to `sessionStorage`. The page shows no other step (e.g. the runtime's `openGenerativeUI` option).
 
 ### [Shared State](https://docs.copilotkit.ai/angular/google-antigravity/shared-state)
 **#9 The agent never sees state written with `agent.setState`.**
@@ -54,7 +54,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 ### [Agent Read-Only Context](https://docs.copilotkit.ai/angular/google-antigravity/shared-state/agent-readonly)
 **#10 `connectAgentContext` values never reach the Antigravity agent.**
 - **Doc:** `connectAgentContext(() => ({ … }))`, sending "values such as the signed-in user's name … timezone".
-- **Result:** asked who/where/which record, the agent answers "Your name is QS. Your timezone is UTC+05:00. I can't determine which record is selected"; Ada, Europe/London and record-42 appear in none of the captured model requests.
+- **Result:** after "Use London time", asked for the name, timezone and selected record, the agent never names Ada, Europe/London or record-42 (it guesses, or offers to search the workspace). None of those values appear in the captured model requests.
 
 ### [Pausing the Agent for Input](https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/useInterrupt)
 **#11 No backend that pauses is shown, and the interrupt payload is undocumented.**
@@ -66,7 +66,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 **#12 The `ticketing` agent is never shown or registered.**
 - **Doc:** "When the backend agent emits an AG-UI interrupt" and `injectAgentStore("ticketing")`.
 - **Result:** no `ticketing` agent exists and no interrupting backend is given; nothing appears.
-- **Confirmed by harness:** with `ticketing` mapped to the HARNESS interrupt agent, the message and Approve/Reject appear and Approve resumes ("TCK-42 was approved…").
+- **Confirmed by harness:** with `ticketing` mapped to the HARNESS interrupt agent, the message and Approve/Reject appear and Approve resumes the run (the agent goes on to ship TCK-42).
 
 ### [Sub-agents](https://docs.copilotkit.ai/angular/google-antigravity/multi-agent/subagents)
 **#13 The sub-agents backend can't start as installed, and the Angular snippet is a fragment.**

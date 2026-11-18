@@ -1,0 +1,9 @@
+{
+ "text": "Moving on to the demo. It should show the weather for Paris, but the card's result is just the app's own HTML page, and the agent says it couldn't get the weather.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 10.82,
+ "file": "837cbddd1614b75942c51600a6f68907.mp3",
+ "clip": "ANTIGRAVITY-angular-12-GenUiToolRendering",
+ "at": "demo"
+}

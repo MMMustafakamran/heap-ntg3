@@ -1,0 +1,9 @@
+{
+ "text": "So this is the problem, the page says ask the agent for the priority and it answers high.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 6.641,
+ "file": "c28de95df7b7e2275da5a9894c456148.mp3",
+ "clip": "ANTIGRAVITY-angular-16-SharedState",
+ "at": "evidence"
+}

@@ -1,0 +1,9 @@
+{
+ "text": "Moving on to the demo. It should render a small dashboard filter in the chat, but nothing renders, just text from the agent.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 8.87,
+ "file": "e7454d9954e2a0d2f56b929b73bfcc86.mp3",
+ "clip": "ANTIGRAVITY-angular-15-OpenGenerativeUi",
+ "at": "demo"
+}
