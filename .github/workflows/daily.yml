@@ -342,8 +342,9 @@ jobs:
       - name: Write env files (secret from repo settings, never logged)
         run: |
           set -eu
-          [ -n "${OPENAI_API_KEY:-}" ] || echo "::warning::secret OPENAI_API_KEY is not set; the AG2 agent will fail"
-          printf 'OPENAI_API_KEY=%s\n' "$OPENAI_API_KEY" > backend/.env
+          [ -n "${GEMINI_POOL_KEYS:-}${GEMINI_POOL_OPENAI_KEY:-}" ] || echo "::warning::no Gemini/OpenAI secret set; the Antigravity agent will fail"
+          # HARNESS: real keys live in the pool on :8285 (job env); dummy key + base URL + local workspace dirs here.
+          printf 'GEMINI_API_KEY=pool\nGOOGLE_API_KEY=pool\nGOOGLE_GEMINI_BASE_URL=http://localhost:8285\nANTIGRAVITY_WORKSPACE=./.ws\nANTIGRAVITY_SAVE_DIR=./.sessions\n' > backend/.env
 
       - name: Start servers (start-all.sh)
         run: |
