@@ -92,6 +92,7 @@ async def proxy(request: Request):
                     last = (r.status_code, data)
                     d = DELAY_RE.search(data)
                     wait = float(d.group(1)) if d else (60 if r.status_code == 429 else 10)
+                    if r.status_code == 402: wait = 3600  # HARNESS: out of prepaid credit doesn't recover in seconds
                     cool[(ki, model)] = time.time() + min(wait, 3600)
                     log(f"{r.status_code} model={model} key#{ki + 1} cool {wait:.0f}s -> next")
                     continue

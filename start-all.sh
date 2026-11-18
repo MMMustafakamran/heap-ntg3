@@ -22,6 +22,9 @@ for _ in $(seq 1 90); do
   sleep 2
 done
 
+# HARNESS: one warm-up turn so the pool's first slow call (skipping keys out of credit) happens before filming.
+curl -s -m 240 -o /dev/null -X POST http://localhost:8281/default -H 'content-type: application/json'   -d '{"threadId":"warmup","runId":"warmup","state":{},"messages":[{"id":"w1","role":"user","content":"hi"}],"tools":[],"context":[],"forwardedProps":{}}' || true
+
 cd frontend
 (npx tsx server.ts > ../logs/runtime-8280.log 2>&1) &
 (npm start > ../logs/angular-4280.log 2>&1) &
