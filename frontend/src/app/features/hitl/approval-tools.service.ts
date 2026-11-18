@@ -3,7 +3,7 @@
  * "Register the tool from the component or service that owns the decision UI",
  * verbatim. There is no handler — CopilotKit supplies one that waits for
  * `respond`, returns the decision to the agent, and continues the run.
- * https://docs.copilotkit.ai/angular/ag2/guides/human-in-the-loop
+ * https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop
  */
 
 import { Injectable } from '@angular/core';

@@ -371,3 +371,15 @@ td > code {
   color: light-dark(#991b1b, #fca5a5);
 }
 /* a2ui : style rendered components end */
+
+/* inspector : position the launcher start (https://docs.copilotkit.ai/angular/google-antigravity/inspector, verbatim) */
+cpk-web-inspector {
+  /* The panel is draggable and sets an inline transform. Neutralize it before
+     choosing a corner. */
+  transform: none !important;
+  top: auto !important;
+  bottom: 1rem !important;
+  left: 1rem !important;
+  right: auto !important;
+}
+/* inspector : position the launcher end */

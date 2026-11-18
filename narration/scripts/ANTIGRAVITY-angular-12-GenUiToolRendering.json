@@ -1,0 +1,38 @@
+{
+ "clip": "ANTIGRAVITY-angular-12-GenUiToolRendering",
+ "page": "gen-ui-tool-rendering",
+ "segments": [
+  {
+   "at": "doc",
+   "text": "Ok so this is the Tool Call Rendering page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, the tool fetches this api weather endpoint, which the page never gives you."
+  },
+  {
+   "at": "evidence#2",
+   "text": "And it says the card shows the city and the tool result."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. It should show the weather for Paris, but the card's result is just the app's own HTML page, and the agent says it couldn't get the weather."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, the handler calls an endpoint that doesn't exist."
+  },
+  {
+   "at": "+",
+   "text": "You'd have to write your own weather API to make this page work."
+  },
+  {
+   "at": "+",
+   "text": "That's it for this one, kindly look into this issue."
+  }
+ ]
+}

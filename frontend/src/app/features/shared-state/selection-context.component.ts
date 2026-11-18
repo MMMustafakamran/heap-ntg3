@@ -2,7 +2,7 @@
 /**
  * "Bind context in a template", verbatim. The directive registers on first
  * render, so it must not be rendered before the context is complete.
- * https://docs.copilotkit.ai/angular/ag2/guides/shared-state
+ * https://docs.copilotkit.ai/angular/google-antigravity/shared-state/agent-readonly
  */
 
 import { Component, computed, signal } from '@angular/core';

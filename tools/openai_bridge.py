@@ -128,6 +128,9 @@ def to_openai(g: dict) -> tuple[dict, list[str]]:
                 m["tool_calls"] = calls
             if m["content"] or calls:
                 msgs.append(m)
+            # HARNESS (Antigravity-Angular, 2026-11-18): the Antigravity SDK sends functionResponse parts in a
+            # role "model" content (checked on the raw request); they used to be dropped here and padded with "null".
+            msgs.extend(results)
         else:
             msgs.extend(results)
             if images:

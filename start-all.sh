@@ -14,6 +14,8 @@ mkdir -p logs
 POOL_ENV=""; [ -f backend/pool.env ] && POOL_ENV="--env-file pool.env"
 (cd backend && PORT=8285 uv run $POOL_ENV --with httpx python ../tools/gemini_pool.py > ../logs/gemini-pool-8285.log 2>&1) &
 (cd backend && uv run --env-file .env python agent_server.py > ../logs/backend-8281.log 2>&1) &
+# HARNESS: 8284 interrupt + sub-agents agents (backend/interrupts_server.py); --with httpx: the Sub-agents page imports httpx but its install step never installs it.
+(cd backend && uv run --env-file .env --with httpx python interrupts_server.py > ../logs/backend-8284.log 2>&1) &
 echo "waiting for the Antigravity agent server on :8281 ..."
 for _ in $(seq 1 90); do
   curl -sf http://localhost:8281/health > /dev/null 2>&1 && break

@@ -2,7 +2,7 @@
 /**
  * "Read agent state", verbatim. Reads through `store().state()` so Angular
  * tracks changes; writes through the plain AG-UI agent at `store().agent`.
- * https://docs.copilotkit.ai/angular/ag2/guides/shared-state
+ * https://docs.copilotkit.ai/angular/google-antigravity/shared-state
  */
 
 import { Component, computed } from '@angular/core';
@@ -29,10 +29,6 @@ const EMPTY_STATE: WorkspaceState = {
     </ul>
     <button type="button" (click)="setPriority('high')">
       Mark high priority
-    </button>
-    <br>
-     <button type="button" (click)="setPriority('low')">
-      Mark low priority
     </button>
   `,
 })

@@ -32,11 +32,23 @@
    "child": false,
    "docPath": "",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    1
+   ],
+   "notes": [
+    "Issue: the Antigravity backend code is a fragment (_common.py has no imports or constants, build_registry() is never defined) and no runtime server is shown for Angular; the linked runtime guide only has a Next.js route."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Not Working",
+     "clip": "ANTIGRAVITY-angular-01-Quickstart",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-01-Quickstart.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -51,11 +63,21 @@
    "child": true,
    "docPath": "prebuilt-components",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
-   "notes": [],
+   "notes": [
+    "Note: the page's AppComponent mounts the popup and the sidebar together; both launchers sit on the same spot, so the popup launcher click opens the sidebar. Mount one at a time."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Prebuilt Components - Angular",
+     "clip": "ANTIGRAVITY-angular-02-PrebuiltComponents",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -70,11 +92,19 @@
    "child": true,
    "docPath": "multimodal-attachments",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
    "notes": [],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Multimodal Attachments - Angular",
+     "clip": "ANTIGRAVITY-angular-03-MultimodalAttachments",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -89,11 +119,23 @@
    "child": true,
    "docPath": "voice",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    2
+   ],
+   "notes": [
+    "Issue: the \"Voice backend setup\" link points back to this page (#backend doesn't exist) and no transcription service code is shown, so no mic button ever shows."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-04-Voice",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-04-Voice.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -108,11 +150,19 @@
    "child": true,
    "docPath": "custom-look-and-feel/css",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
    "notes": [],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "CSS Customization - Angular",
+     "clip": "ANTIGRAVITY-angular-05-ClfCss",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -127,11 +177,19 @@
    "child": true,
    "docPath": "custom-look-and-feel/slots",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
    "notes": [],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Slots (Subcomponents) - Angular",
+     "clip": "ANTIGRAVITY-angular-06-ClfSlots",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -146,11 +204,19 @@
    "child": true,
    "docPath": "custom-look-and-feel/headless-ui",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
    "notes": [],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Headless UI - Angular",
+     "clip": "ANTIGRAVITY-angular-07-ClfHeadlessUi",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -165,11 +231,23 @@
    "child": true,
    "docPath": "prebuilt-components/copilot-threads-drawer",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    3
+   ],
+   "notes": [
+    "Issue: the drawer renders as an empty panel, no thread list and no locked state; the page never says what has to serve the threads list."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-08-ThreadsDrawer",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-08-ThreadsDrawer.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -184,11 +262,23 @@
    "child": true,
    "docPath": "headless-threads",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    4
+   ],
+   "notes": [
+    "Issue: injectThreads lists no threads after chatting; the page never says which backend or platform provides the list, and selectedThreadId is never defined."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-09-HeadlessThreads",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-09-HeadlessThreads.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -203,11 +293,21 @@
    "child": false,
    "docPath": "frontend-tools",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
-   "notes": [],
+   "notes": [
+    "Note: the snippet has no imports and never defines BackgroundToolArgs / resolveGradient."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Frontend Tools - Angular",
+     "clip": "ANTIGRAVITY-angular-10-FrontendTools",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -222,11 +322,19 @@
    "child": true,
    "docPath": "generative-ui/tool-based",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
    "notes": [],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Components as Tools - Angular",
+     "clip": "ANTIGRAVITY-angular-11-GenUiToolBased",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -241,11 +349,23 @@
    "child": true,
    "docPath": "generative-ui/tool-rendering",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    5
+   ],
+   "notes": [
+    "Issue: the tool handler fetches /api/weather, which the page never provides, so the card shows the app's index.html as the result and the agent can't report the weather."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-12-GenUiToolRendering",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-12-GenUiToolRendering.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -260,11 +380,23 @@
    "child": true,
    "docPath": "generative-ui/a2ui",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    6
+   ],
+   "notes": [
+    "Issue: catalog: productCatalog is never defined (nor dynamicString, AcmeBadge, PanelComponent), so A2UI stays off and nothing renders."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-13-A2ui",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-13-A2ui.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -279,11 +411,23 @@
    "child": true,
    "docPath": "generative-ui/mcp-apps",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    7
+   ],
+   "notes": [
+    "Issue: the page only shows provideMCPApps(); no MCP server or runtime mcpApps config is given, so the agent has no app to open."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-14-McpApps",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-14-McpApps.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -298,11 +442,23 @@
    "child": true,
    "docPath": "generative-ui/open-generative-ui",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    8
+   ],
+   "notes": [
+    "Issue: with the page's openGenerativeUI provider config, no sandboxed UI ever renders; the page shows nothing else that is needed."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-15-OpenGenerativeUi",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-15-OpenGenerativeUi.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -317,11 +473,23 @@
    "child": true,
    "docPath": "shared-state",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    9
+   ],
+   "notes": [
+    "Issue: after Mark high priority the agent can't tell the priority; state set with agent.setState never reaches the Antigravity agent and the page shows no backend side."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-16-SharedState",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-16-SharedState.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -336,11 +504,23 @@
    "child": true,
    "docPath": "shared-state/agent-readonly",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    10
+   ],
+   "notes": [
+    "Issue: the connectAgentContext values (name, timezone, selected record) never reach the Antigravity agent."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-17-AgentReadonly",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-17-AgentReadonly.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -355,11 +535,21 @@
    "child": true,
    "docPath": "human-in-the-loop",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
-   "notes": [],
+   "notes": [
+    "Note: the page never says where ApprovalToolsService is provided."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "HITL Overview - Angular",
+     "clip": "ANTIGRAVITY-angular-18-HitlOverview",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -374,11 +564,23 @@
    "child": true,
    "docPath": "human-in-the-loop/useInterrupt",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    11
+   ],
+   "notes": [
+    "Issue: no backend that pauses is shown, injectInterrupt(\"default\") watches an agent that never interrupts, and the interrupt payload shape (title/choices) is never given."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-19-UseInterrupt",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-19-UseInterrupt.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -393,11 +595,23 @@
    "child": true,
    "docPath": "human-in-the-loop/headless",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    12
+   ],
+   "notes": [
+    "Issue: injectAgentStore(\"ticketing\") needs a ticketing agent that is never shown or registered, and no backend that interrupts is given."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-20-HeadlessInterrupts",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-20-HeadlessInterrupts.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -412,11 +626,21 @@
    "child": false,
    "docPath": "webmcp",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
-   "notes": [],
+   "notes": [
+    "Note: searchOrders is never defined on the page."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "WebMCP - Angular",
+     "clip": "ANTIGRAVITY-angular-21-WebMcp",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -431,11 +655,23 @@
    "child": false,
    "docPath": "multi-agent/subagents",
    "reachable": "sidebar",
-   "status": null,
-   "findings": [],
-   "notes": [],
+   "status": "❌",
+   "findings": [
+    13
+   ],
+   "notes": [
+    "Issue: subagents.py imports httpx, which the install step never adds (ModuleNotFoundError), and the Angular snippet is a class fragment using readDelegations / subAgentRendererConfig that are never defined."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Issue",
+     "clip": "ANTIGRAVITY-angular-22-SubAgents",
+     "loom": null,
+     "narration": "narration/scripts/ANTIGRAVITY-angular-22-SubAgents.json",
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -450,11 +686,21 @@
    "child": false,
    "docPath": "auth",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
-   "notes": [],
+   "notes": [
+    "Note: readSessionToken() and verifySession() are never defined on the page."
+   ],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Authentication - Angular",
+     "clip": "ANTIGRAVITY-angular-23-Auth",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,
@@ -469,11 +715,19 @@
    "child": true,
    "docPath": "inspector",
    "reachable": "sidebar",
-   "status": null,
+   "status": "✅",
    "findings": [],
    "notes": [],
    "block": null,
-   "links": [],
+   "links": [
+    {
+     "text": "Inspector - Angular",
+     "clip": "ANTIGRAVITY-angular-24-Inspector",
+     "loom": null,
+     "narration": null,
+     "filmed": null
+    }
+   ],
    "review": {
     "verdict": null,
     "approvedAt": null,

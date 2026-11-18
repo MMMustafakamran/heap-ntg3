@@ -2,10 +2,10 @@
 /**
  * Authentication guide, "When sign-in state changes after bootstrap, update the
  * runtime connection through the CopilotKit service" (verbatim body in `apply`).
- * https://docs.copilotkit.ai/angular/ag2/auth
+ * https://docs.copilotkit.ai/angular/google-antigravity/auth
  *
  * HARNESS: the guide never defines the session (`readSessionToken()`, `sessionToken`) or the
- * server's `verifySession()` (FINDINGS.md #10). This demo starts signed out, so requests reach
+ * server's `verifySession()`. This demo starts signed out, so requests reach
  * the guide's `onRequest` hook without a token (401), and the "Sign in" button sets the
  * Showcase's own `demo-token-123` (the guide's DEMO_AUTH_HEADERS). The chat talks to the runtime
  * mount that runs that hook (frontend/auth-runtime.ts, under /auth on 8280).

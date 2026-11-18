@@ -1,26 +1,25 @@
 /**
- * Authentication guide: "Validate every runtime request" (verbatim block below).
- * https://docs.copilotkit.ai/angular/ag2/auth
+ * Authentication page: "Validate every runtime request" (verbatim block below).
+ * https://docs.copilotkit.ai/angular/google-antigravity/auth
  *
- * HARNESS: the guide shows only the `createCopilotExpressHandler(...)` call. Its
- * imports, `runtime`, `verifySession` and the Express app are not on the page
- * (FINDINGS.md #10). server.ts serves this app under /auth on port 8280, so the
- * handler sees the guide's own basePath "/api/copilotkit".
+ * HARNESS: the page shows only the `createCopilotNodeListener(...)` call. `runtime` and
+ * `verifySession` are not on the page. server.ts serves this listener under /auth on port 8280,
+ * so it sees the page's own basePath "/api/copilotkit".
  */
-import express from "express"; // HARNESS
 import { CopilotRuntime } from "@copilotkit/runtime/v2"; // HARNESS
-import { createCopilotExpressHandler } from "@copilotkit/runtime/v2/express"; // HARNESS
 import { HttpAgent } from "@ag-ui/client"; // HARNESS
+import { createCopilotNodeListener } from "@copilotkit/runtime/v2/node";
 
-const agentUrl = process.env["AG2_AGENT_URL"] ?? "http://localhost:8281/agent/"; // HARNESS
+const agentUrl = process.env["AGENT_URL"] ?? "http://localhost:8281/default"; // HARNESS: Antigravity agent server
 const runtime = new CopilotRuntime({ agents: { default: new HttpAgent({ url: agentUrl }) } }); // HARNESS
-// HARNESS: the guide never defines verifySession; accept the Showcase's demo token only.
+// HARNESS: the page never defines verifySession; accept the Showcase's demo token only.
 const verifySession = async (token: string) => (token === "demo-token-123" ? { userId: "demo" } : null);
 
 // auth : validate every runtime request start
-const handler = createCopilotExpressHandler({
+const listener = createCopilotNodeListener({
   runtime,
   basePath: "/api/copilotkit",
+  cors: true,
   hooks: {
     onRequest: async ({ request }) => {
       const token = request.headers
@@ -36,13 +35,4 @@ const handler = createCopilotExpressHandler({
 });
 // auth : validate every runtime request end
 
-// HARNESS: CORS for the Angular dev server (the guide says to configure it, shows no code).
-export const authApp = express();
-authApp.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin ?? "*");
-  res.setHeader("Access-Control-Allow-Headers", req.headers["access-control-request-headers"] ?? "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE,OPTIONS");
-  if (req.method === "OPTIONS") { res.status(204).end(); return; }
-  next();
-});
-authApp.use(handler);
+export const authApp = listener; // HARNESS: mounted by server.ts under /auth

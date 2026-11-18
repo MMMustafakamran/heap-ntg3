@@ -31,5 +31,6 @@ export class OrderSearchComponent {
 // HARNESS: the WebMCP page calls searchOrders() but never defines it (FINDINGS: undefined helper).
 // Minimal stand-in so the page compiles; returns fake orders for the given status.
 async function searchOrders(status: string) {
+  (window as unknown as { __searchOrdersCalls?: string[] }).__searchOrdersCalls = [...((window as unknown as { __searchOrdersCalls?: string[] }).__searchOrdersCalls ?? []), status]; // HARNESS: lets the recorder see the handler ran
   return [{ id: "ORD-1001", status }];
 }

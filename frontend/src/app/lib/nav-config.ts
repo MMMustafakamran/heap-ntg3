@@ -83,135 +83,35 @@ export const NAV: NavGroup[] = [
         statusNote:
           'The Angular half of the page is complete. Its backend step is not: the page ships the literal comment "setup skipped: agent-setup is not bundled for ag2" where the AG2 server should be. See Known issues.',
       },
-      {
-        path: '/inspector',
-        hasDemo: true,
-        title: 'Inspector',
-        docPath: '/angular/ag2/inspector',
-        summary:
-          'The panel the framework mounts for you — nothing to install, nothing to mount, and a hand-written mount to delete if you have one.',
-        status: 'working',
-        statusNote:
-          'Tracked from 2026-09-01. The quickstart has always linked here, but the page was in neither DOC_PAGES nor the snapshot manifest, so drift had never looked at it.',
-      },
     ],
   },
   {
     title: 'Guides',
     routes: [
-      {
-        path: '/chat-ui',
-        hasDemo: true,
-        title: 'Chat UI and customization',
-        docPath: '/angular/ag2/guides/chat-ui',
-        summary:
-          'The four chat surfaces, a replaced assistant-message component, and scoped chat CSS.',
-        status: 'working',
-      },
-      {
-        path: '/frontend-tools-generative-ui',
-        hasDemo: true,
-        title: 'Frontend tools and generative UI',
-        docPath: '/angular/ag2/guides/frontend-tools-generative-ui',
-        summary:
-          'A server-side tool call rendered by an Angular component, plus the sandboxed Open Generative UI path.',
-        status: 'partial',
-        statusNote:
-          'All three tool paths reach the agent: AG2 streams its own tool calls, a tool sent in RunAgentInput.tools comes back as a TOOL_CALL_CHUNK that ends the run for the browser to answer, and registerComponent declares show_incident from the browser with no change to the AG2 process. The page’s new first section runs, and its published snippet is wrong in four ways. It carries no handler, so core returns an empty tool result and the model apologises for the card it just drew — followUp: false suppresses that and the guide never mentions followUp. It guards on status "in-progress" while the real status is "executing", so the guard never fires and the card paints empty first. The status never reaches "complete" at all, so the gate-on-complete pattern taught higher up the same page would load forever here. And it ships no CSS, so with Angular’s default preserveWhitespaces the card renders as the run-together string INC-4711sev1. Everything is kept verbatim. See Known issues.',
-      },
-      {
-        path: '/a2ui',
-        hasDemo: true,
-        title: 'A2UI schemas, styling, and recovery',
-        docPath: '/angular/ag2/guides/a2ui',
-        summary:
-          'Declarative generative UI driven by the runtime A2UI middleware, with the guide’s recovery thresholds and catalog CSS.',
-        status: 'broken',
-        statusNote:
-          'Inert. /info reports a2uiEnabled: true, but supplying a2ui.catalog is what actually registers the render_a2ui renderer — and the guide’s catalog snippet is not self-contained. See Known issues.',
-      },
-      {
-        path: '/voice-multimodal',
-        hasDemo: true,
-        title: 'Voice and multimodal input',
-        docPath: '/angular/ag2/guides/voice-multimodal',
-        summary:
-          'The built-in microphone control, an attachments config, and a programmatically constructed multimodal message.',
-        status: 'broken',
-        statusNote:
-          'The microphone renders and records, but this repo’s runtime has no transcription service configured, so transcription fails and the guide never says one is required.',
-      },
-      {
-        path: '/human-in-the-loop',
-        hasDemo: true,
-        title: 'Human-in-the-loop and interrupts',
-        docPath: '/angular/ag2/guides/human-in-the-loop',
-        summary:
-          'A decision tool that pauses the run until the user answers, plus a headless interrupt controller.',
-        status: 'working',
-        statusNote:
-          'The registerHumanInTheLoop path is live. The interrupt half of the page cannot run here: ag2.ag_ui emits no interrupt event, so injectInterrupt and store().interruptController stay idle forever. See Known issues.',
-      },
-      {
-        path: '/shared-state',
-        hasDemo: true,
-        title: 'Shared state and agent context',
-        docPath: '/angular/ag2/guides/shared-state',
-        summary:
-          'Reading and writing agent state through injectAgentStore, and publishing read-only app context two ways.',
-        status: 'broken',
-        statusNote:
-          'Reads work; writes are dropped. AG2 merges the incoming AG-UI state under its own agent variables, so agent.setState never reaches the model. There is also no STATE_DELTA, so state only moves at the edges of a run. See Known issues.',
-      },
+      // HARNESS: Antigravity Shared State / HITL / interrupts / WebMCP / Sub-agents pages (2026-11-18).
+      { path: '/shared-state', hasDemo: true, title: 'Shared State', docPath: '/angular/google-antigravity/shared-state', summary: 'injectAgentStore read + agent.setState write.', status: 'working' },
+      { path: '/agent-readonly', hasDemo: true, title: 'Agent Read-Only Context', docPath: '/angular/google-antigravity/shared-state/agent-readonly', summary: 'connectAgentContext and CopilotKitAgentContext.', status: 'working' },
+      { path: '/human-in-the-loop', hasDemo: true, title: 'HITL Overview', docPath: '/angular/google-antigravity/human-in-the-loop', summary: 'registerHumanInTheLoop decision tool.', status: 'working' },
+      { path: '/use-interrupt', hasDemo: true, title: 'Pausing the Agent for Input', docPath: '/angular/google-antigravity/human-in-the-loop/useInterrupt', summary: 'injectInterrupt typed controller.', status: 'working' },
+      { path: '/headless-interrupts', hasDemo: true, title: 'Headless Interrupts', docPath: '/angular/google-antigravity/human-in-the-loop/headless', summary: 'store().interruptController.', status: 'working' },
+      { path: '/webmcp', hasDemo: true, title: 'WebMCP', docPath: '/angular/google-antigravity/webmcp', summary: 'registerFrontendTool with webmcp.', status: 'working' },
+      { path: '/multi-agent-subagents', hasDemo: true, title: 'Sub-Agents', docPath: '/angular/google-antigravity/multi-agent/subagents', summary: 'Supervisor with sub-agent tools and a delegation log.', status: 'working' },
     ],
   },
+  // HARNESS: Antigravity Angular chat UI / threads / inspector / auth pages (2026-11-18).
   {
-    title: 'Threads, memory, attachments, headless',
+    title: 'Chat UI, threads, inspector, auth',
     routes: [
-      {
-        path: '/threads',
-        hasDemo: true,
-        title: 'Threads',
-        docPath: '/angular/ag2/guides/threads-memory-attachments-headless',
-        summary:
-          'A hand-built thread list on injectThreads, and the drop-in CopilotThreadsDrawer beside a chat.',
-        status: 'partial',
-        premium: true,
-        statusNote:
-          'Thread endpoints come from the Enterprise Intelligence Platform. Unlicensed, the list stays empty and the drawer renders its locked state — which is the expected result here.',
-      },
-      {
-        path: '/memory',
-        hasDemo: true,
-        title: 'Memory',
-        docPath: '/angular/ag2/guides/threads-memory-attachments-headless',
-        summary:
-          'injectMemories with the isAvailable() gate the guide requires before showing memory controls.',
-        status: 'partial',
-        premium: true,
-        statusNote:
-          'This runtime does not provide the memory routes, so isAvailable() is false and the guide’s fallback message is what renders.',
-      },
-      {
-        path: '/attachments',
-        hasDemo: true,
-        title: 'Attachments',
-        docPath: '/angular/ag2/guides/threads-memory-attachments-headless',
-        summary:
-          'An AttachmentsConfig bound to copilot-chat, with the file picker, drag-and-drop, and paste.',
-        status: 'working',
-        statusNote:
-          'An image part reaches the model through AG2’s AG-UI bridge. A malformed part does not degrade: the bridge validates before it opens the stream, so the browser gets a bare HTTP 500 rather than a RUN_ERROR. See Known issues.',
-      },
-      {
-        path: '/headless',
-        hasDemo: true,
-        title: 'Headless UI',
-        docPath: '/angular/ag2/guides/threads-memory-attachments-headless',
-        summary:
-          'A transcript and composer built from scratch on injectAgentStore and CopilotKitCore.runAgent.',
-        status: 'working',
-      },
+      { path: '/prebuilt-components', hasDemo: true, title: 'Prebuilt Components', docPath: '/angular/google-antigravity/prebuilt-components', summary: 'Prebuilt Components page, verbatim.', status: 'not-started' },
+      { path: '/multimodal-attachments', hasDemo: true, title: 'Multimodal Attachments', docPath: '/angular/google-antigravity/multimodal-attachments', summary: 'Multimodal Attachments page, verbatim.', status: 'not-started' },
+      { path: '/voice', hasDemo: true, title: 'Voice', docPath: '/angular/google-antigravity/voice', summary: 'Voice page, verbatim.', status: 'not-started' },
+      { path: '/clf-css', hasDemo: true, title: 'CSS Customization', docPath: '/angular/google-antigravity/custom-look-and-feel/css', summary: 'CSS Customization page, verbatim.', status: 'not-started' },
+      { path: '/clf-slots', hasDemo: true, title: 'Slots', docPath: '/angular/google-antigravity/custom-look-and-feel/slots', summary: 'Slots page, verbatim.', status: 'not-started' },
+      { path: '/clf-headless-ui', hasDemo: true, title: 'Headless UI', docPath: '/angular/google-antigravity/custom-look-and-feel/headless-ui', summary: 'Headless UI page, verbatim.', status: 'not-started' },
+      { path: '/threads-drawer', hasDemo: true, title: 'Threads Drawer', docPath: '/angular/google-antigravity/prebuilt-components/copilot-threads-drawer', summary: 'Threads Drawer page, verbatim.', status: 'not-started' },
+      { path: '/headless-threads', hasDemo: true, title: 'Headless Threads', docPath: '/angular/google-antigravity/headless-threads', summary: 'Headless Threads page, verbatim.', status: 'not-started' },
+      { path: '/inspector', hasDemo: true, title: 'Inspector', docPath: '/angular/google-antigravity/inspector', summary: 'Inspector page, verbatim.', status: 'not-started' },
+      { path: '/auth', hasDemo: true, title: 'Authentication', docPath: '/angular/google-antigravity/auth', summary: 'Authentication page, verbatim.', status: 'not-started' },
     ],
   },
 ];

@@ -1,0 +1,34 @@
+{
+ "clip": "ANTIGRAVITY-angular-08-ThreadsDrawer",
+ "page": "threads-drawer",
+ "segments": [
+  {
+   "at": "doc",
+   "text": "Ok so this is the Threads Drawer page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, the page says the drawer shows a locked state when threads aren't available."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. It should list the conversations, or at least show the locked state, but the drawer is just an empty panel."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, the drawer should list threads or show it's locked."
+  },
+  {
+   "at": "+",
+   "text": "It shows nothing, and the page never says what has to serve the threads list."
+  },
+  {
+   "at": "+",
+   "text": "That's the problem here, please have a look."
+  }
+ ]
+}

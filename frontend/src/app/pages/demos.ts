@@ -11,18 +11,9 @@
 import { Component } from '@angular/core';
 
 import { DemoFrame } from '../components/demo-frame';
-import { A2uiChatComponent } from '../features/a2ui/a2ui-chat.component';
-import { MediaChatComponent } from '../features/attachments/media-chat.component';
-import { ChatUiDemoComponent } from '../features/chat-ui/chat-ui-demo.component';
-import { HeadlessChatComponent } from '../features/headless/headless-chat.component';
 import { HitlChatComponent } from '../features/hitl/hitl-chat.component';
-import { InspectorChatComponent } from '../features/inspector/inspector-chat.component';
-import { MemoryDemoComponent } from '../features/memory/memory-demo.component';
-import { VoiceChatComponent } from '../features/media/voice-chat.component';
 import { QuickstartChat } from '../features/quickstart/quickstart-chat';
 import { SharedStateChatComponent } from '../features/shared-state/shared-state-chat.component';
-import { ThreadsDemoComponent } from '../features/threads/threads-demo.component';
-import { ToolsChatComponent } from '../features/tools/tools-chat.component';
 
 @Component({
   selector: 'app-quickstart-demo',
@@ -33,39 +24,7 @@ import { ToolsChatComponent } from '../features/tools/tools-chat.component';
 })
 export class QuickstartDemo {}
 
-@Component({
-  selector: 'app-chat-ui-demo-page',
-  imports: [DemoFrame, ChatUiDemoComponent],
-  template: `<app-demo-frame backTo="/chat-ui"
-    ><app-chat-ui-demo
-  /></app-demo-frame>`,
-})
-export class ChatUiDemo {}
 
-@Component({
-  selector: 'app-tools-demo',
-  imports: [DemoFrame, ToolsChatComponent],
-  template: `<app-demo-frame backTo="/frontend-tools-generative-ui"
-    ><app-tools-chat
-  /></app-demo-frame>`,
-})
-export class ToolsDemo {}
-
-@Component({
-  selector: 'app-a2ui-demo',
-  imports: [DemoFrame, A2uiChatComponent],
-  template: `<app-demo-frame backTo="/a2ui"><app-a2ui-chat /></app-demo-frame>`,
-})
-export class A2uiDemo {}
-
-@Component({
-  selector: 'app-voice-demo',
-  imports: [DemoFrame, VoiceChatComponent],
-  template: `<app-demo-frame backTo="/voice-multimodal"
-    ><app-voice-chat
-  /></app-demo-frame>`,
-})
-export class VoiceDemo {}
 
 @Component({
   selector: 'app-hitl-demo',
@@ -85,157 +44,60 @@ export class HitlDemo {}
 })
 export class SharedStateDemo {}
 
-@Component({
-  selector: 'app-threads-demo-page',
-  imports: [DemoFrame, ThreadsDemoComponent],
-  template: `<app-demo-frame backTo="/threads"
-    ><app-threads-demo
-  /></app-demo-frame>`,
-})
-export class ThreadsDemo {}
-
-@Component({
-  selector: 'app-memory-demo-page',
-  imports: [DemoFrame, MemoryDemoComponent],
-  template: `<app-demo-frame backTo="/memory"
-    ><app-memory-demo
-  /></app-demo-frame>`,
-})
-export class MemoryDemo {}
-
-@Component({
-  selector: 'app-attachments-demo',
-  imports: [DemoFrame, MediaChatComponent],
-  template: `<app-demo-frame backTo="/attachments"
-    ><div style="height: 100%"><app-media-chat /></div
-  ></app-demo-frame>`,
-})
-export class AttachmentsDemo {}
-
-@Component({
-  selector: 'app-headless-demo',
-  imports: [DemoFrame, HeadlessChatComponent],
-  template: `<app-demo-frame backTo="/headless"
-    ><div style="height: 100%; overflow: auto; padding: 1rem">
-      <app-headless-chat /></div
-  ></app-demo-frame>`,
-})
-export class HeadlessDemo {}
-
-/**
- * The Inspector has no surface of its own: the framework mounts `cpk-web-inspector` on
- * `document.body` once a CopilotKit component is on the route, so the chat below is what brings it
- * into existence. Nothing else is on the page (owner rule: no explanatory text of ours on screen).
- */
-@Component({
-  selector: 'app-inspector-demo',
-  imports: [DemoFrame, InspectorChatComponent],
-  template: `<app-demo-frame backTo="/inspector">
-    <div style="height: 100%"><app-inspector-chat /></div>
-  </app-demo-frame>`,
-})
-export class InspectorDemo {}
-
 // HARNESS: demo routes for the pages added on 2026-11-09 (assignment.json).
-import { AuthChatComponent } from '../features/auth/auth-chat.component';
-import { GenUiChatComponent } from '../features/generative-ui/genui-chat.component';
 import { SubagentsChatComponent } from '../features/subagents/subagents-chat.component';
 import { OrderSearchComponent } from '../features/webmcp/order-search.component';
 import { CopilotChat } from '@copilotkit/angular';
 
-@Component({
-  selector: 'app-genui-demo',
-  imports: [DemoFrame, GenUiChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Native generative UI"><app-genui-chat /></app-demo-frame>`,
-})
-export class GenUiDemo {}
 
 @Component({
   selector: 'app-subagents-demo',
   imports: [DemoFrame, SubagentsChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Sub-agents"><app-subagents-chat /></app-demo-frame>`,
+  template: `<app-demo-frame backTo="/multi-agent-subagents" heading="Sub-Agents"><app-subagents-chat /></app-demo-frame>`,
 })
 export class SubagentsDemo {}
 
-@Component({
-  selector: 'app-webmcp-demo',
-  imports: [DemoFrame, OrderSearchComponent, CopilotChat],
-  template: `<app-demo-frame backTo="/" heading="WebMCP"
-    ><app-order-search /><div style="height: 100%"><copilot-chat /></div
-  ></app-demo-frame>`,
-})
-export class WebmcpDemo {}
+
+
+
+
+
+
+
+
+
+
+
+// HARNESS: demo routes for the Shared State / HITL / interrupt / WebMCP / Sub-agents pages (Antigravity doc layout, 2026-11-18).
+import { AgentReadonlyChatComponent } from '../features/shared-state/agent-readonly-chat.component';
+import { UseInterruptChatComponent } from '../features/hitl/use-interrupt-chat.component';
+import { HeadlessInterruptsChatComponent } from '../features/hitl/headless-interrupts-chat.component';
+import { WebmcpChatComponent } from '../features/webmcp/webmcp-chat.component';
 
 @Component({
-  selector: 'app-auth-demo',
-  imports: [DemoFrame, AuthChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Authentication"><app-auth-chat /></app-demo-frame>`,
+  selector: 'app-agent-readonly-demo',
+  imports: [DemoFrame, AgentReadonlyChatComponent],
+  template: `<app-demo-frame backTo="/agent-readonly" heading="Agent Read-Only Context"><app-agent-readonly-chat /></app-demo-frame>`,
 })
-export class AuthDemo {}
-
-// HARNESS: demo routes for the nine Components and surfaces pages (/ag2/generative-ui/components*,
-// Angular tab), added 2026-11-09. One chat each; see features/components/cmp-chat.component.ts.
-import { CmpChatComponent } from '../features/components/cmp-chat.component';
+export class AgentReadonlyDemo {}
 
 @Component({
-  selector: 'app-cmp-components-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Components and surfaces"><app-cmp-chat runtime="components" /></app-demo-frame>`,
+  selector: 'app-use-interrupt-demo',
+  imports: [DemoFrame, UseInterruptChatComponent],
+  template: `<app-demo-frame backTo="/use-interrupt" heading="Pausing the Agent for Input"><app-use-interrupt-chat /></app-demo-frame>`,
 })
-export class CmpComponentsDemo {}
+export class UseInterruptDemo {}
 
 @Component({
-  selector: 'app-cmp-surfaces-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Surfaces"><app-cmp-chat /></app-demo-frame>`,
+  selector: 'app-headless-interrupts-demo',
+  imports: [DemoFrame, HeadlessInterruptsChatComponent],
+  template: `<app-demo-frame backTo="/headless-interrupts" heading="Headless Interrupts"><app-headless-interrupts-chat /></app-demo-frame>`,
 })
-export class CmpSurfacesDemo {}
+export class HeadlessInterruptsDemo {}
 
 @Component({
-  selector: 'app-cmp-catalogs-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Catalogs"><app-cmp-chat /></app-demo-frame>`,
+  selector: 'app-webmcp-chat-demo',
+  imports: [DemoFrame, WebmcpChatComponent],
+  template: `<app-demo-frame backTo="/webmcp" heading="WebMCP"><app-webmcp-chat /></app-demo-frame>`,
 })
-export class CmpCatalogsDemo {}
-
-@Component({
-  selector: 'app-cmp-standard-catalog-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Standard catalog"><app-cmp-chat /></app-demo-frame>`,
-})
-export class CmpStandardCatalogDemo {}
-
-@Component({
-  selector: 'app-cmp-state-and-actions-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="State and actions"><app-cmp-chat /></app-demo-frame>`,
-})
-export class CmpStateAndActionsDemo {}
-
-@Component({
-  selector: 'app-cmp-theming-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Theming"><app-cmp-chat /></app-demo-frame>`,
-})
-export class CmpThemingDemo {}
-
-@Component({
-  selector: 'app-cmp-transports-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Transports"><app-cmp-chat /></app-demo-frame>`,
-})
-export class CmpTransportsDemo {}
-
-@Component({
-  selector: 'app-cmp-markdown-mode-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Markdown mode"><app-cmp-chat /></app-demo-frame>`,
-})
-export class CmpMarkdownModeDemo {}
-
-@Component({
-  selector: 'app-cmp-from-a2ui-demo',
-  imports: [DemoFrame, CmpChatComponent],
-  template: `<app-demo-frame backTo="/" heading="Adopt from A2UI"><app-cmp-chat /></app-demo-frame>`,
-})
-export class CmpFromA2uiDemo {}
+export class WebmcpChatDemo {}

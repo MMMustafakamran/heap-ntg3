@@ -1,0 +1,34 @@
+{
+ "clip": "ANTIGRAVITY-angular-17-AgentReadonly",
+ "page": "agent-readonly",
+ "segments": [
+  {
+   "at": "doc",
+   "text": "Ok so this is the Agent Read-Only Context page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, this connect agent context call should send the user's name and timezone to the agent."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. I asked the agent who I am and which record is selected, but it doesn't know any of the values the app sent."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, the context from the page never reaches the Antigravity agent."
+  },
+  {
+   "at": "+",
+   "text": "So the agent can't use it at all."
+  },
+  {
+   "at": "+",
+   "text": "So yeah, this is the issue, kindly fix it."
+  }
+ ]
+}

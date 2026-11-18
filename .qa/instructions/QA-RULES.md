@@ -32,6 +32,7 @@ Missing steps, undefined identifiers, unstated prerequisites, wrong-framework co
 | Antigravity-vue | 5140 (Vite) | 8140 | 8141 own backend (`backend/`, quickstart agent) |
 | OpenAIAgents-Vue | 5130 (Vite) | 8130 (`server.openai.ts`) | 8131 quickstart agent · 8132–8139 page agents (own `backend/`) |
 | OpenAIAgents-React | 3090 | (Next route) | 8091 quickstart · 8092–8094 page agents (own `backend/`) |
+| Antigravity-angular | 4280 | 8280 (`server.ts`) | 8281 agent server · 8282–8284 page agents · 8285 Gemini pool (own `backend/`) |
 | GoogleADK-vue | 5120 (Vite) | 8120 | 8121 quickstart agent · 8122 page agents (own `backend/`) · 8129 Gemini pool |
 
 Each Vue repo runs its own backend; none depends on a React repo's servers at runtime.
@@ -96,7 +97,7 @@ When a framework's quickstart is a **complete block** (level 1: no usable setup 
 - **Report the block once, on the quickstart row only (owner, 2026-11-18).** Guide rows are no longer marked ❌ `Blocked: …` / `Tested anyway on a setup built by hand…`: each page shows its own status, clip and notes, since a reader with an existing setup (or QA with a hand-built one) can still use it.
 - Keep testing and recording each page on the harness-built setup (marked HARNESS): its own result stays in `status`, and its own findings stay in `FINDINGS.md`, so nothing is lost once the quickstart is fixed.
 - Not for minor quickstart issues (level 3, e.g. a missing `.env` load): those leave the other pages alone.
-- Applies today to: Antigravity Vue, Google ADK Vue, AG2 Angular.
+- Applies today to: Antigravity Vue, Antigravity Angular, Google ADK Vue, AG2 Angular.
 
 ## 9. Scope: reachable pages only
 

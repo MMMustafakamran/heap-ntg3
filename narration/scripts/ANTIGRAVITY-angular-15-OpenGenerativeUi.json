@@ -1,0 +1,34 @@
+{
+ "clip": "ANTIGRAVITY-angular-15-OpenGenerativeUi",
+ "page": "open-generative-ui",
+ "segments": [
+  {
+   "at": "doc",
+   "text": "Ok so this is the Open Generative UI page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, umm, it says generated code runs in a sandboxed iframe, but that iframe never shows up."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. It should render a small dashboard filter in the chat, but nothing renders, just text from the agent."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, with the provider config from the page, no sandboxed UI ever appears."
+  },
+  {
+   "at": "+",
+   "text": "The page doesn't show any other step that's needed."
+  },
+  {
+   "at": "+",
+   "text": "So umm, this one needs fixing, please look into it."
+  }
+ ]
+}

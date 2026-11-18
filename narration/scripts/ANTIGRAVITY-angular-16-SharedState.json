@@ -1,0 +1,34 @@
+{
+ "clip": "ANTIGRAVITY-angular-16-SharedState",
+ "page": "shared-state",
+ "segments": [
+  {
+   "at": "doc",
+   "text": "Ok so this is the Shared State page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, the page says ask the agent for the priority and it answers high."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. After clicking mark high priority, the panel shows high, but the agent says it can't tell the priority."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, the state the app writes never reaches the Antigravity agent."
+  },
+  {
+   "at": "+",
+   "text": "And the page doesn't show any backend side for it."
+  },
+  {
+   "at": "+",
+   "text": "Alright, that's the issue, kindly sort it out."
+  }
+ ]
+}

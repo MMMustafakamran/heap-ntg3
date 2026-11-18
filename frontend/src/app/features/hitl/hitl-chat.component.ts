@@ -1,38 +1,27 @@
 // human in the loop : hitl chat start
 /**
- * Puts the guide's three human-in-the-loop paths side by side: the decision
- * tool (registered by ApprovalToolsService, rendered inside the chat's
- * tool-call flow), the headless interrupt controller, and the store's own
- * controller — the last two rendered outside the chat and pointed at different
- * agents, as the guide's warning requires.
- * https://docs.copilotkit.ai/angular/ag2/guides/human-in-the-loop
- *
- * Injecting ApprovalToolsService is what constructs it, and construction is
- * what performs the `registerHumanInTheLoop` call.
+ * HITL Overview demo: the decision tool (ApprovalToolsService, verbatim) rendered in the chat's
+ * tool-call flow. Injecting ApprovalToolsService is what constructs it, and construction performs
+ * the `registerHumanInTheLoop` call. HARNESS: the page never shows where the service is provided.
+ * https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop
  */
 
 import { Component, inject } from '@angular/core';
 import { CopilotChat } from '@copilotkit/angular';
 
 import { ApprovalToolsService } from './approval-tools.service';
-import { InterruptPanelComponent } from './interrupt-panel.component';
-import { TicketApprovalComponent } from './ticket-approval.component';
 
 @Component({
   selector: 'app-hitl-chat',
-  imports: [CopilotChat, InterruptPanelComponent, TicketApprovalComponent],
-  providers: [ApprovalToolsService],
+  imports: [CopilotChat],
+  providers: [ApprovalToolsService], // HARNESS: the page says "register from the component or service", shows no providers
   template: `
-    <div style="display: flex; flex-direction: column; height: 100%">
-      <app-interrupt-panel />
-      <app-ticket-approval />
-      <div style="flex: 1; min-height: 0">
-        <copilot-chat />
-      </div>
+    <div style="height: 100%">
+      <copilot-chat />
     </div>
   `,
 })
 export class HitlChatComponent {
-  private readonly approvalTools = inject(ApprovalToolsService);
+  private readonly approvalTools = inject(ApprovalToolsService); // HARNESS
 }
 // human in the loop : hitl chat end

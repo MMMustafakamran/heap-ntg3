@@ -1,6 +1,6 @@
 name: Daily QA run
 
-# Daily doc-QA run for AG2-Angular (generated from the workspace template; README "Daily CI").
+# Daily doc-QA run for Antigravity-Angular (generated from the workspace template; README "Daily CI").
 #   plan    -> doc drift: pages whose doc changed are held, not recorded (DRIFT.md);
 #              versions a new reader gets today (CopilotKit + AG-UI latest); page list split into shards
 #   record  -> one runner per shard: today's lockfiles, own servers (start-all.sh), records its pages
@@ -266,6 +266,9 @@ jobs:
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      # HARNESS: Gemini pool (tools/gemini_pool.py on :8285): Gemini key(s) first, OpenAI only as the last-resort fallback.
+      GEMINI_POOL_KEYS: ${{ secrets.GEMINI_POOL_KEYS || secrets.GEMINI_API_KEY }}
+      GEMINI_POOL_OPENAI_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: Today's lockfiles from the plan job
@@ -348,7 +351,7 @@ jobs:
           mkdir -p logs
           nohup bash start-all.sh > logs/start-all.log 2>&1 &
           # "localhost", not 127.0.0.1: the LangGraph JS server binds IPv6 ::1 only.
-          for hp in 8281/health 8280/api/copilotkit/info 8282/api/copilotkit/info 4280/; do
+          for hp in 8281/health 8280/api/copilotkit/info 4280/; do
             port=${hp%%/*}; path=/${hp#*/}
             ok=
             tries=120; case "$port" in 8???) tries=48 ;; esac   # a dead backend costs 4 min, not 10

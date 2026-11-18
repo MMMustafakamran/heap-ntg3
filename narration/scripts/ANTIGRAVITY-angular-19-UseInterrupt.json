@@ -1,0 +1,42 @@
+{
+ "clip": "ANTIGRAVITY-angular-19-UseInterrupt",
+ "page": "use-interrupt",
+ "segments": [
+  {
+   "at": "doc",
+   "text": "Ok so this is the Pausing the Agent for Input page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, the page talks about the backend agent pausing for input, but there's no backend code for it."
+  },
+  {
+   "at": "evidence#2",
+   "text": "And it watches the default agent, which never interrupts."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "+",
+   "text": "This part, an agent that actually pauses, wasn't on the page, so I added it myself."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. With my agent the panel shows up, but only with review required and a cancel button, no title or choices."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, the page never shows a backend that pauses, or what the interrupt payload looks like."
+  },
+  {
+   "at": "+",
+   "text": "So you have to guess both."
+  },
+  {
+   "at": "+",
+   "text": "So kindly look into it, thanks."
+  }
+ ]
+}

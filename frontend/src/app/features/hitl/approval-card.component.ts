@@ -1,7 +1,7 @@
 // human in the loop : register a decision tool renderer start
 /**
  * "Register a decision tool" renderer, verbatim.
- * https://docs.copilotkit.ai/angular/ag2/guides/human-in-the-loop
+ * https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop
  */
 
 import { Component, input } from '@angular/core';

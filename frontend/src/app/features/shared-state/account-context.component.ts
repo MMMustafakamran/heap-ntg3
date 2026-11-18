@@ -2,7 +2,7 @@
 /**
  * "Send read-only application context", verbatim. The accessor form keeps the
  * signal reads reactive, so changing the timezone re-registers the context.
- * https://docs.copilotkit.ai/angular/ag2/guides/shared-state
+ * https://docs.copilotkit.ai/angular/google-antigravity/shared-state/agent-readonly
  */
 
 import { Component, signal } from '@angular/core';
@@ -11,7 +11,6 @@ import { connectAgentContext } from '@copilotkit/angular';
 @Component({
   selector: 'app-account-context',
   template: `
-    <br>
     <button type="button" (click)="timezone.set('Europe/London')">
       Use London time
     </button>

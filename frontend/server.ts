@@ -23,6 +23,11 @@ const runtime = new CopilotRuntime({
     default: new HttpAgent({ url: agentUrl }),
     // chat ui : support agent
     support: new HttpAgent({ url: agentUrl }),
+    // HARNESS: interrupt + sub-agents pages (backend/interrupts_server.py on 8284). The Headless Interrupts
+    // page injects "ticketing", which no page registers; it points at the same harness interrupt agent.
+    interrupt: new HttpAgent({ url: "http://localhost:8284/interrupt/" }),
+    ticketing: new HttpAgent({ url: "http://localhost:8284/interrupt/" }),
+    subagents: new HttpAgent({ url: "http://localhost:8284/subagents/" }),
   },
   // a2ui : enable a2ui middleware start
   a2ui: {},

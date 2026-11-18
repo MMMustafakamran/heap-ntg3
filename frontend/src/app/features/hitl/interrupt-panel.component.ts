@@ -2,7 +2,7 @@
 /**
  * "Handle an interrupt", verbatim. The controller is headless, so this panel
  * renders nothing until the backend emits an AG-UI interrupt.
- * https://docs.copilotkit.ai/angular/ag2/guides/human-in-the-loop
+ * https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/useInterrupt
  */
 
 import { Component } from '@angular/core';
@@ -66,7 +66,10 @@ export class InterruptPanelComponent {
   // version note while the snippet was uncompilable — but it no longer blocks.
   //
   // human in the loop : inject interrupt start
-  protected readonly controller = injectInterrupt<ReviewRequest>('default');
+  // HARNESS: doc injects "default" (the quickstart agent, which never pauses). The page shows no backend
+  // that emits an interrupt, so this points at the harness interrupt agent; verbatim copy in
+  // frontend/doc-verbatim/use-interrupt/.
+  protected readonly controller = injectInterrupt<ReviewRequest>('interrupt');
   // human in the loop : inject interrupt end
 
   protected asReviewRequest(value: unknown): ReviewRequest {

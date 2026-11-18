@@ -1,7 +1,7 @@
 // frontend tools : register a browser tool (change_background) start
 /**
  * The guide's `change_background` frontend tool.
- * https://docs.copilotkit.ai/angular/ag2/guides/frontend-tools-generative-ui
+ * https://docs.copilotkit.ai/angular/google-antigravity/frontend-tools
  *
  * `createBackgroundTool` is the guide's function, unchanged. Everything above
  * it is not in the guide: the snippet is quoted from the live Showcase without
@@ -9,12 +9,12 @@
  * so those are defined here to make it runnable.
  */
 
-import { type WritableSignal } from '@angular/core';
-import { type FrontendToolConfig } from '@copilotkit/angular';
-import { z } from 'zod';
+import { type WritableSignal } from '@angular/core'; // HARNESS: the snippet has no imports
+import { type FrontendToolConfig } from '@copilotkit/angular'; // HARNESS: the snippet has no imports
+import { z } from 'zod'; // HARNESS: the snippet has no imports
 
 /** Arguments the agent may send to `change_background`. */
-export type BackgroundToolArgs = {
+export type BackgroundToolArgs = { // HARNESS: used by the snippet, never defined on the page
   background?: string;
   color?: string;
 };
@@ -34,7 +34,7 @@ export const DEFAULT_BACKGROUND = GRADIENT_PRESETS['slate'];
  * Accept a preset name, a bare CSS color, or a full gradient and always return
  * something safe to drop into a `background` style binding.
  */
-export function resolveGradient(value: string | undefined): string {
+export function resolveGradient(value: string | undefined): string { // HARNESS: called by the snippet, never defined on the page
   const raw = value?.trim();
   if (!raw) {
     return DEFAULT_BACKGROUND;
@@ -55,8 +55,8 @@ export function createBackgroundTool(
   background: WritableSignal<string>,
 ): FrontendToolConfig<BackgroundToolArgs> {
   return {
-    name: 'change_background',
-    description: 'Change the application background to a CSS gradient.',
+    name: "change_background",
+    description: "Change the application background to a CSS gradient.",
     parameters: z.object({
       background: z.string().optional(),
       color: z.string().optional(),
