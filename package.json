@@ -1,11 +1,8 @@
 {
-  "name": "copilotkit-ag2-angular-workspace",
+  "name": "copilotkit-antigravity-angular-workspace",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "automate": "node ci/automate.mjs",
-    "automate:pull": "node ci/automate.mjs --pull",
-    "automate:locked": "node ci/automate.mjs --use-lockfile",
     "dev": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "record": "npm --prefix autorecorder run record --",
@@ -14,12 +11,8 @@
     "record:doctor": "npm --prefix autorecorder run doctor",
     "record:doctor:online": "npm --prefix autorecorder run doctor:online",
     "record:consistency": "npm --prefix autorecorder run consistency",
-    "record:mux": "npm --prefix autorecorder run mux",
     "record:manifest": "npm --prefix autorecorder run manifest",
-    "ci:videos": "npm --prefix autorecorder run ci:videos --",
-    "ci:pages": "node ci/list-pages.mjs",
-    "ci:versions": "node ci/check-versions.mjs",
-    "drift": "node ci/check-doc-drift.mjs",
+    "drift": "node .qa/tools/drift.mjs",
     "drift:sync": "npm --prefix frontend run doc:sync",
     "versions": "npm --prefix frontend run gen:versions"
   }
