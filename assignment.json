@@ -14,7 +14,7 @@
   "title": "Google Antigravity Angular testing",
   "quickstartHeading": "Quickstart",
   "quickstartHeader": null,
-  "clipsToUpload": true,
+  "clipsToUpload": false,
   "guidesHeading": "Angular Guides",
   "columns": [
    "Page/Section",
@@ -22,7 +22,68 @@
   ],
   "resultColumn": 1
  },
- "sections": [],
+ "sections": [
+  {
+   "label": "Chat",
+   "cells": [
+    "Sub section"
+   ]
+  },
+  {
+   "label": "Custom Look and Feel",
+   "cells": [
+    "Sub section"
+   ]
+  },
+  {
+   "label": "Threads",
+   "cells": [
+    "Sub section"
+   ]
+  },
+  {
+   "label": "Basics",
+   "cells": [
+    "Section"
+   ]
+  },
+  {
+   "label": "Generative UI",
+   "cells": [
+    "Section"
+   ]
+  },
+  {
+   "label": "Shared state",
+   "cells": [
+    "Sub section"
+   ]
+  },
+  {
+   "label": "Human-in-the-loop",
+   "cells": [
+    "Sub section"
+   ]
+  },
+  {
+   "label": "Interactivity",
+   "cells": [
+    "Section"
+   ]
+  },
+  {
+   "label": "Agent capabilities",
+   "cells": [
+    "Section"
+   ]
+  },
+  {
+   "label": "Debugging",
+   "cells": [
+    "Sub section"
+   ]
+  }
+ ],
  "pages": [
   {
    "id": "quickstart",
