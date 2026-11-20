@@ -54,10 +54,6 @@ export const FINDING_EVIDENCE: Record<string, DocEvidence[]> = {
   'headless-interrupts': [
     { text: 'When the backend agent emits an AG-UI interrupt', caption: 'No Antigravity interrupt backend is shown or linked, so nothing appears' },
   ],
-  'multi-agent-subagents': [
-    { text: 'pip install ag-ui-antigravity google-antigravity', caption: 'subagents.py imports httpx, which this install never installs (ModuleNotFoundError)' },
-    { text: 'readDelegations(this.agentStore().state())', caption: 'Frontend snippet is a class fragment: readDelegations, subAgentRendererConfig, SubAgentName never defined' },
-  ],
 };
 // Doc step highlights these before the IDE (no KNOWN_ISSUE set in this repo, so no skip list).
 registerDocEvidence(FINDING_EVIDENCE);

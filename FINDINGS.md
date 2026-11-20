@@ -63,14 +63,9 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 - **Result:** no interrupting backend is given, so no pending decision ever appears.
 - **Confirmed by harness:** with the HARNESS interrupt agent, the message and Approve/Reject appear and Approve resumes the run.
 
-### [Sub-agents](https://docs.copilotkit.ai/angular/google-antigravity/multi-agent/subagents)
-**#13 The sub-agents backend can't start as installed, and the Angular snippet is a fragment.**
-- **Doc:** `pip install ag-ui-antigravity google-antigravity`; the Angular snippet calls `readDelegations(this.agentStore().state())` and `subAgentRendererConfig(name)`.
-- **Result:** `ModuleNotFoundError: No module named 'httpx'` on `import agents.subagents`; the Angular snippet is a class fragment that doesn't parse (TS1128), and `readDelegations`, `subAgentRendererConfig`, `SubAgentName` are never defined.
-- **Confirmed by harness:** with `--with httpx` and a HARNESS delegation log, research_agent, writing_agent and critique_agent run and a blog post comes back.
-
 ## Minor notes
 
+- Sub-agents (#13): the install step leaves out httpx (it is in the linked showcase requirements.txt); the Angular snippet is a showcase excerpt with small helpers (`readDelegations`, `subAgentRendererConfig`) not shown.
 - Tool Call Rendering (#5): the handler fetches `/api/weather`, a placeholder the page doesn't provide; the card renders, its result line is the app's index.html.
 - Quickstart: `HttpAgent` comes from `@ag-ui/client`, which the install step never adds.
 - Prebuilt Components: the page's `AppComponent` mounts `copilot-popup` and `copilot-sidebar` together; both launchers sit on the same spot, so "Click the popup launcher button" opens the sidebar.
