@@ -24,6 +24,11 @@ async def request_review(topic: str) -> str:  # HARNESS: no page shows a backend
             "title": f"Review {topic}",
             "choices": [{"id": "ship", "label": "Ship it"}, {"id": "hold", "label": "Hold"}],
         },
+        # HARNESS (2026-11-20): the page's panel reads event.value.title / .choices at the top level, but
+        # @copilotkit/angular hands it the whole AG-UI Interrupt (fields under metadata). Also sent as
+        # top-level extras, to see whether the runtime keeps them (its docstring says relays drop extras).
+        title=f"Review {topic}",
+        choices=[{"id": "ship", "label": "Ship it"}, {"id": "hold", "label": "Hold"}],
     )
     if answer.status != "resolved":
         return f"Not shipped ({answer.status})."

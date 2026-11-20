@@ -102,7 +102,7 @@
         1
       ],
       "notes": [
-        "Issue: the backend snippet is a fragment (no imports or constants, build_registry is never defined) and no Node runtime server or start command is given for Angular; the runtime guide loops back to the quickstart."
+        "Issue: backend snippet is a fragment; no runtime server or start step for Angular."
       ],
       "block": null,
       "links": [
@@ -131,7 +131,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: the page's AppComponent mounts the popup and the sidebar together; both launchers sit on the same spot, so the popup launcher click opens the sidebar. Mount one at a time."
+        "Note: popup and sidebar are mounted together; mount one at a time."
       ],
       "block": null,
       "links": [
@@ -187,7 +187,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: backend setup link leads to the React voice page; transcriptionService moves to the Angular runtime as is."
+        "Note: the backend setup link goes to the React voice page."
       ],
       "block": null,
       "links": [
@@ -271,7 +271,7 @@
         14
       ],
       "notes": [
-        "Issue: with today's packages ng serve fails to compile the Headless UI snippet: runAgent({ agent }) TS2739, @copilotkit/angular 0.6.0 pins @ag-ui/client 1.0.2 while core 1.89.0 uses 1.0.5."
+        "Issue: ng serve fails with TS2739 on runAgent({ agent }) with today's packages."
       ],
       "block": null,
       "links": [
@@ -328,7 +328,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: selectedThreadId is never defined, add a signal; list needs CopilotKit Intelligence."
+        "Note: selectedThreadId is never defined; the list needs CopilotKit Intelligence."
       ],
       "block": null,
       "links": [
@@ -356,7 +356,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: the snippet has no imports and never defines BackgroundToolArgs / resolveGradient."
+        "Note: snippet has no imports; BackgroundToolArgs and resolveGradient never defined."
       ],
       "block": null,
       "links": [
@@ -412,7 +412,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: /api/weather is a placeholder the page doesn't provide; the card renders."
+        "Note: /api/weather is a placeholder the page doesn't provide."
       ],
       "block": null,
       "links": [
@@ -468,7 +468,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: page never names an MCP app server; the runtime mcpApps config is only in the Copilot Runtime guide."
+        "Note: page never names an MCP app server; runtime config is only in the runtime guide."
       ],
       "block": null,
       "links": [
@@ -498,7 +498,7 @@
         8
       ],
       "notes": [
-        "Issue: only the frontend config is shown; the runtime openGenerativeUI flag that turns it on is never shown, so no sandboxed UI renders."
+        "Issue: the runtime openGenerativeUI flag is never shown, so no sandboxed UI renders."
       ],
       "block": null,
       "links": [
@@ -529,7 +529,7 @@
         9
       ],
       "notes": [
-        "Issue: the agent never sees state set with agent.setState; Antigravity needs experimental_app_state=True plus a prompt to call get_shared_state, which the Angular page never shows."
+        "Issue: the agent never sees state set with agent.setState."
       ],
       "block": null,
       "links": [
@@ -560,7 +560,7 @@
         10
       ],
       "notes": [
-        "Issue: the connectAgentContext values never reach the agent; Antigravity needs experimental_app_context=True plus a get_app_context instruction, never shown."
+        "Issue: connectAgentContext values never reach the agent."
       ],
       "block": null,
       "links": [
@@ -620,7 +620,7 @@
         11
       ],
       "notes": [
-        "Issue: no Antigravity backend that pauses is shown or linked, so injectInterrupt(\"default\") never fires."
+        "Issue: no Antigravity backend that pauses is shown, so injectInterrupt never fires."
       ],
       "block": null,
       "links": [
@@ -651,7 +651,7 @@
         12
       ],
       "notes": [
-        "Issue: no Antigravity interrupt backend is shown or linked, so no pending decision ever appears."
+        "Issue: no Antigravity interrupt backend is shown, so no pending decision appears."
       ],
       "block": null,
       "links": [
@@ -709,7 +709,7 @@
       "status": "✅",
       "findings": [],
       "notes": [
-        "Note: install step leaves out httpx (it's in the linked showcase requirements.txt); the Angular snippet is a showcase excerpt with small helpers."
+        "Note: install step leaves out httpx; the snippet is a showcase excerpt."
       ],
       "block": null,
       "links": [
@@ -783,5 +783,5 @@
       }
     }
   ],
-  "quickstartBlocked": "the Angular quickstart's backend snippet is a fragment (no imports or constants, build_registry never defined) and no Node runtime server or start command is given for Angular; the runtime guide loops back to the quickstart"
+  "quickstartBlocked": "the backend snippet is a fragment and no runtime server or start step is given for Angular"
 }
