@@ -1,6 +1,6 @@
 /**
  * A chat, so the Inspector has something to inspect.
- * https://docs.copilotkit.ai/angular/ag2/inspector
+ * https://docs.copilotkit.ai/angular/google-antigravity/inspector
  *
  * Nothing here mounts the Inspector, and that is the page's whole point:
  * `@copilotkit/angular` mounts it for you — the `CopilotKit` service creates

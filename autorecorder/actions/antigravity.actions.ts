@@ -31,7 +31,8 @@ export const FINDING_EVIDENCE: Record<string, DocEvidence[]> = {
     { text: 'Expose the selected backend through Copilot Runtime', caption: 'Runtime step is only this callout; no Node runtime server or start command for Angular, the runtime guide loops back here' },
   ],
   'open-generative-ui': [
-    { text: 'An openGenerativeUI object opts the frontend into the built-in sandboxed renderer.', caption: 'Only the frontend config is shown; the runtime openGenerativeUI flag that turns it on is never shown' },
+    // The rendered <p> breaks the line after "sandboxed" (raw text node has a newline), so the needle stops there.
+    { text: 'object opts the frontend into the built-in sandboxed', caption: 'Only the frontend config is shown; the runtime openGenerativeUI flag that turns it on is never shown' },
   ],
   // --- shared-state / agent-readonly / hitl / interrupts / sub-agents (2026-11-18) ---
   'shared-state': [
@@ -118,7 +119,17 @@ export const FINDING_NOTES: Record<string, string> = {
   ].join('\n'),
 };
 
+/** Status per page from assignment.json: the Notepad tail runs only on ❌/⚠️ pages (AUTORECORDER.md section 3). */
+function pageStatus(id: string): string {
+  try {
+    const a = JSON.parse(readFileSync(join(import.meta.dirname, '..', '..', 'assignment.json'), 'utf-8')) as { pages: { id: string; status?: string }[] };
+    return a.pages.find((p) => p.id === id)?.status ?? '';
+  } catch { return ''; }
+}
+
 async function writeFinding(page: Page, id: string, config: Parameters<PageActionHandler>[1]): Promise<void> {
+  const st = pageStatus(id);
+  if (!st.includes('❌') && !st.includes('⚠')) return; // ✅ take: no Notepad
   await showFinding(page, config, FINDING_EVIDENCE[id], FINDING_NOTES[id]);
 }
 
