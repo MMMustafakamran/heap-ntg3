@@ -534,7 +534,18 @@ export const runThreadsDrawerAction: PageActionHandler = async (page, config, _r
   await settle(page, msgCount, ctx);
   await sleep(3000);
   const drawer = page.locator('copilot-threads-drawer').first();
-  const text = (await drawer.innerText().catch(() => '')).trim();
+  // The drawer is a web component (shadow DOM) that may start collapsed behind a launcher: open it like a reader would.
+  const opener = drawer.getByRole('button', { name: /open.*(thread|drawer|conversation)/i }).first();
+  if (await opener.isVisible().catch(() => false)) {
+    await glideClick(page, opener).catch(async () => opener.click({ force: true }).catch(() => {}));
+    await sleep(2000);
+  }
+  const deepText = (el: Element): string => {
+    const walk = (n: Node): string =>
+      n.nodeType === 3 ? n.textContent ?? '' : [...((n as Element).shadowRoot?.childNodes ?? []), ...n.childNodes].map(walk).join(' ');
+    return walk(el);
+  };
+  const text = (await drawer.evaluate(deepText).catch(() => '')).replace(/\s+/g, ' ').trim();
   await glideTo(page, drawer, 2500);
   ctx.warn(`Drawer text: ${text.slice(0, 300).replace(/\s+/g, ' ')}`);
   if (!text) mark('error', 'drawer renders empty: no list, no locked state');
