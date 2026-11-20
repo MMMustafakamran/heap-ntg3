@@ -3,7 +3,11 @@
   "ui": "angular",
   "repo": "heap-ntg3",
   "docBase": "https://docs.copilotkit.ai/angular/google-antigravity/",
-  "versions": {},
+  "versions": {
+    "@copilotkit/angular": "0.6.0",
+    "@copilotkit/runtime": "1.89.0",
+    "@copilotkit/core": "1.89.0"
+  },
   "testedContext": {
     "os": "Microsoft Windows 11 Pro",
     "packageManager": "npm 11 (Node 26.7.0)"
@@ -262,16 +266,20 @@
       "child": true,
       "docPath": "custom-look-and-feel/headless-ui",
       "reachable": "sidebar",
-      "status": "✅",
-      "findings": [],
-      "notes": [],
+      "status": "❌",
+      "findings": [
+        14
+      ],
+      "notes": [
+        "Issue: with today's packages ng serve fails to compile the Headless UI snippet: runAgent({ agent }) TS2739, @copilotkit/angular 0.6.0 pins @ag-ui/client 1.0.2 while core 1.89.0 uses 1.0.5."
+      ],
       "block": null,
       "links": [
         {
-          "text": "Headless UI - Angular",
+          "text": "Issue",
           "clip": "ANTIGRAVITY-angular-07-ClfHeadlessUi",
           "loom": "https://www.loom.com/share/f0c8e975a8a34afc8bd8218897ccf063",
-          "narration": null,
+          "narration": "narration/scripts/ANTIGRAVITY-angular-07-ClfHeadlessUi.json",
           "filmed": "2026-11-18"
         }
       ],

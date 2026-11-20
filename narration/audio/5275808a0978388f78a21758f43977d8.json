@@ -1,0 +1,9 @@
+{
+ "text": "So basically, the Angular package pins an older AG-UI client than CopilotKit core, so you end up with two copies of the agent type.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 9.985,
+ "file": "5275808a0978388f78a21758f43977d8.mp3",
+ "clip": "ANTIGRAVITY-angular-07-ClfHeadlessUi",
+ "at": "notepad"
+}

@@ -8,7 +8,7 @@
  * showFinding). ✅ pages are plain working takes (AUTORECORDER.md sections 2-3).
  */
 import { execFile } from 'node:child_process';
-import { appendFileSync, mkdirSync } from 'node:fs';
+import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { type Page } from 'playwright';
 
@@ -43,6 +43,9 @@ export const FINDING_EVIDENCE: Record<string, DocEvidence[]> = {
   'use-interrupt': [
     { text: 'When the backend agent pauses for input', caption: 'No Antigravity backend that pauses is shown or linked' },
     { text: 'injectInterrupt<ReviewRequest>("default")', caption: 'So the default agent never interrupts and this never fires' },
+  ],
+  'clf-headless-ui': [
+    { text: 'await this.copilotKit.core.runAgent({ agent });', caption: 'ng serve fails TS2739 on this line with today packages: @copilotkit/angular 0.6.0 pins @ag-ui/client 1.0.2, core 1.89.0 uses 1.0.5 (FINDINGS.md #14)' },
   ],
   'headless-interrupts': [
     { text: 'When the backend agent emits an AG-UI interrupt', caption: 'No Antigravity interrupt backend is shown or linked, so nothing appears' },
@@ -94,6 +97,12 @@ export const FINDING_NOTES: Record<string, string> = {
     "following the page nothing pauses so nothing ever shows up",
     "no antigravity backend that pauses is shown or linked anywhere",
     "so injectInterrupt default never fires,i had to write my own interrupt agent to see the panel",
+  ].join('\n'),
+  'clf-headless-ui': [
+    "page says call copilotKit.core.runAgent with the agent and the headless chat sends ur message",
+    "with todays install ng serve wont even compile,ts2739 type abstractagent is missing _threadId maxEnforcedEntries",
+    "angular 0.6.0 pins ag-ui client 1.0.2 exact but core 1.89 uses 1.0.5,so u get two copies of abstractagent",
+    "the runAgent line straight from the page is what breaks,i had to cast it to get the rest of the app building",
   ].join('\n'),
   'headless-interrupts': [
     "page says when the backend emits an interrupt the agent store holds the pending decision",
@@ -494,31 +503,41 @@ export const runSlotsAction: PageActionHandler = async (page, config, _root, ctx
   else await glideTo(page, custom.last(), 2500);
 };
 
-/** Headless UI: type in the hand-written textarea, click Send, the reply appears as an article. */
-export const runHeadlessUiAction: PageActionHandler = async (page, config, _root, ctx) => {
-  await sendPrompt(page, config.prompt, {
-    timeoutMs: 15000,
-    inputSelector: 'app-headless-chat textarea[aria-label="Message"]',
-    submitSelector: 'app-headless-chat button:has-text("Send")',
-    messageSelector: 'app-headless-chat article[data-role="assistant"]',
-  });
-  const replied = await page
-    .waitForFunction(
-      () => {
-        const a = document.querySelectorAll('app-headless-chat article[data-role="assistant"]');
-        return a.length > 0 && (a[a.length - 1].textContent ?? '').trim().length > 0;
-      },
-      undefined,
-      { timeout: 90000 },
-    )
-    .then(() => true)
-    .catch(() => false);
-  await page
-    .waitForFunction(() => !document.querySelector('app-headless-chat')?.textContent?.includes('Agent is working'), undefined, { timeout: 60000 })
-    .catch(() => {});
-  await sleep(1500);
-  if (!replied) ctx.fail('No assistant reply appeared in the headless transcript.');
-  else await glideTo(page, page.locator('app-headless-chat article[data-role="assistant"]').last(), 2500);
+/**
+ * Headless UI (FINDINGS.md #14): with today's packages the page's `runAgent({ agent })` line fails
+ * ng serve with TS2739 (@copilotkit/angular 0.6.0 pins @ag-ui/client 1.0.2, core 1.89.0 uses 1.0.5).
+ * The shared app keeps a HARNESS cast so the other pages build; for this take the verbatim line is put
+ * back, the real compile error shows (overlay + logs/angular-4280.log), and the cast is restored in
+ * `finally`. Pages record one at a time, so the broken build costs no other take.
+ */
+export const runHeadlessUiAction: PageActionHandler = async (page, config, root, ctx) => {
+  const file = join(root, 'frontend', 'src', 'app', 'features', 'headless', 'headless-chat.component.ts');
+  const log = join(root, 'logs', 'angular-4280.log');
+  const cast = 'runAgent({ agent: agent as any })';
+  const src = readFileSync(file, 'utf8');
+  const logLen = () => (existsSync(log) ? readFileSync(log, 'utf8').length : 0);
+  const from = logLen();
+  let seen = false;
+  try {
+    if (!src.includes(cast)) ctx.warn('HARNESS cast not found in headless-chat.component.ts');
+    writeFileSync(file, src.replace(cast, 'runAgent({ agent })'));
+    for (let i = 0; i < 90 && !seen; i++) {
+      await sleep(1000);
+      seen = existsSync(log) && readFileSync(log, 'utf8').slice(from).includes('TS2739');
+    }
+    await page.reload().catch(() => null);
+    const overlay = await page.locator('vite-error-overlay').first()
+      .waitFor({ state: 'attached', timeout: 20000 }).then(() => true).catch(() => false);
+    mark('error', "TS2739: Type 'AbstractAgent' is missing the following properties from type 'AbstractAgent'");
+    await sleep(6000);
+    if (!seen) ctx.warn('TS2739 never appeared in logs/angular-4280.log');
+    if (!overlay) ctx.warn('No vite-error-overlay after the reload');
+    await writeFinding(page, config.id, config);
+  } finally {
+    writeFileSync(file, src);
+    await page.waitForEvent('load', { timeout: 20000 }).catch(() => null);
+  }
+  ctx.fail("ng serve fails to compile the page's runAgent({ agent }): TS2739: Type 'AbstractAgent' is missing the following properties from type 'AbstractAgent': _threadId, _maxEnforcedEntries, maxEnforcedEntries (two @ag-ui/client copies: @copilotkit/angular 0.6.0 pins 1.0.2, @copilotkit/core 1.89.0 uses 1.0.5).");
 };
 
 /** Threads Drawer: the drawer lists the conversation next to the chat. */

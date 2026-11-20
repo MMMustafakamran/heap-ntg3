@@ -60,7 +60,9 @@ export class HeadlessChatComponent {
     });
     this.draft.set('');
     // headless : run agent start
-    await this.copilotKit.core.runAgent({ agent });
+    // verbatim (doc): await this.copilotKit.core.runAgent({ agent });
+    // HARNESS: cast so ng serve compiles the shared app; verbatim line fails TS2739 (two @ag-ui/client copies), FINDINGS.md #14
+    await this.copilotKit.core.runAgent({ agent: agent as any });
     // headless : run agent end
   }
 }
