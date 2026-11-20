@@ -8,7 +8,7 @@ import { provideMCPApps } from "@copilotkit/angular/mcp-apps";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideCopilotKit({ runtimeUrl: "http://localhost:8280/api/copilotkit" }), // HARNESS: doc says "/api/copilotkit" (relative, ng serve has no proxy); runtime on 8280
+    provideCopilotKit({ runtimeUrl: "http://localhost:8286/api/copilotkit" }), // HARNESS: doc says "/api/copilotkit" (relative, ng serve has no proxy); MCP Apps runtime on 8286 (server.pages.ts, mcpApps from the Copilot Runtime guide)
     provideMCPApps(),
   ],
 };

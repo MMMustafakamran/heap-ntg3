@@ -1,0 +1,9 @@
+{
+ "text": "So basically, the agent never sees the state the app sets.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 4.83,
+ "file": "45175b301ac4dd08ba01867a122b1009.mp3",
+ "clip": "ANTIGRAVITY-angular-16-SharedState",
+ "at": "notepad"
+}

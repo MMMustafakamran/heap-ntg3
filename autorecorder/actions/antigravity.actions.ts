@@ -27,37 +27,32 @@ import { glideClick, glideTo } from './glide-click';
 
 export const FINDING_EVIDENCE: Record<string, DocEvidence[]> = {
   quickstart: [
-    { text: 'AGENT_REGISTRY = build_registry()', caption: 'build_registry is never defined; _common.py has no imports or constants (FINDINGS.md #1)' },
-    { text: 'Expose the selected backend through Copilot Runtime', caption: 'The runtime step is only this (collapsed) callout; the linked guide shows a Next.js route, no Angular server' },
-  ],
-  'gen-ui-tool-rendering': [
-    { text: 'fetch(`/api/weather?city=${encodeURIComponent(city)}`', caption: 'The handler fetches /api/weather; the page never shows or links that endpoint' },
-    { text: 'then the city and the tool result', caption: 'Promised result; the card shows the app index.html instead of weather' },
+    { text: 'AGENT_REGISTRY = build_registry()', caption: 'Backend is a fragment: build_registry is never defined; _common.py has no imports or constants (FINDINGS.md #1)' },
+    { text: 'Expose the selected backend through Copilot Runtime', caption: 'Runtime step is only this callout; no Node runtime server or start command for Angular, the runtime guide loops back here' },
   ],
   a2ui: [
     { text: 'catalog: productCatalog,', caption: 'productCatalog is never defined anywhere on the page' },
     { text: 'A catalog is required: without one, A2UI stays off even when the runtime', caption: 'So following the page, A2UI stays off' },
   ],
   'open-generative-ui': [
-    { text: 'Generated code runs in a sandboxed iframe without same-origin access.', caption: 'Only the frontend provider is shown; no sandboxed UI ever renders' },
+    { text: 'An openGenerativeUI object opts the frontend into the built-in sandboxed renderer.', caption: 'Only the frontend config is shown; the runtime openGenerativeUI flag that turns it on is never shown' },
   ],
   'mcp-apps': [
     { text: 'MCP resource and tool requests travel through the selected AG-UI agent.', caption: 'No MCP server, no runtime mcpApps config, no agent change shown' },
   ],
   // --- shared-state / agent-readonly / hitl / interrupts / sub-agents (2026-11-18) ---
   'shared-state': [
-    { text: 'then ask the agent for the current priority', caption: 'Page promises the agent answers "high" after agent.setState; the Antigravity agent never sees the state' },
+    { text: 'then ask the agent for the current priority', caption: 'Agent never sees agent.setState state: Antigravity needs experimental_app_state=True + a get_shared_state prompt, never shown' },
   ],
   'agent-readonly': [
-    { text: 'connectAgentContext(() => ({', caption: 'Context is registered, but the Antigravity agent never receives it' },
+    { text: 'connectAgentContext(() => ({', caption: 'Values never reach the agent: needs experimental_app_context=True + a get_app_context instruction, never shown' },
   ],
   'use-interrupt': [
-    { text: 'When the backend agent pauses for input', caption: 'No page shows an Antigravity backend that pauses / emits an interrupt' },
-    { text: 'injectInterrupt<ReviewRequest>("default")', caption: 'The default (quickstart) agent never interrupts; payload shape (title, choices) never shown' },
+    { text: 'When the backend agent pauses for input', caption: 'No Antigravity backend that pauses is shown or linked' },
+    { text: 'injectInterrupt<ReviewRequest>("default")', caption: 'So the default agent never interrupts and this never fires' },
   ],
   'headless-interrupts': [
-    { text: 'When the backend agent emits an AG-UI interrupt', caption: 'No backend that emits an interrupt is shown' },
-    { text: 'injectAgentStore("ticketing")', caption: 'No "ticketing" agent is registered anywhere on the page' },
+    { text: 'When the backend agent emits an AG-UI interrupt', caption: 'No Antigravity interrupt backend is shown or linked, so nothing appears' },
   ],
   'multi-agent-subagents': [
     { text: 'pip install ag-ui-antigravity google-antigravity', caption: 'subagents.py imports httpx, which this install never installs (ModuleNotFoundError)' },
@@ -71,14 +66,8 @@ export const FINDING_NOTES: Record<string, string> = {
   quickstart: [
     "page says connect the antigravity backend then run backend runtime and angular app and chat works",
     "following just the page theres nothing to run, chat only answers on a backend and runtime i put together myself",
-    "_common.py has no imports and no constants like MODEL WORKSPACE SLUG, agent_server.py calls build_registry which is never defined",
-    "runtime step is only a callout,the linked runtime page only has a next.js route so no server for angular and no command to start it",
-  ].join('\n'),
-  'gen-ui-tool-rendering': [
-    "page says ask for weather in paris and the card shows loading then the city and the tool result",
-    "card does render but the result line is a whole html page,the angular index.html",
-    "handler fetches /api/weather?city= but the page never gives that endpoint or says where it comes from",
-    "so the tool never returns weather, u have to write your own weather api to make it work",
+    "backend snippet is a fragment,no imports no constants and build_registry is never defined",
+    "and theres no node runtime server or start command for angular,the runtime guide just loops back to the quickstart",
   ].join('\n'),
   a2ui: [
     "page says pass your catalog thru provideCopilotKit a2ui and the chat renders your catalog components",
@@ -87,10 +76,10 @@ export const FINDING_NOTES: Record<string, string> = {
     "page itself says without a catalog a2ui stays off,so as written theres nothing to render with",
   ].join('\n'),
   'open-generative-ui': [
-    "page says add openGenerativeUI with sandboxFunctions and the agent streams sandboxed html into the chat",
-    "asked for 3 filter buttons,no sandbox iframe ever shows,agent just writes html buttons into the message and they dont do anything",
-    "asked straight out and the agent says it has no generatesandboxedui tool",
-    "page only shows the angular provider,nothing about turning open generative ui on in the runtime",
+    "page says add openGenerativeUI and the agent streams sandboxed ui into the chat",
+    "asked for 3 filter buttons,no sandbox iframe ever shows,agent just writes html buttons into the message",
+    "page only shows the frontend config",
+    "the runtime openGenerativeUI flag that actually turns it on is never shown so nothing sandboxed renders",
   ].join('\n'),
   'mcp-apps': [
     "page says add provideMCPApps and the chat renders the app resources an mcp server returns",
@@ -100,27 +89,28 @@ export const FINDING_NOTES: Record<string, string> = {
   ].join('\n'),
   // --- shared-state / agent-readonly / hitl / interrupts / sub-agents (2026-11-18) ---
   'shared-state': [
-    'page says click mark high priority then ask the agent and it answers high',
-    'panel shows priority high but the agent says it doesnt have enough context to tell which priority',
-    'agent.setState never reaches the antigravity agent,state isnt passed to the model',
-    'page shows only the angular side, nothing on the backend reads state',
+    "page says click mark high priority then ask the agent and it answers high",
+    "panel shows priority high but the agent says it cant tell the priority",
+    "agent never sees state from agent.setState",
+    "antigravity needs experimental_app_state true plus a prompt to call get_shared_state,angular page never shows that",
   ].join('\n'),
   'agent-readonly': [
-    'page says connectAgentContext sends app values like name and timezone to the agent',
-    'clicked use london time and asked, agent doesnt know ada or london or the selected record',
-    'the context is registered in the browser but the antigravity agent never gets it',
-    'no backend step on the page to read the context',
+    "page says connectAgentContext sends app values like name and timezone to the agent",
+    "clicked use london time and asked, agent doesnt know ada or london or the selected record",
+    "values never reach the agent",
+    "antigravity needs experimental_app_context true and an instruction to call get_app_context,never shown on the page",
   ].join('\n'),
   'use-interrupt': [
-    'page says when the backend agent pauses injectInterrupt gives u the pending decision',
-    'with just the page nothing pauses,the default agent never sends an interrupt',
-    'page never shows an antigravity backend that interrupts or what payload gives title and choices',
-    'i wrote a harness interrupt tool,panel shows only review required and cancel,no title or choices',
+    "page says when the backend agent pauses injectInterrupt gives u the pending decision",
+    "following the page nothing pauses so nothing ever shows up",
+    "no antigravity backend that pauses is shown or linked anywhere",
+    "so injectInterrupt default never fires,i had to write my own interrupt agent to see the panel",
   ].join('\n'),
   'headless-interrupts': [
-    'page says store interruptController holds the pending decision when the backend interrupts',
-    'injectAgentStore ticketing but no ticketing agent exists anywhere and no backend that interrupts',
-    'had to register ticketing on my own interrupt agent to see anything,then approve resumes the run',
+    "page says when the backend emits an interrupt the agent store holds the pending decision",
+    "following the page nothing appears,no pending decision",
+    "no antigravity interrupt backend is shown or linked",
+    "had to write my own interrupt agent to see approve and reject",
   ].join('\n'),
   'multi-agent-subagents': [
     'page says pip install ag-ui-antigravity google-antigravity then run subagents.py',
@@ -335,17 +325,14 @@ export const runToolRenderingAction: PageActionHandler = async (page, config, _r
   await settle(page, msgCount, ctx);
   if (!shown) {
     mark('error');
-    await writeFinding(page, config.id, config);
     ctx.fail('The weather card never reached "complete": getWeather did not render.');
     return;
   }
   const result = ((await card.locator('p').innerText().catch(() => '')) || '').trim();
   await glideTo(page, card, 2500);
-  const broken = !result || /<!doctype html|<html/i.test(result);
-  if (broken) mark('error');
+  // ✅ + Note (owner, 2026-11-20): /api/weather is the reader's own placeholder endpoint; the card rendering is the feature.
+  if (!result || /<!doctype html|<html/i.test(result)) ctx.warn(`Card rendered; tool result is not weather ("${result.slice(0, 60)}"): /api/weather is a placeholder the page doesn't provide.`);
   await sleep(1500);
-  await writeFinding(page, config.id, config);
-  if (broken) ctx.fail(`The weather card's tool result is not weather: "${result.slice(0, 100)}" (/api/weather is never provided by the page, so fetch gets the app's index.html).`);
 };
 
 /** A2UI: ask for a catalog component; A2UI stays off without the never-defined catalog. */

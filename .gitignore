@@ -70,3 +70,7 @@ reference-*.wav
 # Antigravity workspace/session dirs
 backend/.ws/
 backend/.sessions/
+
+# HARNESS: local keys for frontend/server.pages.ts (Intelligence, voice transcription)
+.env.intelligence
+*/.env.intelligence

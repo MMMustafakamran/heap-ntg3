@@ -115,6 +115,13 @@ We test as the human reviewer the company asked for: we were given the docs link
 - CI records only `sidebar` + `in-content` pages that are not `excluded`, in parallel shards: 5 by default, 15 for LangGraph React (public repos: Actions minutes are free, up to 20 jobs at once). Shards are balanced by each page's recording time from the previous run (`page-durations.json`, kept in the Actions cache).
 - Check by hand: new pages with no route or recorder entry, removed pages whose stale route still records a green clip, legacy code left beside new code, silent failures, React vs Vue/Angular divergence.
 
+## 9a. Threads pages need a valid Intelligence key (owner, 2026-11-20)
+
+- Pages that use threads (threads drawer, headless threads, thread lists, anything the doc says is served by CopilotKit Intelligence) must run with a **valid** `CPK_INTELLIGENCE_API_KEY` (from `4-private/.env` locally, a GitHub secret in CI, set with `4-private/set-secrets.py`). Wire it in as the doc says; if the doc doesn't say where, add it as a `HARNESS` line.
+- A missing, empty or invalid key is **harness trouble, never a finding**: don't mark the page ❌ or ⚠️, don't write a finding, don't film or narrate it as a failure. Keep the page's previous status, note `blocked: no Intelligence key` in the run summary, and tell the owner.
+- Before calling a threads page failing, check the key was set and accepted (no 401/403 on the Intelligence requests in `result.json` / events). Only a failure with a valid key counts.
+- The key's value is a secret (§10): never print, log or commit it.
+
 ## 10. Secrets
 
 - Never print, log, paste or commit API keys, `.env` files or key files (`4-private/.env`, any `*.env` / `*.env.txt`).

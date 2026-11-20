@@ -8,7 +8,7 @@
   },
   {
    "at": "evidence",
-   "text": "So this is the problem, umm, it says generated code runs in a sandboxed iframe, but that iframe never shows up."
+   "text": "So this is the problem, umm, the page only shows the frontend config, the runtime flag that turns it on is never shown."
   },
   {
    "at": "ide",
@@ -16,15 +16,15 @@
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. It should render a small dashboard filter in a sandbox, but the agent just writes the buttons as plain HTML in its message, and they don't do anything."
+   "text": "Moving on to the demo. It should render a small dashboard filter in a sandbox, but the agent just writes the buttons as plain HTML in its message."
   },
   {
    "at": "notepad",
-   "text": "So basically, with the provider config from the page, no sandboxed UI ever appears."
+   "text": "So basically, the page only gives the frontend part."
   },
   {
    "at": "+",
-   "text": "The page doesn't show any other step that's needed."
+   "text": "Without the runtime open generative UI flag, nothing sandboxed ever renders."
   },
   {
    "at": "+",

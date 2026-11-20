@@ -27,5 +27,7 @@ curl -s -m 240 -o /dev/null -X POST http://localhost:8281/default -H 'content-ty
 
 cd frontend
 (npx tsx server.ts > ../logs/runtime-8280.log 2>&1) &
+# HARNESS: 8286 MCP Apps / 8287 Threads (Intelligence) / 8288 Voice runtimes (server.pages.ts). OPENAI_TRANSCRIPTION_API_KEY falls back to OPENAI_API_KEY.
+(OPENAI_TRANSCRIPTION_API_KEY="${OPENAI_TRANSCRIPTION_API_KEY:-${OPENAI_API_KEY:-}}" npx tsx server.pages.ts > ../logs/runtime-pages.log 2>&1) &
 (npm start > ../logs/angular-4280.log 2>&1) &
 wait

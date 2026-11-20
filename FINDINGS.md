@@ -5,8 +5,8 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 ## Dev blockers (seen with `ng serve` and normal use of the page)
 
 ### [Quickstart](https://docs.copilotkit.ai/angular/google-antigravity)
-**#1 The Antigravity backend is a fragment and no Angular runtime server is shown.**
-- **Doc:** "Connect the selected agent backend" shows `_common.py` starting at `def api_key()`: no imports (`os`, `GeminiAPIEndpoint`, `CapabilitiesConfig`, `BuiltinTools`, `get_forwarded_headers`) and none of the constants it uses (`SLUG`, `_FORWARDED_PREFIXES`, `MODEL`, `WORKSPACE`, `SAVE_DIR`, `SESSION_TIMEOUT_SECONDS`, `MAX_SESSIONS`, `MAX_TOOL_CALLS_PER_TURN`). `agent_server.py` is `AGENT_REGISTRY = build_registry()`, and `build_registry` is never defined or imported. The runtime step is only a callout ("Configure Copilot Runtime to register this backend as the `default` agent"); the linked Copilot Runtime guide shows only a Next.js route, no Node server for Angular and no command to start the backend or runtime.
+**#1 The backend snippet is a fragment and no Node runtime server or start command is given for Angular.**
+- **Doc:** "Connect the selected agent backend" shows `_common.py` starting at `def api_key()`: no imports (`os`, `GeminiAPIEndpoint`, `CapabilitiesConfig`, `BuiltinTools`, `get_forwarded_headers`) and none of the constants it uses (`SLUG`, `_FORWARDED_PREFIXES`, `MODEL`, `WORKSPACE`, `SAVE_DIR`, `SESSION_TIMEOUT_SECONDS`, `MAX_SESSIONS`, `MAX_TOOL_CALLS_PER_TURN`). `agent_server.py` is `AGENT_REGISTRY = build_registry()`, and `build_registry` is never defined or imported. The runtime step is only a callout ("Configure Copilot Runtime to register this backend as the `default` agent"); the linked Copilot Runtime guide loops back to the quickstart: no Node runtime server for Angular and no command to start the backend or runtime.
 - **Result:** the backend code as published fails at import (`NameError`). No working Angular app can be built from the page without guessing.
 - **Confirmed by harness:** `backend/agents/_common.py` (the showcase file the snippet comes from, with its imports and constants), a HARNESS `build_registry()` in `backend/agent_server.py` and `frontend/server.ts` (`CopilotRuntime` + `createCopilotNodeListener` + `HttpAgent` to `http://localhost:8281/default`) make the chat answer ("Yes, I'm here! Fun fact: Benjamin Franklin's famous kite experiment…").
 
@@ -26,11 +26,6 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 - **Result:** after chatting on `support` the list shows only "New conversation", no threads and no error. The page never says which backend provides the list.
 - **Confirmed by harness:** `selectedThreadId` (used in `<copilot-chat agentId="support" [threadId]="selectedThreadId()" />`) is never defined; added as a HARNESS signal.
 
-### [Tool Call Rendering](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/tool-rendering)
-**#5 The weather tool fetches an endpoint the page never provides.**
-- **Doc:** ``fetch(`/api/weather?city=${encodeURIComponent(city)}`)`` and "The weather card shows \"Loading weather for Paris\", then the city and the tool result."
-- **Result:** the card shows the city, but the tool result is the Angular app's own `index.html` (`<!doctype html> <html lang="en">…`), and the agent says "I couldn't retrieve the current weather for Paris". No `/api/weather` route is shown or linked.
-
 ### [A2UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/a2ui)
 **#6 The catalog the page requires is never defined.**
 - **Doc:** "A catalog is required: without one, A2UI stays off even when the runtime enables it", then `catalog: productCatalog,`; the catalog snippets also use `dynamicString`, `AcmeBadge`, `PanelComponent` with no imports.
@@ -42,31 +37,31 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 - **Result:** the page names no MCP server and shows no runtime `mcpApps` config; the agent replies "I can't open or launch an interactive app… no MCP app-launching tool is available".
 
 ### [Open Generative UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/open-generative-ui)
-**#8 No sandboxed UI renders with the page's setup.**
-- **Doc:** `provideCopilotKit({ …, openGenerativeUI: { sandboxFunctions: [setDashboardFilter] } })`.
-- **Result:** no sandbox iframe ever appears (3/3, also with the config at the app root); the agent writes plain HTML `<button>`s into its chat message instead (rendered static, "This chat may display the controls as static HTML"), so clicking does nothing and nothing is written to `sessionStorage`. The page shows no other step (e.g. the runtime's `openGenerativeUI` option).
+**#8 Only the frontend config is shown; the runtime `openGenerativeUI` flag is never shown.**
+- **Doc:** "An openGenerativeUI object opts the frontend into the built-in sandboxed renderer." and `provideCopilotKit({ …, openGenerativeUI: { sandboxFunctions: [setDashboardFilter] } })`.
+- **Result:** no sandbox iframe ever appears; the agent writes plain HTML `<button>`s into its message and says it has no `generateSandboxedUi` tool. The runtime's `openGenerativeUI` option, which turns the middleware on, is never shown or linked.
 
 ### [Shared State](https://docs.copilotkit.ai/angular/google-antigravity/shared-state)
 **#9 The agent never sees state written with `agent.setState`.**
 - **Doc:** "Click **Mark high priority**, then ask the agent for the current priority. It answers \"high\"."
-- **Result:** the panel shows `Priority: high`, the agent replies "I can't determine the current priority" (3/3). Captured model requests from the Antigravity agent contain no state at all; the page shows no backend side.
+- **Result:** the panel shows `Priority: high`, the agent replies "I can't determine the current priority" (3/3). The Antigravity agent only reads app state with `experimental_app_state=True` plus a prompt telling it to call `get_shared_state`; the Angular page never shows either.
 
 ### [Agent Read-Only Context](https://docs.copilotkit.ai/angular/google-antigravity/shared-state/agent-readonly)
 **#10 `connectAgentContext` values never reach the Antigravity agent.**
 - **Doc:** `connectAgentContext(() => ({ … }))`, sending "values such as the signed-in user's name … timezone".
-- **Result:** after "Use London time", asked for the name, timezone and selected record, the agent never names Ada, Europe/London or record-42 (it guesses, or offers to search the workspace). None of those values appear in the captured model requests.
+- **Result:** after "Use London time", asked for the name, timezone and selected record, the agent never names Ada, Europe/London or record-42. The agent needs `experimental_app_context=True` plus an instruction to call `get_app_context`; neither is shown.
 
 ### [Pausing the Agent for Input](https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/useInterrupt)
-**#11 No backend that pauses is shown, and the interrupt payload is undocumented.**
+**#11 No Antigravity backend that pauses is shown or linked.**
 - **Doc:** "When the backend agent pauses for input" and `injectInterrupt<ReviewRequest>("default")`.
-- **Result:** the quickstart's `default` agent never interrupts, so nothing appears.
-- **Confirmed by harness:** a HARNESS interrupt agent (`backend/interrupts_server.py`, agent `interrupt`) makes the panel appear and resume ("Not shipped (cancelled)"), but `event.value` never has the `title`/`choices` the panel reads, so it shows only "Review required" and Cancel.
+- **Result:** the quickstart's `default` agent never interrupts, so `injectInterrupt("default")` never fires and nothing appears.
+- **Confirmed by harness:** a HARNESS interrupt agent (`backend/interrupts_server.py`, agent `interrupt`) makes the panel appear and resume.
 
 ### [Headless Interrupts](https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/headless)
-**#12 The `ticketing` agent is never shown or registered.**
-- **Doc:** "When the backend agent emits an AG-UI interrupt" and `injectAgentStore("ticketing")`.
-- **Result:** no `ticketing` agent exists and no interrupting backend is given; nothing appears.
-- **Confirmed by harness:** with `ticketing` mapped to the HARNESS interrupt agent, the message and Approve/Reject appear and Approve resumes the run (the agent goes on to ship TCK-42).
+**#12 No Antigravity interrupt backend is shown or linked.**
+- **Doc:** "When the backend agent emits an AG-UI interrupt, the agent store already holds the pending decision."
+- **Result:** no interrupting backend is given, so no pending decision ever appears.
+- **Confirmed by harness:** with the HARNESS interrupt agent, the message and Approve/Reject appear and Approve resumes the run.
 
 ### [Sub-agents](https://docs.copilotkit.ai/angular/google-antigravity/multi-agent/subagents)
 **#13 The sub-agents backend can't start as installed, and the Angular snippet is a fragment.**
@@ -76,6 +71,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 
 ## Minor notes
 
+- Tool Call Rendering (#5): the handler fetches `/api/weather`, a placeholder the page doesn't provide; the card renders, its result line is the app's index.html.
 - Quickstart: `HttpAgent` comes from `@ag-ui/client`, which the install step never adds.
 - Prebuilt Components: the page's `AppComponent` mounts `copilot-popup` and `copilot-sidebar` together; both launchers sit on the same spot, so "Click the popup launcher button" opens the sidebar.
 - Prebuilt Components, Headless Threads: `agentId="support"` is used without saying it must be registered in the runtime.

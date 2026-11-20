@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { provideCopilotKit } from '@copilotkit/angular'; // HARNESS: route-scoped runtimes (server.pages.ts)
+import { basicCatalog } from '@copilotkit/angular/a2ui'; // HARNESS: A2UI catalog from the Copilot Runtime guide
 
 import { AppChrome } from './components/app-chrome';
 import { appConfig as mcpAppsConfig } from './features/mcp-apps/app.config'; // HARNESS: MCP Apps page provider, route-scoped
@@ -21,12 +23,12 @@ export const routes: Routes = [
   // HARNESS: chat UI / threads / inspector / auth pages (2026-11-18), pages/demos-ui.ts.
   { path: 'prebuilt-components/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.PrebuiltComponentsDemo) },
   { path: 'multimodal-attachments/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.MultimodalAttachmentsDemo) },
-  { path: 'voice/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.VoicePageDemo) },
+  { path: 'voice/demo', providers: [provideCopilotKit({ runtimeUrl: 'http://localhost:8288/api/copilotkit' })] /* HARNESS: voice runtime with transcriptionService (server.pages.ts) */, loadComponent: () => import('./pages/demos-ui').then((m) => m.VoicePageDemo) },
   { path: 'clf-css/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.ClfCssDemo) },
   { path: 'clf-slots/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.ClfSlotsDemo) },
   { path: 'clf-headless-ui/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.ClfHeadlessUiDemo) },
-  { path: 'threads-drawer/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.ThreadsDrawerDemo) },
-  { path: 'headless-threads/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.HeadlessThreadsDemo) },
+  { path: 'threads-drawer/demo', providers: [provideCopilotKit({ runtimeUrl: 'http://localhost:8287/api/copilotkit' })] /* HARNESS: threads runtime with Intelligence (server.pages.ts) */, loadComponent: () => import('./pages/demos-ui').then((m) => m.ThreadsDrawerDemo) },
+  { path: 'headless-threads/demo', providers: [provideCopilotKit({ runtimeUrl: 'http://localhost:8287/api/copilotkit' })] /* HARNESS: threads runtime with Intelligence (server.pages.ts) */, loadComponent: () => import('./pages/demos-ui').then((m) => m.HeadlessThreadsDemo) },
   { path: 'inspector/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.InspectorPageDemo) },
   { path: 'auth/demo', loadComponent: () => import('./pages/demos-ui').then((m) => m.AuthPageDemo) },
   // HARNESS: Frontend Tools + Generative UI pages (2026-11-18), pages/demos-genui.ts. MCP Apps and
@@ -34,7 +36,7 @@ export const routes: Routes = [
   { path: 'frontend-tools/demo', loadComponent: () => import('./pages/demos-genui').then((m) => m.FrontendToolsDemo) },
   { path: 'gen-ui-tool-based/demo', loadComponent: () => import('./pages/demos-genui').then((m) => m.GenUiToolBasedDemo) },
   { path: 'gen-ui-tool-rendering/demo', loadComponent: () => import('./pages/demos-genui').then((m) => m.GenUiToolRenderingDemo) },
-  { path: 'a2ui/demo', loadComponent: () => import('./pages/demos-genui').then((m) => m.A2uiPageDemo) },
+  { path: 'a2ui/demo', providers: [provideCopilotKit({ runtimeUrl: 'http://localhost:8280/api/copilotkit', a2ui: { catalog: basicCatalog, recovery: { showAfterMs: 2_000, showAfterAttempts: 2 } } })] /* HARNESS: productCatalog is never defined; basicCatalog from the Copilot Runtime guide */, loadComponent: () => import('./pages/demos-genui').then((m) => m.A2uiPageDemo) },
   { path: 'mcp-apps/demo', providers: mcpAppsConfig.providers, loadComponent: () => import('./pages/demos-genui').then((m) => m.McpAppsDemo) },
   { path: 'open-generative-ui/demo', providers: openGenUiConfig.providers, loadComponent: () => import('./pages/demos-genui').then((m) => m.OpenGenerativeUiDemo) },
   {

@@ -98,7 +98,7 @@
     1
    ],
    "notes": [
-    "Issue: the Antigravity backend code is a fragment (_common.py has no imports or constants, build_registry() is never defined) and no runtime server is shown for Angular; the linked runtime guide only has a Next.js route."
+    "Issue: the backend snippet is a fragment (no imports or constants, build_registry is never defined) and no Node runtime server or start command is given for Angular; the runtime guide loops back to the quickstart."
    ],
    "block": null,
    "links": [
@@ -410,20 +410,17 @@
    "child": true,
    "docPath": "generative-ui/tool-rendering",
    "reachable": "sidebar",
-   "status": "❌",
-   "findings": [
-    5
-   ],
+   "status": "✅",
+   "findings": [],
    "notes": [
-    "Issue: the tool handler fetches /api/weather, which the page never provides, so the card shows the app's index.html as the result and the agent can't report the weather."
+    "Note: /api/weather is a placeholder the page doesn't provide; the card renders."
    ],
    "block": null,
    "links": [
     {
-     "text": "Issue",
+     "text": "Tool Call Rendering - JS",
      "clip": "ANTIGRAVITY-angular-12-GenUiToolRendering",
      "loom": "https://www.loom.com/share/3778f0751c3a4506926d6c9f87446fe7",
-     "narration": "narration/scripts/ANTIGRAVITY-angular-12-GenUiToolRendering.json",
      "filmed": "2026-11-19"
     }
    ],
@@ -508,7 +505,7 @@
     8
    ],
    "notes": [
-    "Issue: with the page's openGenerativeUI provider config, no sandboxed UI ever renders; the page shows nothing else that is needed."
+    "Issue: only the frontend config is shown; the runtime openGenerativeUI flag that turns it on is never shown, so no sandboxed UI renders."
    ],
    "block": null,
    "links": [
@@ -539,7 +536,7 @@
     9
    ],
    "notes": [
-    "Issue: after Mark high priority the agent can't tell the priority; state set with agent.setState never reaches the Antigravity agent and the page shows no backend side."
+    "Issue: the agent never sees state set with agent.setState; Antigravity needs experimental_app_state=True plus a prompt to call get_shared_state, which the Angular page never shows."
    ],
    "block": null,
    "links": [
@@ -570,7 +567,7 @@
     10
    ],
    "notes": [
-    "Issue: the connectAgentContext values (name, timezone, selected record) never reach the Antigravity agent."
+    "Issue: the connectAgentContext values never reach the agent; Antigravity needs experimental_app_context=True plus a get_app_context instruction, never shown."
    ],
    "block": null,
    "links": [
@@ -630,7 +627,7 @@
     11
    ],
    "notes": [
-    "Issue: no backend that pauses is shown, injectInterrupt(\"default\") watches an agent that never interrupts, and the interrupt payload shape (title/choices) is never given."
+    "Issue: no Antigravity backend that pauses is shown or linked, so injectInterrupt(\"default\") never fires."
    ],
    "block": null,
    "links": [
@@ -661,7 +658,7 @@
     12
    ],
    "notes": [
-    "Issue: injectAgentStore(\"ticketing\") needs a ticketing agent that is never shown or registered, and no backend that interrupts is given."
+    "Issue: no Antigravity interrupt backend is shown or linked, so no pending decision ever appears."
    ],
    "block": null,
    "links": [
@@ -796,5 +793,5 @@
    }
   }
  ],
- "quickstartBlocked": "the Angular quickstart's Antigravity backend is a fragment (_common.py with no imports or constants, build_registry never defined) and no runtime server is shown for Angular, so a reader has no working Angular app to build on"
+ "quickstartBlocked": "the Angular quickstart's backend snippet is a fragment (no imports or constants, build_registry never defined) and no Node runtime server or start command is given for Angular; the runtime guide loops back to the quickstart"
 }

@@ -1,0 +1,9 @@
+{
+ "text": "So this is the problem, umm, the backend code is only a fragment, no imports, no constants, and this build registry function is never defined.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 10.495,
+ "file": "ec4c2a2611656fba54bf638a09c9de14.mp3",
+ "clip": "ANTIGRAVITY-angular-01-Quickstart",
+ "at": "evidence"
+}

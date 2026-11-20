@@ -2,14 +2,41 @@
  "clip": "ANTIGRAVITY-angular-01-Quickstart",
  "page": "quickstart",
  "segments": [
-  {"at": "doc", "text": "Ok so this is the quickstart page for Google Antigravity with Angular, and I'm reporting a problem on this page."},
-  {"at": "evidence", "text": "So this is the problem, umm, this build registry function is called here but it's never defined, and the common file has no imports."},
-  {"at": "evidence#2", "text": "And the runtime step is just this callout, there's no runtime server for Angular."},
-  {"at": "ide", "text": "This is my project, I've implemented the exact code from the doc."},
-  {"at": "+", "text": "This part, the agent registry and the runtime server, wasn't on the page, so I had to add it myself."},
-  {"at": "demo", "text": "Moving on to the demo. The chat answers, but only because of the backend and runtime I put together, following the page alone there's nothing to run."},
-  {"at": "notepad", "text": "So basically, the page says connect your Antigravity backend, but the code is only a fragment."},
-  {"at": "+", "text": "There are no imports, no constants, build registry is missing, and no runtime server for Angular, so you have to guess all of it."},
-  {"at": "+", "text": "So yeah, kindly check this and fix it."}
+  {
+   "at": "doc",
+   "text": "Ok so this is the quickstart page for Google Antigravity with Angular, and I'm reporting a problem on this page."
+  },
+  {
+   "at": "evidence",
+   "text": "So this is the problem, umm, the backend code is only a fragment, no imports, no constants, and this build registry function is never defined."
+  },
+  {
+   "at": "evidence#2",
+   "text": "And the runtime step is just this callout, there's no Node runtime server or start command for Angular."
+  },
+  {
+   "at": "ide",
+   "text": "This is my project, I've implemented the exact code from the doc."
+  },
+  {
+   "at": "+",
+   "text": "This part, the agent registry and the runtime server, wasn't on the page, so I had to add it myself."
+  },
+  {
+   "at": "demo",
+   "text": "Moving on to the demo. The chat answers, but only because of the backend and runtime I put together, following the page alone there's nothing to run."
+  },
+  {
+   "at": "notepad",
+   "text": "So basically, the page says connect your Antigravity backend, but the snippet is a fragment."
+  },
+  {
+   "at": "+",
+   "text": "And there's no runtime server for Angular, the runtime guide just sends you back to the quickstart."
+  },
+  {
+   "at": "+",
+   "text": "So yeah, kindly check this and fix it."
+  }
  ]
 }

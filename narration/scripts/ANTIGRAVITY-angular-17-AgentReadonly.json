@@ -20,11 +20,11 @@
   },
   {
    "at": "notepad",
-   "text": "So basically, the context from the page never reaches the Antigravity agent."
+   "text": "So basically, the context never reaches the agent."
   },
   {
    "at": "+",
-   "text": "So the agent can't use it at all."
+   "text": "Antigravity needs the app context option and an instruction to read it, and that's never shown."
   },
   {
    "at": "+",

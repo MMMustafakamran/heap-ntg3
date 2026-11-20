@@ -8,11 +8,7 @@
   },
   {
    "at": "evidence",
-   "text": "So this is the problem, umm, it says when the backend agent emits an interrupt, but no backend is shown."
-  },
-  {
-   "at": "evidence#2",
-   "text": "And it uses a ticketing agent that's never registered."
+   "text": "So this is the problem, umm, it says when the backend agent emits an interrupt, but no Antigravity backend for it is shown or linked."
   },
   {
    "at": "ide",
@@ -20,23 +16,23 @@
   },
   {
    "at": "+",
-   "text": "This part, the ticketing agent, wasn't on the page, so I added it myself."
+   "text": "This part, the interrupting agent, wasn't on the page, so I added it myself."
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. With my own agent the approve and reject buttons work, but following the page there's nothing to connect to."
+   "text": "Moving on to the demo. With my own agent the approve and reject buttons work, but following the page nothing appears."
   },
   {
    "at": "notepad",
-   "text": "So basically, the ticketing agent and its interrupting backend are never shown."
+   "text": "So basically, the interrupting backend is never shown."
   },
   {
    "at": "+",
-   "text": "Without guessing them, nothing appears."
+   "text": "Without guessing it, there's no pending decision at all."
   },
   {
    "at": "+",
-   "text": "So yeah, kindly check this and fix it."
+   "text": "So yeah, please take a look and fix this."
   }
  ]
 }

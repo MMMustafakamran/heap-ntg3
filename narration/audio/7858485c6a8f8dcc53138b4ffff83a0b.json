@@ -1,0 +1,9 @@
+{
+ "text": "So basically, the context never reaches the agent.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 4.551,
+ "file": "7858485c6a8f8dcc53138b4ffff83a0b.mp3",
+ "clip": "ANTIGRAVITY-angular-17-AgentReadonly",
+ "at": "notepad"
+}

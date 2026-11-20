@@ -8,11 +8,11 @@
   },
   {
    "at": "evidence",
-   "text": "So this is the problem, the page talks about the backend agent pausing for input, but there's no backend code for it."
+   "text": "So this is the problem, the page talks about the backend agent pausing for input, but no Antigravity backend for it is shown or linked."
   },
   {
    "at": "evidence#2",
-   "text": "And it watches the default agent, which never interrupts."
+   "text": "So this default agent never interrupts."
   },
   {
    "at": "ide",
@@ -24,15 +24,15 @@
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. With my agent the panel shows up, but only with review required and a cancel button, no title or choices."
+   "text": "Moving on to the demo. Only with my own agent does the panel show up, following the page nothing pauses at all."
   },
   {
    "at": "notepad",
-   "text": "So basically, the page never shows a backend that pauses, or what the interrupt payload looks like."
+   "text": "So basically, without a backend that pauses, inject interrupt never fires."
   },
   {
    "at": "+",
-   "text": "So you have to guess both."
+   "text": "And the page never gives you one."
   },
   {
    "at": "+",

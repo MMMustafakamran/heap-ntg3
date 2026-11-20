@@ -20,11 +20,11 @@
   },
   {
    "at": "notepad",
-   "text": "So basically, the state the app writes never reaches the Antigravity agent."
+   "text": "So basically, the agent never sees the state the app sets."
   },
   {
    "at": "+",
-   "text": "And the page doesn't show any backend side for it."
+   "text": "Antigravity needs the app state option turned on and a prompt to read it, and the Angular page never shows that."
   },
   {
    "at": "+",
