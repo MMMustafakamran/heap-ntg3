@@ -129,20 +129,33 @@ async def via_openai(body: bytes, asked, stream: bool):
     except json.JSONDecodeError:
         return Response(b'{"error":"bad request body"}', status_code=400, media_type="application/json")
     req, notes = openai_bridge.to_openai(g)
-    try:
-        r = await oa_client.post(openai_bridge.OPENAI_URL, json=req,
-                                 headers={"Authorization": f"Bearer {OPENAI_KEY}"})
-    except httpx.HTTPError as e:
-        log(f"OPENAI {type(e).__name__}")
+    # HARNESS (2026-11-20): thoughts asked -> Responses API with a reasoning summary; chat completions if it fails
+    attempts = []
+    if openai_bridge.wants_thoughts(g):
+        attempts.append(("responses", openai_bridge.OPENAI_RESPONSES_URL, openai_bridge.to_responses(req)))
+    attempts.append(("chat", openai_bridge.OPENAI_URL, req))
+    r, kind = None, "chat"
+    for kind, url, payload in attempts:
+        try:
+            r = await oa_client.post(url, json=payload, headers={"Authorization": f"Bearer {OPENAI_KEY}"})
+        except httpx.HTTPError as e:
+            log(f"OPENAI {kind} {type(e).__name__}")
+            r = None
+            continue
+        if r.status_code == 200:
+            break
+        log(f"OPENAI {kind} {r.status_code} {r.text[:200]}")
+    if r is None:
         return Response(b'{"error":"openai unreachable"}', status_code=503, media_type="application/json")
     if r.status_code != 200:
-        log(f"OPENAI {r.status_code} {r.text[:200]}")
         return Response(r.content, status_code=r.status_code, media_type="application/json")
-    out = openai_bridge.to_gemini(r.json())
-    log(f"FALLBACK served {asked} with OPENAI {openai_bridge.OPENAI_MODEL}"
-        f"{' (stream)' if stream else ''}{' notes=' + ';'.join(notes) if notes else ''}")
+    out = (openai_bridge.responses_to_gemini if kind == "responses" else openai_bridge.to_gemini)(r.json())
+    nthought = sum(1 for p in out["candidates"][0]["content"]["parts"] if p.get("thought"))
+    log(f"FALLBACK served {asked} with OPENAI {openai_bridge.OPENAI_MODEL} {kind}"
+        f"{' (stream)' if stream else ''}{f' thoughts={nthought}' if kind == 'responses' else ''}"
+        f"{' notes=' + ';'.join(notes) if notes else ''}")
     if stream:
-        return Response(("data: " + json.dumps(out) + "\r\n\r\n").encode(), media_type="text/event-stream")
+        return Response(openai_bridge.to_sse(out), media_type="text/event-stream")
     return Response(json.dumps(out).encode(), media_type="application/json")
 
 

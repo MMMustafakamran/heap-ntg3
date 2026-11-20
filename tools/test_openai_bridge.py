@@ -76,6 +76,33 @@ def test_to_gemini_parallel_calls():
                      {"functionCall": {"id": "y", "name": "g", "args": {}}}]
 
 
+def test_reasoning_request_and_mapping():
+    g = {"contents": [{"role": "user", "parts": [{"text": "why is the sky blue"}]},
+                      {"role": "model", "parts": [{"functionCall": {"id": "c1", "name": "f", "args": {}}},
+                                                  {"functionResponse": {"id": "c1", "name": "f", "response": {"x": 1}}}]}],
+         "systemInstruction": {"parts": [{"text": "be helpful"}]},
+         "tools": [{"functionDeclarations": [{"name": "f", "parameters": {"type": "OBJECT"}}]}],
+         "generationConfig": {"thinkingConfig": {"includeThoughts": True}}}
+    assert b.wants_thoughts(g)
+    assert not b.wants_thoughts({"generationConfig": {"thinkingConfig": {"thinkingBudget": 0}}})
+    assert not b.wants_thoughts({})
+    chat, _ = b.to_openai(g)
+    r = b.to_responses(chat)
+    assert r["reasoning"]["summary"] == "auto" and r["instructions"] == "be helpful"
+    assert [i.get("type", i.get("role")) for i in r["input"]] == ["user", "function_call", "function_call_output"]
+    assert r["input"][2]["output"] == '{"x": 1}' and r["tools"][0]["name"] == "f"
+    o = {"output": [{"type": "reasoning", "summary": [{"type": "summary_text", "text": "Rayleigh scattering"}]},
+                    {"type": "message", "content": [{"type": "output_text", "text": "Because..."}]}],
+         "usage": {"input_tokens": 3, "output_tokens": 9, "total_tokens": 12,
+                   "output_tokens_details": {"reasoning_tokens": 5}}}
+    out = b.responses_to_gemini(o)
+    assert out["candidates"][0]["content"]["parts"] == [{"text": "Rayleigh scattering", "thought": True},
+                                                        {"text": "Because..."}]
+    chunks = [json.loads(x[6:]) for x in b.to_sse(out).decode().split("\r\n\r\n") if x]
+    assert chunks[0]["candidates"][0]["content"]["parts"][0]["thought"] is True
+    assert chunks[1]["candidates"][0]["content"]["parts"] == [{"text": "Because..."}]
+
+
 if __name__ == "__main__":
     for n, f in list(globals().items()):
         if n.startswith("test_"):

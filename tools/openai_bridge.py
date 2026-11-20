@@ -149,6 +149,9 @@ def to_openai(g: dict) -> tuple[dict, list[str]]:
             elif texts:
                 msgs.append({"role": "user", "content": "\n".join(texts)})
     msgs = _pair_tool_calls(msgs, notes)
+    gc = g.get("generationConfig") or g.get("generation_config") or {}
+    if gc.get("thinkingConfig") or gc.get("thinking_config"):  # logged so CI shows whether thoughts were asked
+        notes.append("thinkingConfig " + json.dumps(gc.get("thinkingConfig") or gc.get("thinking_config")))
     tools = []
     for t in g.get("tools", []) or []:
         for fd in t.get("functionDeclarations") or t.get("function_declarations") or []:
@@ -192,3 +195,98 @@ def to_gemini(o: dict) -> dict:
                           "totalTokenCount": u.get("total_tokens", 0)},
         "modelVersion": OPENAI_MODEL,
     }
+
+
+# HARNESS (Antigravity, 2026-11-20): reasoning. When the Gemini request asks for thoughts
+# (generationConfig.thinkingConfig.includeThoughts, or thinkingBudget > 0), chat completions can't
+# return reasoning (and gpt-6-luna there rejects tools with reasoning on), so tools/gemini_pool.py
+# sends it to the Responses API with a reasoning summary, mapped back as Gemini parts with "thought": true.
+OPENAI_RESPONSES_URL = "https://api.openai.com/v1/responses"
+
+
+def wants_thoughts(g: dict) -> bool:
+    gc = g.get("generationConfig") or g.get("generation_config") or {}
+    tc = gc.get("thinkingConfig") or gc.get("thinking_config") or {}
+    if tc.get("includeThoughts") or tc.get("include_thoughts"):
+        return True
+    budget = tc.get("thinkingBudget", tc.get("thinking_budget"))
+    return isinstance(budget, int) and budget > 0
+
+
+def to_responses(chat_req: dict) -> dict:
+    """chat completions request (from to_openai) -> Responses API request with a reasoning summary."""
+    instr, items = [], []
+    for m in chat_req["messages"]:
+        r = m["role"]
+        if r == "system":
+            instr.append(m["content"])
+        elif r == "tool":
+            items.append({"type": "function_call_output", "call_id": m["tool_call_id"], "output": m["content"]})
+        elif r == "assistant":
+            if m.get("content"):
+                items.append({"role": "assistant", "content": m["content"]})
+            for tc in m.get("tool_calls") or []:
+                items.append({"type": "function_call", "call_id": tc["id"], "name": tc["function"]["name"],
+                              "arguments": tc["function"]["arguments"]})
+        else:
+            c = m["content"]
+            if isinstance(c, list):
+                c = [{"type": "input_text", "text": p["text"]} if p["type"] == "text"
+                     else {"type": "input_image", "image_url": p["image_url"]["url"]} for p in c]
+            items.append({"role": "user", "content": c})
+    req = {"model": chat_req["model"], "input": items,
+           "reasoning": {"effort": os.getenv("GEMINI_POOL_OPENAI_THINK_EFFORT", "low"), "summary": "auto"}}
+    if instr:
+        req["instructions"] = "\n".join(instr)
+    if chat_req.get("tools"):
+        req["tools"] = [dict(type="function", **t["function"]) for t in chat_req["tools"]]
+    return req
+
+
+def responses_to_gemini(o: dict) -> dict:
+    parts, calls = [], []
+    for it in o.get("output") or []:
+        t = it.get("type")
+        if t == "reasoning":
+            s = "\n\n".join(x.get("text", "") for x in it.get("summary") or [] if x.get("text"))
+            if s:
+                parts.append({"text": s, "thought": True})
+        elif t == "message":
+            txt = "".join(x.get("text", "") for x in it.get("content") or [] if x.get("type") == "output_text")
+            if txt:
+                parts.append({"text": txt})
+        elif t == "function_call":
+            try:
+                args = json.loads(it.get("arguments") or "{}")
+            except json.JSONDecodeError:
+                args = {}
+            calls.append({"functionCall": {"id": it.get("call_id"), "name": it["name"], "args": args}})
+    parts += calls
+    if not parts:
+        parts = [{"text": ""}]
+    u = o.get("usage") or {}
+    rt = (u.get("output_tokens_details") or {}).get("reasoning_tokens", 0)
+    return {
+        "candidates": [{"content": {"role": "model", "parts": parts}, "finishReason": "STOP", "index": 0}],
+        "usageMetadata": {"promptTokenCount": u.get("input_tokens", 0),
+                          "candidatesTokenCount": u.get("output_tokens", 0),
+                          "thoughtsTokenCount": rt, "totalTokenCount": u.get("total_tokens", 0)},
+        "modelVersion": OPENAI_MODEL,
+    }
+
+
+def to_sse(out: dict) -> bytes:
+    """Gemini streamGenerateContent SSE: thought parts in their own first chunk, then the answer."""
+    parts = out["candidates"][0]["content"]["parts"]
+    th = [p for p in parts if p.get("thought")]
+    rest = [p for p in parts if not p.get("thought")]
+    chunks = []
+    if th and rest:
+        first = json.loads(json.dumps(out))
+        first["candidates"][0]["content"]["parts"] = th
+        first["candidates"][0].pop("finishReason", None)
+        out = json.loads(json.dumps(out))
+        out["candidates"][0]["content"]["parts"] = rest
+        chunks.append(first)
+    chunks.append(out)
+    return b"".join(("data: " + json.dumps(c) + "\r\n\r\n").encode() for c in chunks)
