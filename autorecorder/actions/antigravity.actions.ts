@@ -335,6 +335,29 @@ export const runToolRenderingAction: PageActionHandler = async (page, config, _r
   await sleep(1500);
 };
 
+
+/** Observed facts for a failure text: which runtime URLs the page called and what its /info says (no secrets). */
+async function runtimeInfo(page: Page): Promise<string> {
+  const urls = await page
+    .evaluate(() => [...new Set(performance.getEntriesByType('resource').map((e) => e.name).filter((u) => /:828\d\//.test(u)).map((u) => u.replace(/\?.*$/, '')))])
+    .catch(() => [] as string[]);
+  const base = (urls.find((u) => /\/api\/copilotkit/.test(u)) ?? '').replace(/(\/api\/copilotkit).*$/, '$1');
+  let info = '';
+  if (base) {
+    info = await page
+      .evaluate(async (u) => {
+        try {
+          const r = await fetch(`${u}/info`);
+          const j: any = await r.json().catch(() => ({}));
+          const pick = { status: r.status, audioFileTranscriptionEnabled: j.audioFileTranscriptionEnabled, threadEndpoints: j.threadEndpoints, a2ui: j.a2ui, mcpApps: j.mcpApps ?? j.mcpServers, agents: Object.keys(j.agents ?? {}) };
+          return JSON.stringify(pick);
+        } catch (e) { return `info fetch failed: ${String(e)}`; }
+      }, base)
+      .catch(() => '');
+  }
+  return `Runtime calls: ${urls.slice(0, 6).join(', ') || 'none'}; ${base || 'runtime'}/info: ${info || 'n/a'}`;
+}
+
 /** A2UI: ask for a catalog component; A2UI stays off without the never-defined catalog. */
 export const runA2uiAction: PageActionHandler = async (page, config, root, ctx) => {
   const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 15000 });
@@ -347,7 +370,7 @@ export const runA2uiAction: PageActionHandler = async (page, config, root, ctx) 
   await sleep(1500);
   await typecheck(root, 'a2ui');
   await writeFinding(page, config.id, config);
-  if (!rendered) ctx.fail(`No A2UI surface rendered, the agent answered in text: "${reply.slice(0, 120)}". The page's productCatalog is never defined, and without a catalog "A2UI stays off".`);
+  if (!rendered) ctx.fail(`No A2UI surface rendered; the agent's reply text: "${reply.slice(0, 120)}". ${await runtimeInfo(page)}`);
 };
 
 /** MCP Apps: provideMCPApps() alone; the page gives no MCP server, so no app resource can come back. */
@@ -361,7 +384,7 @@ export const runMcpAppsAction: PageActionHandler = async (page, config, _root, c
   if (!rendered) mark('error');
   await sleep(1500);
   await writeFinding(page, config.id, config);
-  if (!rendered) ctx.fail(`No MCP app rendered, the agent answered in text: "${reply.slice(0, 120)}". The page never says which MCP server to connect or where (no runtime mcpApps config).`);
+  if (!rendered) ctx.fail(`No MCP app rendered; the agent's reply text: "${reply.slice(0, 120)}". ${await runtimeInfo(page)}`);
 };
 
 /** Open Generative UI: the sandboxed iframe must render; clicking a button calls setDashboardFilter. */
@@ -449,9 +472,7 @@ export const runVoicePageAction: PageActionHandler = async (page, config, _root,
     await writeFinding(page, config.id, config);
   }
   if (!hasMic) {
-    ctx.fail(
-      'No mic button in the composer: /info reports audioFileTranscriptionEnabled: false. The page links "Voice backend setup" to its own #backend anchor, which does not exist, and shows no transcriptionService code.',
-    );
+    ctx.fail(`No mic button in the composer. ${await runtimeInfo(page)}`);
   }
 };
 
@@ -522,7 +543,7 @@ export const runThreadsDrawerAction: PageActionHandler = async (page, config, _r
   ctx.warn(`Drawer text: ${text.slice(0, 300).replace(/\s+/g, ' ')}`);
   if (!text) mark('error', 'drawer renders empty: no list, no locked state');
   await writeFinding(page, config.id, config);
-  if (!text) ctx.fail('CopilotThreadsDrawer renders an empty panel: no thread list and no locked state (runtime /info: threadEndpoints.list false).');
+  if (!text) ctx.fail(`CopilotThreadsDrawer renders an empty panel: no thread list and no locked state. ${await runtimeInfo(page)}`);
 };
 
 /** Headless Threads: the injectThreads list shows the conversation. */
@@ -537,7 +558,7 @@ export const runHeadlessThreadsAction: PageActionHandler = async (page, config, 
   const hasThread = (await list.locator('button').count()) > 1;
   if (!hasThread) mark('error', 'thread list stays empty after a conversation');
   await writeFinding(page, config.id, config);
-  if (!hasThread) ctx.fail('injectThreads lists no conversation after a chat on agent "support": only the New conversation button (runtime /info: threadEndpoints.list false).');
+  if (!hasThread) ctx.fail(`injectThreads lists no conversation after a chat on agent "support": only the New conversation button. ${await runtimeInfo(page)}`);
 };
 
 /** Inspector: the framework mounts cpk-web-inspector; the page's CSS puts the launcher bottom-left. */
