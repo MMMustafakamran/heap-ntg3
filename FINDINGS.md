@@ -20,7 +20,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.89.0, `@copilotkit/c
 ### [Open Generative UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/open-generative-ui)
 **#8 Only the frontend config is shown; the runtime `openGenerativeUI` flag is never shown.**
 - **Doc:** "An openGenerativeUI object opts the frontend into the built-in sandboxed renderer." and `provideCopilotKit({ …, openGenerativeUI: { sandboxFunctions: [setDashboardFilter] } })`.
-- **Result:** no sandbox iframe ever appears; the agent writes plain HTML `<button>`s into its message and says it has no `generateSandboxedUi` tool. The runtime's `openGenerativeUI` option, which turns the middleware on, is never shown or linked.
+- **Result:** no sandbox iframe ever appears; the agent replies "Generated an interactive dashboard filter UI above with All, Open, and Closed buttons" but only text shows (CI probe r44718166560, 2/2, with the page's `openGenerativeUI` config applied at the root). The runtime's `openGenerativeUI` option, which turns the middleware on, is never shown or linked.
 
 ### [Shared State](https://docs.copilotkit.ai/angular/google-antigravity/shared-state)
 **#9 The agent never sees state written with `agent.setState`.**

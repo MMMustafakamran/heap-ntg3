@@ -16,7 +16,7 @@
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. It should render a small dashboard filter in a sandbox, but the agent just writes the buttons as plain HTML in its message."
+   "text": "Moving on to the demo. It should render a small dashboard filter in a sandbox, but the agent says it generated the UI and nothing shows up, just text."
   },
   {
    "at": "notepad",

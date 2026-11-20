@@ -69,7 +69,7 @@ export const FINDING_NOTES: Record<string, string> = {
   ].join('\n'),
   'open-generative-ui': [
     "page says add openGenerativeUI and the agent streams sandboxed ui into the chat",
-    "asked for 3 filter buttons,no sandbox iframe ever shows,agent just writes html buttons into the message",
+    "asked for 3 filter buttons,agent says it generated the ui above but no sandbox iframe ever shows,just text",
     "page only shows the frontend config",
     "the runtime openGenerativeUI flag that actually turns it on is never shown so nothing sandboxed renders",
   ].join('\n'),
