@@ -180,20 +180,17 @@
       "child": true,
       "docPath": "voice",
       "reachable": "sidebar",
-      "status": "❌",
-      "findings": [
-        2
-      ],
+      "status": "✅",
+      "findings": [],
       "notes": [
-        "Issue: the \"Voice backend setup\" link points back to this page (#backend doesn't exist) and no transcription service code is shown, so no mic button ever shows."
+        "Note: backend setup link leads to the React voice page; transcriptionService moves to the Angular runtime as is."
       ],
       "block": null,
       "links": [
         {
-          "text": "Issue",
+          "text": "Voice - JS",
           "clip": "ANTIGRAVITY-angular-04-Voice",
           "loom": "https://www.loom.com/share/cc0489dba1ae44c19cf10b01dd38119c",
-          "narration": "narration/scripts/ANTIGRAVITY-angular-04-Voice.json",
           "filmed": "2026-11-19"
         }
       ],
@@ -323,20 +320,17 @@
       "child": true,
       "docPath": "headless-threads",
       "reachable": "sidebar",
-      "status": "❌",
-      "findings": [
-        4
-      ],
+      "status": "✅",
+      "findings": [],
       "notes": [
-        "Issue: injectThreads lists no threads after chatting; the page never says which backend or platform provides the list, and selectedThreadId is never defined."
+        "Note: selectedThreadId is never defined, add a signal; list needs CopilotKit Intelligence."
       ],
       "block": null,
       "links": [
         {
-          "text": "Issue",
+          "text": "Headless Threads - JS",
           "clip": "ANTIGRAVITY-angular-09-HeadlessThreads",
           "loom": "https://www.loom.com/share/5f2d2d46b53a406cb559d150a1ee30d9",
-          "narration": "narration/scripts/ANTIGRAVITY-angular-09-HeadlessThreads.json",
           "filmed": "2026-11-19"
         }
       ],
@@ -438,20 +432,17 @@
       "child": true,
       "docPath": "generative-ui/a2ui",
       "reachable": "sidebar",
-      "status": "❌",
-      "findings": [
-        6
-      ],
+      "status": "✅",
+      "findings": [],
       "notes": [
-        "Issue: catalog: productCatalog is never defined (nor dynamicString, AcmeBadge, PanelComponent), so A2UI stays off and nothing renders."
+        "Note: productCatalog is never defined; basicCatalog from the runtime guide works."
       ],
       "block": null,
       "links": [
         {
-          "text": "Issue",
+          "text": "A2UI - JS",
           "clip": "ANTIGRAVITY-angular-13-A2ui",
           "loom": "https://www.loom.com/share/cfa01b76641b4daf996fd48c627b44d0",
-          "narration": "narration/scripts/ANTIGRAVITY-angular-13-A2ui.json",
           "filmed": "2026-11-18"
         }
       ],
@@ -469,20 +460,17 @@
       "child": true,
       "docPath": "generative-ui/mcp-apps",
       "reachable": "sidebar",
-      "status": "❌",
-      "findings": [
-        7
-      ],
+      "status": "✅",
+      "findings": [],
       "notes": [
-        "Issue: the page only shows provideMCPApps(); no MCP server or runtime mcpApps config is given, so the agent has no app to open."
+        "Note: page never names an MCP app server; the runtime mcpApps config is only in the Copilot Runtime guide."
       ],
       "block": null,
       "links": [
         {
-          "text": "Issue",
+          "text": "MCP Apps - JS",
           "clip": "ANTIGRAVITY-angular-14-McpApps",
           "loom": "https://www.loom.com/share/9daa3b133a114b388caae119d3875086",
-          "narration": "narration/scripts/ANTIGRAVITY-angular-14-McpApps.json",
           "filmed": "2026-11-19"
         }
       ],

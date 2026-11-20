@@ -30,15 +30,8 @@ export const FINDING_EVIDENCE: Record<string, DocEvidence[]> = {
     { text: 'AGENT_REGISTRY = build_registry()', caption: 'Backend is a fragment: build_registry is never defined; _common.py has no imports or constants (FINDINGS.md #1)' },
     { text: 'Expose the selected backend through Copilot Runtime', caption: 'Runtime step is only this callout; no Node runtime server or start command for Angular, the runtime guide loops back here' },
   ],
-  a2ui: [
-    { text: 'catalog: productCatalog,', caption: 'productCatalog is never defined anywhere on the page' },
-    { text: 'A catalog is required: without one, A2UI stays off even when the runtime', caption: 'So following the page, A2UI stays off' },
-  ],
   'open-generative-ui': [
     { text: 'An openGenerativeUI object opts the frontend into the built-in sandboxed renderer.', caption: 'Only the frontend config is shown; the runtime openGenerativeUI flag that turns it on is never shown' },
-  ],
-  'mcp-apps': [
-    { text: 'MCP resource and tool requests travel through the selected AG-UI agent.', caption: 'No MCP server, no runtime mcpApps config, no agent change shown' },
   ],
   // --- shared-state / agent-readonly / hitl / interrupts / sub-agents (2026-11-18) ---
   'shared-state': [
@@ -725,14 +718,8 @@ export const runSubagentsPageAction: PageActionHandler = async (page, config, ro
 };
 
 Object.assign(FINDING_EVIDENCE, {
-  voice: [
-    { text: 'Voice backend setup', caption: 'Links to #backend on this same page, which does not exist; no transcriptionService code anywhere' },
-  ],
   'threads-drawer': [
     { text: 'shows its locked state when that feature is unavailable', caption: 'Drawer renders empty: no list, no locked state' },
-  ],
-  'headless-threads': [
-    { text: 'The list is server-authoritative', caption: 'No thread list endpoint on the runtime; page never says what serves it' },
   ],
 } satisfies Record<string, DocEvidence[]>);
 

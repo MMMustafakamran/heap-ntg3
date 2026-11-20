@@ -10,31 +10,10 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 - **Result:** the backend code as published fails at import (`NameError`). No working Angular app can be built from the page without guessing.
 - **Confirmed by harness:** `backend/agents/_common.py` (the showcase file the snippet comes from, with its imports and constants), a HARNESS `build_registry()` in `backend/agent_server.py` and `frontend/server.ts` (`CopilotRuntime` + `createCopilotNodeListener` + `HttpAgent` to `http://localhost:8281/default`) make the chat answer ("Yes, I'm here! Fun fact: Benjamin Franklin's famous kite experiment…").
 
-### [Voice](https://docs.copilotkit.ai/angular/google-antigravity/voice)
-**#2 Voice can't be set up: the transcription backend is never shown.**
-- **Doc:** "Follow the Voice backend setup to add a dedicated Runtime route and transcription service."
-- **Result:** the link goes to `voice#backend` on the same page, a section that doesn't exist; no `transcriptionService` code anywhere. `/info` reports `"audioFileTranscriptionEnabled":false` and the composer has no mic button.
-
 ### [Threads Drawer](https://docs.copilotkit.ai/angular/google-antigravity/prebuilt-components/copilot-threads-drawer)
 **#3 The threads drawer renders empty.**
 - **Doc:** "The drawer reads the platform's `threads` license feature and shows its locked state when that feature is unavailable."
 - **Result:** `copilot-threads-drawer` renders an empty panel: no list, no locked state. The runtime's `/info` has `threadEndpoints.list:false`; the page never says what serves the list.
-
-### [Headless Threads](https://docs.copilotkit.ai/angular/google-antigravity/headless-threads)
-**#4 `injectThreads` lists no threads.**
-- **Doc:** "The list is server-authoritative and uses realtime updates when the platform supplies a WebSocket URL."
-- **Result:** after chatting on `support` the list shows only "New conversation", no threads and no error. The page never says which backend provides the list.
-- **Confirmed by harness:** `selectedThreadId` (used in `<copilot-chat agentId="support" [threadId]="selectedThreadId()" />`) is never defined; added as a HARNESS signal.
-
-### [A2UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/a2ui)
-**#6 The catalog the page requires is never defined.**
-- **Doc:** "A catalog is required: without one, A2UI stays off even when the runtime enables it", then `catalog: productCatalog,`; the catalog snippets also use `dynamicString`, `AcmeBadge`, `PanelComponent` with no imports.
-- **Result:** the verbatim files don't type-check (`Cannot find name 'productCatalog'`, `logs/doc-typecheck.log`). Without them: `[CopilotKit] The runtime enables A2UI, but no a2ui.catalog is configured, so A2UI stays off.` and the agent answers in text.
-
-### [MCP Apps](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/mcp-apps)
-**#7 No MCP server or runtime setup is given.**
-- **Doc:** only `provideMCPApps()` from `@copilotkit/angular/mcp-apps`; "MCP resource and tool requests travel through the selected AG-UI agent."
-- **Result:** the page names no MCP server and shows no runtime `mcpApps` config; the agent replies "I can't open or launch an interactive app… no MCP app-launching tool is available".
 
 ### [Open Generative UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/open-generative-ui)
 **#8 Only the frontend config is shown; the runtime `openGenerativeUI` flag is never shown.**
@@ -65,6 +44,10 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 
 ## Minor notes
 
+- Voice (#2): backend setup link leads to the React voice page; transcriptionService moves to the Angular runtime as is.
+- Headless Threads (#4): selectedThreadId is never defined, add a signal; list needs CopilotKit Intelligence.
+- A2UI (#6): productCatalog is never defined; basicCatalog from the runtime guide works.
+- MCP Apps (#7): page never names an MCP app server; the runtime mcpApps config is only in the Copilot Runtime guide.
 - Sub-agents (#13): the install step leaves out httpx (it is in the linked showcase requirements.txt); the Angular snippet is a showcase excerpt with small helpers (`readDelegations`, `subAgentRendererConfig`) not shown.
 - Tool Call Rendering (#5): the handler fetches `/api/weather`, a placeholder the page doesn't provide; the card renders, its result line is the app's index.html.
 - Quickstart: `HttpAgent` comes from `@ag-ui/client`, which the install step never adds.
