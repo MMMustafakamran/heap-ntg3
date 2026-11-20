@@ -533,17 +533,18 @@ export const runThreadsDrawerAction: PageActionHandler = async (page, config, _r
     await glideClick(page, opener).catch(async () => opener.click({ force: true }).catch(() => {}));
     await sleep(2000);
   }
-  const deepText = (el: Element): string => {
-    const walk = (n: Node): string =>
-      n.nodeType === 3 ? n.textContent ?? '' : [...((n as Element).shadowRoot?.childNodes ?? []), ...n.childNodes].map(walk).join(' ');
-    return walk(el);
-  };
-  const text = (await drawer.evaluate(deepText).catch(() => '')).replace(/\s+/g, ' ').trim();
+  // String body (not a closure): tsx's __name helper does not exist in the browser.
+  const text = (
+    await drawer
+      .evaluate((el) => new Function('el', "const w=(n)=>n.nodeType===3?(n.textContent||''):[...((n.shadowRoot&&n.shadowRoot.childNodes)||[]),...n.childNodes].map(w).join(' ');return w(el);")(el) as string)
+      .catch((e) => `evaluate failed: ${String(e).slice(0, 80)}`)
+  ).replace(/\s+/g, ' ').trim();
   await glideTo(page, drawer, 2500);
   ctx.warn(`Drawer text: ${text.slice(0, 300).replace(/\s+/g, ' ')}`);
-  if (!text) mark('error', 'drawer renders empty: no list, no locked state');
+  const empty = !text || text.startsWith('evaluate failed');
+  if (empty) mark('error', 'drawer renders empty: no list, no locked state');
   await writeFinding(page, config.id, config);
-  if (!text) ctx.fail(`CopilotThreadsDrawer renders an empty panel: no thread list and no locked state. ${await runtimeInfo(page)}`);
+  if (empty) ctx.fail(`CopilotThreadsDrawer renders an empty panel: no thread list and no locked state. ${await runtimeInfo(page)}`);
 };
 
 /** Headless Threads: the injectThreads list shows the conversation. */
