@@ -131,8 +131,8 @@ async def via_openai(body: bytes, asked, stream: bool):
     req, notes = openai_bridge.to_openai(g)
     # HARNESS (2026-11-20): thoughts asked -> Responses API with a reasoning summary; chat completions if it fails
     attempts = []
-    if openai_bridge.wants_thoughts(g):
-        attempts.append(("responses", openai_bridge.OPENAI_RESPONSES_URL, openai_bridge.to_responses(req)))
+    if openai_bridge.needs_responses(g):
+        attempts.append(("responses", openai_bridge.OPENAI_RESPONSES_URL, openai_bridge.to_responses(req, g)))
     attempts.append(("chat", openai_bridge.OPENAI_URL, req))
     r, kind = None, "chat"
     for kind, url, payload in attempts:

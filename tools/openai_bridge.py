@@ -165,7 +165,8 @@ def to_openai(g: dict) -> tuple[dict, list[str]]:
             if k not in ("functionDeclarations", "function_declarations"):
                 # HARNESS: built-in Gemini tools (googleSearch, codeExecution) have no chat-completions
                 # equivalent; the turn goes on without them and the model answers from its own knowledge.
-                notes.append(f"dropped built-in tool {k}")
+                notes.append(f"built-in tool {k} -> web_search" if k in ("googleSearch", "google_search", "googleSearchRetrieval")
+                             else f"dropped built-in tool {k}")
     # gpt-6-luna on chat/completions rejects function tools unless reasoning is off
     req = {"model": OPENAI_MODEL, "messages": msgs, "reasoning_effort": os.getenv("GEMINI_POOL_OPENAI_REASONING", "none")}
     if tools:
@@ -213,8 +214,18 @@ def wants_thoughts(g: dict) -> bool:
     return isinstance(budget, int) and budget > 0
 
 
-def to_responses(chat_req: dict) -> dict:
-    """chat completions request (from to_openai) -> Responses API request with a reasoning summary."""
+def wants_search(g: dict) -> bool:
+    """HARNESS: Gemini's built-in googleSearch tool maps to the Responses API web_search tool."""
+    return any(k in t for t in g.get("tools") or [] for k in ("googleSearch", "google_search", "googleSearchRetrieval"))
+
+
+def needs_responses(g: dict) -> bool:
+    return wants_thoughts(g) or wants_search(g)
+
+
+def to_responses(chat_req: dict, g: dict | None = None) -> dict:
+    """chat completions request (from to_openai) -> Responses API request (reasoning summary when the
+    Gemini request asked for thoughts, web_search when it carried googleSearch)."""
     instr, items = [], []
     for m in chat_req["messages"]:
         r = m["role"]
@@ -234,12 +245,16 @@ def to_responses(chat_req: dict) -> dict:
                 c = [{"type": "input_text", "text": p["text"]} if p["type"] == "text"
                      else {"type": "input_image", "image_url": p["image_url"]["url"]} for p in c]
             items.append({"role": "user", "content": c})
-    req = {"model": chat_req["model"], "input": items,
-           "reasoning": {"effort": os.getenv("GEMINI_POOL_OPENAI_THINK_EFFORT", "low"), "summary": "auto"}}
+    req = {"model": chat_req["model"], "input": items}
+    if g is None or wants_thoughts(g):
+        req["reasoning"] = {"effort": os.getenv("GEMINI_POOL_OPENAI_THINK_EFFORT", "low"), "summary": "auto"}
     if instr:
         req["instructions"] = "\n".join(instr)
-    if chat_req.get("tools"):
-        req["tools"] = [dict(type="function", **t["function"]) for t in chat_req["tools"]]
+    tools = [dict(type="function", **t["function"]) for t in chat_req.get("tools") or []]
+    if g is not None and wants_search(g):
+        tools.append({"type": "web_search"})
+    if tools:
+        req["tools"] = tools
     return req
 
 
