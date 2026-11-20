@@ -54,32 +54,43 @@ def _schema(s):
 
 
 def _pair_tool_calls(msgs: list, notes: list) -> list:
-    """HARNESS (Antigravity-Vue): the Antigravity runtime can send a functionCall turn whose
-    functionResponse carries another id, or none at all. OpenAI needs every tool_call answered by a
-    tool message right after it, so re-pair them (unmatched results take the open ids in order;
-    still-open ids get a null result). Bridge plumbing only, the doc's agent code is unchanged."""
-    out, i = [], 0
-    while i < len(msgs):
-        m = msgs[i]; i += 1
+    """HARNESS (Antigravity, 2026-11-20): OpenAI needs every assistant tool_call answered by a tool
+    message right after it. The Antigravity SDK sends functionResponse parts in role "model" contents
+    and not always right after their functionCall, so match results across the whole history:
+    by call id first, then by function name in order; a placeholder only when a result is truly absent
+    (a frontend tool the browser has not answered yet). Bridge plumbing only, doc agent code unchanged."""
+    results = [m for m in msgs if m.get("role") == "tool"]
+    by_id = {}
+    for r in results:
+        by_id.setdefault(r["tool_call_id"], []).append(r)
+    used = set()
+    out = []
+    for m in msgs:
         if m.get("role") == "tool":
-            notes.append("dropped orphan tool result")
             continue
         out.append(m)
         if m.get("role") != "assistant" or not m.get("tool_calls"):
             continue
-        ids = [tc["id"] for tc in m["tool_calls"]]
-        results = []
-        while i < len(msgs) and msgs[i].get("role") == "tool":
-            results.append(msgs[i]); i += 1
-        by_id = {r["tool_call_id"]: r for r in results if r["tool_call_id"] in ids}
-        spare = [r for r in results if r["tool_call_id"] not in ids]
-        for cid in ids:
-            r = by_id.get(cid) or (dict(spare.pop(0), tool_call_id=cid) if spare else None)
+        for tc in m["tool_calls"]:
+            cid, name = tc["id"], tc["function"]["name"]
+            r = next((x for x in by_id.get(cid, []) if id(x) not in used), None)
+            if r is None:  # id mismatch: take the first unused result for the same function name
+                r = next((x for x in results if id(x) not in used and x.get("_name") == name
+                          and x["tool_call_id"] not in _all_ids(msgs)), None)
             if r is None:
-                notes.append("filled missing tool result")
-                r = {"role": "tool", "tool_call_id": cid, "content": "null"}
-            out.append(r)
+                notes.append(f"filled missing tool result {name}")
+                out.append({"role": "tool", "tool_call_id": cid, "content": json.dumps({"result": None})})
+                continue
+            used.add(id(r))
+            out.append({"role": "tool", "tool_call_id": cid, "content": r["content"]})
+    left = sum(1 for r in results if id(r) not in used)
+    if left:
+        notes.append(f"dropped {left} orphan tool result(s)")
     return out
+
+
+def _all_ids(msgs):
+    return {tc["id"] for m in msgs if m.get("role") == "assistant" for tc in m.get("tool_calls") or []}
 
 
 def to_openai(g: dict) -> tuple[dict, list[str]]:
@@ -109,7 +120,7 @@ def to_openai(g: dict) -> tuple[dict, list[str]]:
                 cid = fr.get("id") or (q.pop(0) if q else f"call_{uuid.uuid4().hex[:12]}")
                 if fr.get("id") and fr["id"] in q:
                     q.remove(fr["id"])
-                results.append({"role": "tool", "tool_call_id": cid,
+                results.append({"role": "tool", "tool_call_id": cid, "_name": fr.get("name"),
                                 "content": json.dumps(fr.get("response"), default=str)})
             elif ("inlineData" in p or "inline_data" in p) and role != "model":
                 d = p.get("inlineData") or p.get("inline_data")
@@ -149,7 +160,9 @@ def to_openai(g: dict) -> tuple[dict, list[str]]:
                 "name": fd["name"], "description": fd.get("description", ""), "parameters": params}})
         for k in t:
             if k not in ("functionDeclarations", "function_declarations"):
-                notes.append(f"dropped tool {k}")
+                # HARNESS: built-in Gemini tools (googleSearch, codeExecution) have no chat-completions
+                # equivalent; the turn goes on without them and the model answers from its own knowledge.
+                notes.append(f"dropped built-in tool {k}")
     # gpt-6-luna on chat/completions rejects function tools unless reasoning is off
     req = {"model": OPENAI_MODEL, "messages": msgs, "reasoning_effort": os.getenv("GEMINI_POOL_OPENAI_REASONING", "none")}
     if tools:
