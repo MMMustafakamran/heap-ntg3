@@ -1,0 +1,9 @@
+{
+ "text": "Antigravity needs the app context option and an instruction to read it, that's never shown, and umm, the backend log says the model gave invalid output.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 11.053,
+ "file": "309ebfa53092db38f6dbe62c863dc26d.mp3",
+ "clip": "ANTIGRAVITY-angular-17-AgentReadonly",
+ "at": "+"
+}

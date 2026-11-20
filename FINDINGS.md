@@ -25,12 +25,12 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.89.0, `@copilotkit/c
 ### [Shared State](https://docs.copilotkit.ai/angular/google-antigravity/shared-state)
 **#9 The agent never sees state written with `agent.setState`.**
 - **Doc:** "Click **Mark high priority**, then ask the agent for the current priority. It answers \"high\"."
-- **Result:** the panel shows `Priority: high`, the agent replies "I can't determine the current priority" (3/3). The Antigravity agent only reads app state with `experimental_app_state=True` plus a prompt telling it to call `get_shared_state`; the Angular page never shows either.
+- **Result:** the panel shows `Priority: high`, but the agent never answers: the run ends with no reply (CI probes r44726393184, r44727685884: 4/4). The backend stream ends in `RUN_ERROR` "AntigravityExecutionError: Model produced invalid output. (model output error: encountered an improper format stop reason. Please retry with a properly formatted function call.)". Earlier runs answered "I can't determine the current priority". The Antigravity agent only reads app state with `experimental_app_state=True` plus a prompt telling it to call `get_shared_state`; the Angular page never shows either.
 
 ### [Agent Read-Only Context](https://docs.copilotkit.ai/angular/google-antigravity/shared-state/agent-readonly)
 **#10 `connectAgentContext` values never reach the Antigravity agent.**
 - **Doc:** `connectAgentContext(() => ({ … }))`, sending "values such as the signed-in user's name … timezone".
-- **Result:** after "Use London time", asked for the name, timezone and selected record, the agent never names Ada, Europe/London or record-42. The agent needs `experimental_app_context=True` plus an instruction to call `get_app_context`; neither is shown.
+- **Result:** after "Use London time", asked for the name, timezone and selected record, the agent never answers: the run ends with no reply (CI probes r44726393184, r44727685884: 4/4), the backend stream ends in the same `RUN_ERROR` "Model produced invalid output … improper format stop reason". Earlier runs answered without Ada, Europe/London or record-42. The agent needs `experimental_app_context=True` plus an instruction to call `get_app_context`; neither is shown.
 
 ### [Pausing the Agent for Input](https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/useInterrupt)
 **#11 No Antigravity backend that pauses is shown or linked.**
@@ -64,6 +64,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.89.0, `@copilotkit/c
 - MCP Apps, Open Generative UI: `runtimeUrl: "/api/copilotkit"` assumes a same-origin runtime the Angular setup doesn't have.
 - Sub-agents: the file is called `subagents.py` in one place and `src/agents/subagents.py` in another.
 - Sub-agents: links to `/angular/google-antigravity/shared-state/streaming`, which is a 404.
+- Pausing the Agent for Input: the panel reads `event.value.title` / `.choices`, but `injectInterrupt` hands it the whole AG-UI interrupt (fields under `metadata`; the runtime drops top-level extras), so only Cancel shows.
 - "Next steps" links drop `/google-antigravity` (e.g. `/angular/prebuilt-components`).
 
 ## Build-only

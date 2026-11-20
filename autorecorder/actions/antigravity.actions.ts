@@ -83,13 +83,15 @@ export const FINDING_NOTES: Record<string, string> = {
   // --- shared-state / agent-readonly / hitl / interrupts / sub-agents (2026-11-18) ---
   'shared-state': [
     "page says click mark high priority then ask the agent and it answers high",
-    "panel shows priority high but the agent says it cant tell the priority",
+    "panel shows priority high but the agent never answers,run ends with no reply",
+    "backend log says model produced invalid output,improper format stop reason",
     "agent never sees state from agent.setState",
     "antigravity needs experimental_app_state true plus a prompt to call get_shared_state,angular page never shows that",
   ].join('\n'),
   'agent-readonly': [
     "page says connectAgentContext sends app values like name and timezone to the agent",
-    "clicked use london time and asked, agent doesnt know ada or london or the selected record",
+    "clicked use london time and asked,the agent never answers,no reply at all",
+    "backend log says model produced invalid output,improper format stop reason",
     "values never reach the agent",
     "antigravity needs experimental_app_context true and an instruction to call get_app_context,never shown on the page",
   ].join('\n'),

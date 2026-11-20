@@ -529,7 +529,7 @@
         9
       ],
       "notes": [
-        "Issue: the agent never sees state set with agent.setState."
+        "Issue: after agent.setState the agent never answers; the run ends with no reply."
       ],
       "block": null,
       "links": [
@@ -560,7 +560,7 @@
         10
       ],
       "notes": [
-        "Issue: connectAgentContext values never reach the agent."
+        "Issue: with connectAgentContext values set the agent never answers; no reply."
       ],
       "block": null,
       "links": [

@@ -16,7 +16,7 @@
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. I asked the agent who I am and which record is selected, but it doesn't know any of the values the app sent."
+   "text": "Moving on to the demo. I asked the agent who I am and which record is selected, it should know from the app context, but it never answers, there's no reply at all."
   },
   {
    "at": "notepad",
@@ -24,7 +24,7 @@
   },
   {
    "at": "+",
-   "text": "Antigravity needs the app context option and an instruction to read it, and that's never shown."
+   "text": "Antigravity needs the app context option and an instruction to read it, that's never shown, and umm, the backend log says the model gave invalid output."
   },
   {
    "at": "+",

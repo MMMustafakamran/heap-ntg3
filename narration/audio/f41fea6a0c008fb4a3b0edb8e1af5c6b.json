@@ -1,0 +1,9 @@
+{
+ "text": "Moving on to the demo. I asked the agent who I am and which record is selected, it should know from the app context, but it never answers, there's no reply at all.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 10.542,
+ "file": "f41fea6a0c008fb4a3b0edb8e1af5c6b.mp3",
+ "clip": "ANTIGRAVITY-angular-17-AgentReadonly",
+ "at": "demo"
+}

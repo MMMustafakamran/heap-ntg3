@@ -16,7 +16,7 @@
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. After clicking mark high priority, the panel shows high, but the agent says it can't tell the priority."
+   "text": "Moving on to the demo. After clicking mark high priority, the panel shows high, but the agent never answers, the run just ends with no reply."
   },
   {
    "at": "notepad",
@@ -24,7 +24,7 @@
   },
   {
    "at": "+",
-   "text": "Antigravity needs the app state option turned on and a prompt to read it, and the Angular page never shows that."
+   "text": "Antigravity needs the app state option and a prompt to read it, the page never shows that, and the backend log says the model gave invalid output."
   },
   {
    "at": "+",
