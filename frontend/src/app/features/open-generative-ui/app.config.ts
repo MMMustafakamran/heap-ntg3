@@ -11,7 +11,7 @@ import { z } from "zod";
 
 const dashboardFilterParameters = z.object({ filter: z.string() });
 
-const setDashboardFilter: SandboxFunction = {
+export const setDashboardFilter: SandboxFunction = { // HARNESS: exported so the root config (app.config.ts) can use it; the route-level provideCopilotKit is ignored
   name: "setDashboardFilter",
   description: "Set the active dashboard filter",
   parameters: dashboardFilterParameters,
