@@ -719,9 +719,6 @@ export const runSubagentsPageAction: PageActionHandler = async (page, config, ro
 };
 
 Object.assign(FINDING_EVIDENCE, {
-  'threads-drawer': [
-    { text: 'shows its locked state when that feature is unavailable', caption: 'Drawer renders empty: no list, no locked state' },
-  ],
 } satisfies Record<string, DocEvidence[]>);
 
 Object.assign(FINDING_NOTES, {

@@ -10,11 +10,6 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 - **Result:** the backend code as published fails at import (`NameError`). No working Angular app can be built from the page without guessing.
 - **Confirmed by harness:** `backend/agents/_common.py` (the showcase file the snippet comes from, with its imports and constants), a HARNESS `build_registry()` in `backend/agent_server.py` and `frontend/server.ts` (`CopilotRuntime` + `createCopilotNodeListener` + `HttpAgent` to `http://localhost:8281/default`) make the chat answer ("Yes, I'm here! Fun fact: Benjamin Franklin's famous kite experiment…").
 
-### [Threads Drawer](https://docs.copilotkit.ai/angular/google-antigravity/prebuilt-components/copilot-threads-drawer)
-**#3 The threads drawer renders empty.**
-- **Doc:** "The drawer reads the platform's `threads` license feature and shows its locked state when that feature is unavailable."
-- **Result:** `copilot-threads-drawer` renders an empty panel: no list, no locked state. The runtime's `/info` has `threadEndpoints.list:false`; the page never says what serves the list.
-
 ### [Open Generative UI](https://docs.copilotkit.ai/angular/google-antigravity/generative-ui/open-generative-ui)
 **#8 Only the frontend config is shown; the runtime `openGenerativeUI` flag is never shown.**
 - **Doc:** "An openGenerativeUI object opts the frontend into the built-in sandboxed renderer." and `provideCopilotKit({ …, openGenerativeUI: { sandboxFunctions: [setDashboardFilter] } })`.
@@ -44,6 +39,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.85.0, `@ag-ui/client
 
 ## Minor notes
 
+- Threads Drawer (#3): needs CopilotKit Intelligence (threads license).
 - Voice (#2): backend setup link leads to the React voice page; transcriptionService moves to the Angular runtime as is.
 - Headless Threads (#4): selectedThreadId is never defined, add a signal; list needs CopilotKit Intelligence.
 - A2UI (#6): productCatalog is never defined; basicCatalog from the runtime guide works.

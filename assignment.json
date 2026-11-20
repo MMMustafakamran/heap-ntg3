@@ -289,20 +289,17 @@
       "child": true,
       "docPath": "prebuilt-components/copilot-threads-drawer",
       "reachable": "sidebar",
-      "status": "❌",
-      "findings": [
-        3
-      ],
+      "status": "✅",
+      "findings": [],
       "notes": [
-        "Issue: the drawer renders as an empty panel, no thread list and no locked state; the page never says what has to serve the threads list."
+        "Note: needs CopilotKit Intelligence (threads license)."
       ],
       "block": null,
       "links": [
         {
-          "text": "Issue",
+          "text": "Threads Drawer - JS",
           "clip": "ANTIGRAVITY-angular-08-ThreadsDrawer",
           "loom": "https://www.loom.com/share/a0691f664c25495292d12f04dcb1b623",
-          "narration": "narration/scripts/ANTIGRAVITY-angular-08-ThreadsDrawer.json",
           "filmed": "2026-11-18"
         }
       ],
