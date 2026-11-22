@@ -1,6 +1,6 @@
 # Findings: Antigravity-Angular (Google Antigravity Python agent + CopilotKit Angular)
 Open doc defects only. Numbers are stable IDs (code cites `FINDINGS.md #N`); gaps are removed findings.
-Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.89.0, `@copilotkit/core` 1.89.0, `@ag-ui/client` 1.0.5 (1.0.2 nested under `@copilotkit/angular`), `@angular/core` 22.1.4, agent: `ag-ui-antigravity` 0.2.1, `google-antigravity` 0.1.23, `fastapi` 0.164.0 on Python 3.13 (uv); Node 26.7.0, npm 11, Windows 11 Pro. Docs: https://docs.copilotkit.ai/angular/google-antigravity (snapshot 2026-11-18)
+Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.89.0, `@copilotkit/core` 1.89.0, `@ag-ui/client` 1.0.5 (1.0.2 nested under `@copilotkit/angular`), `@angular/core` 22.1.4, agent: `ag-ui-antigravity` 0.2.1, `google-antigravity` 0.1.24, `fastapi` 0.165.0 on Python 3.13 (uv); Node 26.7.0, npm 11, Windows 11 Pro. Docs: https://docs.copilotkit.ai/angular/google-antigravity (snapshot 2026-11-18)
 
 ## Dev blockers (seen with `ng serve` and normal use of the page)
 
