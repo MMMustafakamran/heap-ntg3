@@ -412,7 +412,7 @@
    "status": "✅",
    "findings": [],
    "notes": [
-    "Note: /api/weather is a placeholder the page doesn't provide."
+    "Note: /api/weather is never provided, so the card shows the app's index.html."
    ],
    "block": null,
    "links": [
