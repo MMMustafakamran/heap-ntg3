@@ -737,7 +737,8 @@
     "verdict": null,
     "approvedAt": null,
     "by": null
-   }
+   },
+   "excluded": "Backend section of the docs sidebar (owner 2026-11-23: Backend pages out of scope)"
   },
   {
    "id": "inspector",
@@ -764,7 +765,8 @@
     "verdict": null,
     "approvedAt": null,
     "by": null
-   }
+   },
+   "excluded": "Backend section of the docs sidebar (owner 2026-11-23: Backend pages out of scope)"
   }
  ],
  "quickstartBlocked": "the backend snippet is a fragment and no runtime server or start step is given for Angular"
