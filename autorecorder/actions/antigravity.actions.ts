@@ -466,25 +466,50 @@ export const runAttachmentsAction: PageActionHandler = async (page, config, root
   await glideTo(page, page.locator('copilot-chat-assistant-message').last(), 2500);
 };
 
-const MIC_SELECTOR = ['transcri', 'voice', 'microphone', 'dictat', 'record', 'audio']
-  .map((k) => `copilot-chat-input button[aria-label*="${k}" i]`)
-  .join(', ');
-
-/** Voice: the page promises a mic button in the composer; there is none without a transcription service the page never shows. */
+/**
+ * Voice: the demo uses the real mic. The take's browser plays `fakeMicWav` (pages.config.ts) as the
+ * microphone; click Transcribe, let the prompt play, click Finish, the runtime's transcription
+ * service fills the composer, then send it and wait for the reply.
+ */
 export const runVoicePageAction: PageActionHandler = async (page, config, _root, ctx) => {
-  let hasMic = false;
-  try {
-    const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 15000 });
-    await settle(page, msgCount, ctx);
-    hasMic = (await page.locator(MIC_SELECTOR).count()) > 0;
-    await glideTo(page, page.locator('copilot-chat-input, textarea').first(), 2500);
-    if (!hasMic) mark('error', 'no mic button in the composer');
-  } finally {
-    await writeFinding(page, config.id, config);
-  }
+  const startBtn = page.locator('copilot-chat-input button[aria-label="Transcribe"]').first();
+  const finishBtn = page.locator('copilot-chat-input button[aria-label="Finish"]').first();
+  const input = page.locator('copilot-chat-input textarea').first();
+  const hasMic = await startBtn.waitFor({ state: 'visible', timeout: 30000 }).then(() => true, () => false);
   if (!hasMic) {
+    mark('error', 'no mic button in the composer');
     ctx.fail(`No mic button in the composer. ${await runtimeInfo(page)}`);
+    await writeFinding(page, config.id, config);
+    return;
   }
+  const msgCount = await page.locator('copilot-chat-assistant-message').count();
+  await glideClick(page, startBtn);
+  mark('action', 'mic on: speaking the prompt');
+  await finishBtn.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
+  await sleep(5500); // the wav: 0.3 s lead-in, ~3.7 s of speech, then silence
+  await glideClick(page, finishBtn);
+  mark('action', 'mic off: transcribing');
+  let text = '';
+  const until = Date.now() + 45000;
+  while (Date.now() < until && !text) {
+    text = (await input.inputValue().catch(() => '')).trim();
+    if (!text) await sleep(500);
+  }
+  console.log(`   🎙️ Transcribed: "${text}"`);
+  if (!text) {
+    mark('error', 'transcription left the composer empty');
+    ctx.fail(`Nothing was transcribed into the composer. ${await runtimeInfo(page)}`);
+    await writeFinding(page, config.id, config);
+    return;
+  }
+  await glideTo(page, input, 1500);
+  await page.keyboard.press('Enter');
+  await settle(page, msgCount, ctx);
+  const reply = (await page.locator('copilot-chat-assistant-message').last().innerText().catch(() => '')) || '';
+  console.log(`   💬 Reply: "${reply.slice(0, 200)}"`);
+  if (!reply.trim()) ctx.fail(`No reply to the transcribed prompt "${text}".`);
+  await glideTo(page, page.locator('copilot-chat-assistant-message').last(), 2500);
+  await writeFinding(page, config.id, config);
 };
 
 /** CSS customization: user bubble blue (#2563eb), assistant bubble pale blue (#eff6ff). */

@@ -76,7 +76,11 @@ export const PAGES = definePages([
     ideFile: 'frontend/src/app/features/media/voice-chat.component.ts',
     startLine: 1,
     endLine: 35,
+    // Spoken through the mic: assets/voice-prompt.wav (Windows SAPI voice, not the owner's) is fed
+    // as the browser microphone; the demo clicks Transcribe, waits, clicks Finish, sends the text.
     prompt: 'Hi, can you hear me? Reply in one short sentence.',
+    fakeMicWav: 'assets/voice-prompt.wav',
+    timeouts: { replyStartMs: 120_000, replyStreamMs: 90_000 },
     waitAfterPromptMs: 3000,
   },
   {

@@ -110,10 +110,9 @@ def guides_table(a):
 
     page_rows(None)
     for s in a['sections']:
-        if status:
-            out.append(row([td(f'<b>{esc(s["label"])}</b>', ';width:30%')] + [td(f'<b>{esc(c)}</b>', center) for c in s['cells']]))
-        else:
-            out.append(row([td(f'<b>{esc(s["label"])}</b>', ';width:30%')] + [td(esc(c)) for c in s['cells']]))
+        # owner 2026-11-23: grouping rows are one bold label across the whole row; no "Section" /
+        # "Sub section" cells (they made an extra narrow column in the Google Doc). s['cells'] is ignored.
+        out.append(row([td(f'<b>{esc(s["label"])}</b>').replace('<td ', f'<td colspan="{len(cols)}" ', 1)]))
         page_rows(s['label'])
     out.append('</table>')
     return out
@@ -151,6 +150,7 @@ def build(assignments):
     if r0.get('clipsToUpload'):
         body = '\n'.join(h)
         used = sorted(set(re.findall(r'#LOOM-([\w-]+)', body)))
+    if r0.get('clipsToUpload') and used:  # every clip on Loom: no empty "Clips to upload" section
         h += ['<h2>Clips to upload</h2>',
               '<p>Each link above points at #LOOM-&lt;clip&gt;. Replace it with the Loom URL of that clip '
               '(approved clips are in 3-output/&lt;date&gt;/deliver/).</p>',
