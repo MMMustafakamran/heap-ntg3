@@ -27,6 +27,7 @@ Source of truth: the team doc's export, `C:\Users\QS\Downloads\_Updated Testing 
 - A page filmed in several clips (e.g. a page with default and custom variants) gets a distinct link text per clip (`links[].text`, e.g. `Tool Call Rendering (custom render) - JS`), never the same text repeated.
 - Page cell: the page name, linked to the doc page URL.
 - Only pages a real user can reach (sidebar, or linked from page content) get a row ([QA-RULES.md](QA-RULES.md) section 9).
+- **Rows follow the live docs sidebar order** for that frontend + framework (owner, 2026-11-23). `node .qa/tools/sidebar_order.mjs` (run from the repo root, Playwright headless) expands every folder and writes `doc-snapshot/sidebar-order.json` (url, name, group path, in visual order); `build.py` orders rows by it: a bold row when a section heading or folder is entered (never repeated when a page comes back up a level), `- ` for pages inside a folder, pages not in the sidebar (in-content) last under `Other pages`. Rerun it and commit the file whenever drift reports sidebar changes. It is not a drift baseline (`sidebar.json` stays drift.mjs's).
 
 ## 3. Result cell
 
