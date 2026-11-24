@@ -38,6 +38,7 @@ export const PAGES = definePages([
     ],
     prompt: 'Hey, are you connected? Tell me a quick fun fact about kites.',
     waitAfterPromptMs: 3000,
+    timeouts: { replyStartMs: 120_000, replyStreamMs: 90_000 }, // reply came ~80 s after submit in CI r45348818777
   },
   // Chat UI, threads, inspector, auth (2026-11-18): actions in antigravity.actions.ts.
   {

@@ -24,7 +24,7 @@
   },
   {
    "at": "+",
-   "text": "Antigravity needs the app state option and a prompt to read it, the page never shows that, and the backend log says the model gave invalid output."
+   "text": "Antigravity needs the app state option and a prompt to read it, and the page never shows either of those."
   },
   {
    "at": "+",
