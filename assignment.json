@@ -109,9 +109,9 @@
     {
      "text": "Not Working",
      "clip": "ANTIGRAVITY-angular-01-Quickstart",
-     "loom": "https://www.loom.com/share/48099fb514c5429db9f0d2aed43b55c7",
+     "loom": "https://www.loom.com/share/f1e36d1754544593936490b7383e0a55",
      "narration": "narration/scripts/ANTIGRAVITY-angular-01-Quickstart.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -138,9 +138,9 @@
     {
      "text": "Prebuilt Components - Angular",
      "clip": "ANTIGRAVITY-angular-02-PrebuiltComponents",
-     "loom": "https://www.loom.com/share/76ba14b11c0846aebb0ef215ca14ceae",
+     "loom": "https://www.loom.com/share/89c10a12f58a44c885f7e49df338ad9b",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -165,9 +165,9 @@
     {
      "text": "Multimodal Attachments - Angular",
      "clip": "ANTIGRAVITY-angular-03-MultimodalAttachments",
-     "loom": "https://www.loom.com/share/3594c35858b24400ba18ea04e82450e1",
+     "loom": "https://www.loom.com/share/d2c074dd45b34030bf5d4a9278fa5eb6",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -192,8 +192,8 @@
     {
      "text": "Voice - JS",
      "clip": "ANTIGRAVITY-angular-04-Voice",
-     "loom": "https://www.loom.com/share/e3420981d19e4f15a9a01e6e284b4162",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/b2975d208fa0469cb9b40d9fc784a2f8",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -218,9 +218,9 @@
     {
      "text": "CSS Customization - Angular",
      "clip": "ANTIGRAVITY-angular-05-ClfCss",
-     "loom": "https://www.loom.com/share/52bc814c20254b70844ea05e4247f4d5",
+     "loom": "https://www.loom.com/share/7f1cfd2072a843c785307aa4bcf13298",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -245,9 +245,9 @@
     {
      "text": "Slots (Subcomponents) - Angular",
      "clip": "ANTIGRAVITY-angular-06-ClfSlots",
-     "loom": "https://www.loom.com/share/28452bd98dd14d248b837c6db788b083",
+     "loom": "https://www.loom.com/share/6e55af6916154d5d8396b47d1388eaac",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -276,9 +276,9 @@
     {
      "text": "Issue",
      "clip": "ANTIGRAVITY-angular-07-ClfHeadlessUi",
-     "loom": "https://www.loom.com/share/184ddd2ec23147538f2bd1c6dd0db4d6",
+     "loom": "https://www.loom.com/share/2e134289c9a9482a8ba7e7048d77f2ef",
      "narration": "narration/scripts/ANTIGRAVITY-angular-07-ClfHeadlessUi.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -305,8 +305,8 @@
     {
      "text": "Threads Drawer - JS",
      "clip": "ANTIGRAVITY-angular-08-ThreadsDrawer",
-     "loom": "https://www.loom.com/share/762ba6757f7b4babbc702fe5ad0a7cf8",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/138a32528cec4f388500eb06a38d00fb",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -333,8 +333,8 @@
     {
      "text": "Headless Threads - JS",
      "clip": "ANTIGRAVITY-angular-09-HeadlessThreads",
-     "loom": "https://www.loom.com/share/26565a6d91cf44f5b445e45f4718fcc1",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/799e5e617972467b871838eff3449076",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -359,9 +359,9 @@
     {
      "text": "Frontend Tools - Angular",
      "clip": "ANTIGRAVITY-angular-10-FrontendTools",
-     "loom": "https://www.loom.com/share/11ac643c1c9143dd835deef55c86a19b",
+     "loom": "https://www.loom.com/share/975ec5eb431e43f4a12d59880c6accc7",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -386,9 +386,9 @@
     {
      "text": "Components as Tools - Angular",
      "clip": "ANTIGRAVITY-angular-11-GenUiToolBased",
-     "loom": "https://www.loom.com/share/0bc135ed0cf04c1881d6804570f1b316",
+     "loom": "https://www.loom.com/share/8f90d435a3ba493fb08e1225980ea052",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -415,8 +415,8 @@
     {
      "text": "Tool Call Rendering - JS",
      "clip": "ANTIGRAVITY-angular-12-GenUiToolRendering",
-     "loom": "https://www.loom.com/share/a45e681dc32446a6b11c08b399c7e194",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/7fe4948a90124c2bbe6cedbc5429c8dd",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -441,8 +441,8 @@
     {
      "text": "A2UI - JS",
      "clip": "ANTIGRAVITY-angular-13-A2ui",
-     "loom": "https://www.loom.com/share/a5b36f2eb73a41e78956d7d5fda2126e",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/c2d626afca374f4e8a48d784c5bcff62",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -467,8 +467,8 @@
     {
      "text": "MCP Apps - JS",
      "clip": "ANTIGRAVITY-angular-14-McpApps",
-     "loom": "https://www.loom.com/share/ff912a191a534b27808885613722d5c8",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/bcca72f76cbf45d08034f620da5d8c04",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -497,9 +497,9 @@
     {
      "text": "Issue",
      "clip": "ANTIGRAVITY-angular-15-OpenGenerativeUi",
-     "loom": "https://www.loom.com/share/a2e917928b004a5ea9e8495daedf6b15",
+     "loom": "https://www.loom.com/share/c555fc85eb3046f9b5abd9072d0925fd",
      "narration": "narration/scripts/ANTIGRAVITY-angular-15-OpenGenerativeUi.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -528,9 +528,9 @@
     {
      "text": "Issue",
      "clip": "ANTIGRAVITY-angular-16-SharedState",
-     "loom": "https://www.loom.com/share/ad2bfd52ef6d446f9f28c4e67e9ef1fa",
+     "loom": "https://www.loom.com/share/ba66feee6ecb4201b3c42e9fb039d99f",
      "narration": "narration/scripts/ANTIGRAVITY-angular-16-SharedState.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -559,9 +559,9 @@
     {
      "text": "Issue",
      "clip": "ANTIGRAVITY-angular-17-AgentReadonly",
-     "loom": "https://www.loom.com/share/e0783b9cafdf4220b34b6f32fdbeebb0",
+     "loom": "https://www.loom.com/share/4830f2c4138a44c5a491e07b6b70c2cd",
      "narration": "narration/scripts/ANTIGRAVITY-angular-17-AgentReadonly.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -586,9 +586,9 @@
     {
      "text": "HITL Overview - Angular",
      "clip": "ANTIGRAVITY-angular-18-HitlOverview",
-     "loom": "https://www.loom.com/share/aa6cf8b4b89749e487f01f32cb845895",
+     "loom": "https://www.loom.com/share/df07c9f83ffd4330950609bf2d75c467",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -617,9 +617,9 @@
     {
      "text": "Issue",
      "clip": "ANTIGRAVITY-angular-19-UseInterrupt",
-     "loom": "https://www.loom.com/share/9f45cc4403774a3485d914619b3c97ab",
+     "loom": "https://www.loom.com/share/a9cdbff36dbd4c3e9a9582015250cf71",
      "narration": "narration/scripts/ANTIGRAVITY-angular-19-UseInterrupt.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -648,9 +648,9 @@
     {
      "text": "Issue",
      "clip": "ANTIGRAVITY-angular-20-HeadlessInterrupts",
-     "loom": "https://www.loom.com/share/2aadefda94504fa2b3dff5ea7c18e8fb",
+     "loom": "https://www.loom.com/share/680e72cc07da47598da4483a47a3059d",
      "narration": "narration/scripts/ANTIGRAVITY-angular-20-HeadlessInterrupts.json",
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -675,9 +675,9 @@
     {
      "text": "WebMCP - Angular",
      "clip": "ANTIGRAVITY-angular-21-WebMcp",
-     "loom": "https://www.loom.com/share/33bffcae2a75487589479508e614804e",
+     "loom": "https://www.loom.com/share/cfbd0c5f2c8046aab9e414fed6ace155",
      "narration": null,
-     "filmed": "2026-11-23"
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
@@ -702,8 +702,8 @@
     {
      "text": "Sub-agents - JS",
      "clip": "ANTIGRAVITY-angular-22-SubAgents",
-     "loom": "https://www.loom.com/share/33546fbc98564f10add6471f15a6623b",
-     "filmed": "2026-11-23"
+     "loom": "https://www.loom.com/share/16911ca385a34447a8c8e0217503ad0c",
+     "filmed": "2026-11-24"
     }
    ],
    "review": {
