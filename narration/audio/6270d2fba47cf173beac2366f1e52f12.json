@@ -1,0 +1,9 @@
+{
+ "text": "Moving on to the demo. It should pause and show the review panel, but the interrupt doesn't complete the way the page says.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 7.941,
+ "file": "6270d2fba47cf173beac2366f1e52f12.mp3",
+ "clip": "ANTIGRAVITY-angular-19-UseInterrupt",
+ "at": "demo"
+}

@@ -19,20 +19,24 @@
    "text": "This is my project, I've implemented the exact code from the doc."
   },
   {
-   "at": "+",
-   "text": "This part, an agent that actually pauses, wasn't on the page, so I added it myself."
+   "at": "added",
+   "text": "This part, the interrupt tool, wasn't on the page, so I added it myself."
+  },
+  {
+   "at": "added#2",
+   "text": "And this agent that calls it, I added that too."
   },
   {
    "at": "demo",
-   "text": "Moving on to the demo. Only with my own agent does the panel show up, following the page nothing pauses at all."
+   "text": "Moving on to the demo. It should pause and show the review panel, but the interrupt doesn't complete the way the page says."
   },
   {
    "at": "notepad",
-   "text": "So basically, without a backend that pauses, inject interrupt never fires."
+   "text": "So basically, the page needs a backend that pauses, and it never gives you one."
   },
   {
    "at": "+",
-   "text": "And the page never gives you one."
+   "text": "The default agent never pauses, so umm, even with my own agent it doesn't work the way the page says."
   },
   {
    "at": "+",

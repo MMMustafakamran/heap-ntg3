@@ -6,6 +6,7 @@
  * Notepad note (actions/antigravity.actions.ts).
  */
 import { definePages } from '../core/types';
+import { expectUiFor } from '../core/ui-log';
 
 export const SKIP_RECORDING: Record<string, string> = {};
 
@@ -33,10 +34,11 @@ export const PAGES = definePages([
       PKG,
       { filePath: 'frontend/src/app/app.config.ts', startLine: 1, endLine: 50 },
       COMMON,
-      { ...AGENT, addedText: 'def build_registry():  # HARNESS: never defined on the page' },
-      { ...RUNTIME, addedText: '  process.env["AGENT_URL"] ?? "http://localhost:8281/default"; // HARNESS: Antigravity agent server, port 8281 (doc: 8000)' },
+      AGENT,
+      RUNTIME,
     ],
     prompt: 'Hey, are you connected? Tell me a quick fun fact about kites.',
+    expectUi: [{ name: 'assistant-reply', selector: 'copilot-chat-assistant-message' }],
     waitAfterPromptMs: 3000,
     timeouts: { replyStartMs: 120_000, replyStreamMs: 90_000 }, // reply came ~80 s after submit in CI r45348818777
   },
@@ -285,9 +287,10 @@ export const PAGES = definePages([
     startLine: 1,
     endLine: 90,
     extraTabs: [
-      { filePath: 'backend/interrupts_server.py', startLine: 1, endLine: 40, addedText: 'async def request_review(topic: str) -> str:  # HARNESS: no page shows a backend interrupt for Angular' },
+      { filePath: 'backend/interrupts_server.py', startLine: 1, endLine: 40 },
     ],
     prompt: 'Please ship the v2 release.',
+    expectUi: expectUiFor('interrupt'),
   },
   {
     id: 'headless-interrupts',
@@ -299,10 +302,11 @@ export const PAGES = definePages([
     startLine: 1,
     endLine: 34,
     extraTabs: [
-      { filePath: 'backend/interrupts_server.py', startLine: 1, endLine: 40, addedText: 'async def request_review(topic: str) -> str:  # HARNESS: no page shows a backend interrupt for Angular' },
-      { ...RUNTIME, startLine: 15, endLine: 45, addedText: '    ticketing: new HttpAgent({ url: "http://localhost:8284/interrupt/" }),' },
+      { filePath: 'backend/interrupts_server.py', startLine: 1, endLine: 40 },
+      { ...RUNTIME, startLine: 15, endLine: 45 },
     ],
     prompt: 'Please ship ticket TCK-42 to production.',
+    expectUi: expectUiFor('interrupt'),
   },
   {
     id: 'webmcp',

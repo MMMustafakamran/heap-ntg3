@@ -15,7 +15,7 @@ from agents import _common
 from agents.subagents import subagents_agent
 
 
-async def request_review(topic: str) -> str:  # HARNESS: no page shows a backend interrupt for Angular
+async def request_review(topic: str) -> str:  # ADDED: no page shows a backend interrupt for Angular
     """Pauses for the user to review a change before it ships."""
     answer = await experimental_interrupt(
         "request_review",
@@ -30,7 +30,7 @@ async def request_review(topic: str) -> str:  # HARNESS: no page shows a backend
     return f"The user answered the review with {answer.payload}. Tell the user what they decided."
 
 
-def interrupt_agent():  # HARNESS
+def interrupt_agent():  # ADDED: the agent that calls request_review
     return _common.build(
         system_instructions="When the user asks to ship, release or approve something, call the `request_review` tool first, then report the decision.",
         tools=[request_review],

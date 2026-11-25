@@ -3,7 +3,7 @@
  * "Handle an interrupt from the store", verbatim.
  * https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/headless
  *
- * Verbatim, agent id "ticketing" included. HARNESS: no page registers a "ticketing" agent or shows a
+ * Verbatim, agent id "ticketing" included. CHANGED: no page registers a "ticketing" agent or shows a
  * backend that emits an interrupt; frontend/server.ts maps "ticketing" to the harness interrupt agent
  * (backend/interrupts_server.py, port 8284).
  */

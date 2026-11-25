@@ -36,7 +36,7 @@ Stack: `@copilotkit/angular` 0.6.0, `@copilotkit/runtime` 1.89.0, `@copilotkit/c
 **#11 No Antigravity backend that pauses is shown or linked.**
 - **Doc:** "When the backend agent pauses for input" and `injectInterrupt<ReviewRequest>("default")`.
 - **Result:** the quickstart's `default` agent never interrupts, so `injectInterrupt("default")` never fires and nothing appears.
-- **Confirmed by harness:** a HARNESS interrupt agent (`backend/interrupts_server.py`, agent `interrupt`) makes the panel appear and resume.
+- **Confirmed by harness:** with a harness interrupt agent (`backend/interrupts_server.py`, agent `interrupt`) the interrupt still doesn't complete the way the page says on every run (sometimes the panel shows and resumes, sometimes only "The decision could not be submitted."); the page gives no backend to try it with.
 
 ### [Headless Interrupts](https://docs.copilotkit.ai/angular/google-antigravity/human-in-the-loop/headless)
 **#12 No Antigravity interrupt backend is shown or linked.**

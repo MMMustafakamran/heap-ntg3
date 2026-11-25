@@ -1,5 +1,5 @@
 /**
- * HARNESS: Copilot Runtime for this harness (the Angular quickstart never shows one for Antigravity:
+ * ADDED: Copilot Runtime for this harness (the Angular quickstart never shows one for Antigravity:
  * its runtime callout links a guide whose only server is a Next.js route; FINDINGS.md #1).
  * Shape: the Node listener from @copilotkit/runtime/v2/node, with an HttpAgent pointed at the
  * Antigravity agent server in ../backend (create_antigravity_app mounts each agent at /<name>).
@@ -11,10 +11,10 @@ import { createServer } from "node:http";
 import { CopilotRuntime } from "@copilotkit/runtime/v2";
 import { createCopilotNodeListener } from "@copilotkit/runtime/v2/node";
 import { HttpAgent } from "@ag-ui/client";
-import { authApp } from "./auth-runtime"; // HARNESS: Authentication guide hook, served under /auth
+import { authApp } from "./auth-runtime"; // CHANGED: Authentication guide hook, served under /auth
 
 const agentUrl =
-  process.env["AGENT_URL"] ?? "http://localhost:8281/default"; // HARNESS: Antigravity agent server, port 8281 (doc: 8000)
+  process.env["AGENT_URL"] ?? "http://localhost:8281/default"; // CHANGED: Antigravity agent server, port 8281 (doc: 8000)
 
 // quickstart : copilot runtime start
 const runtime = new CopilotRuntime({
@@ -23,7 +23,7 @@ const runtime = new CopilotRuntime({
     default: new HttpAgent({ url: agentUrl }),
     // chat ui : support agent
     support: new HttpAgent({ url: agentUrl }),
-    // HARNESS: interrupt + sub-agents pages (backend/interrupts_server.py on 8284). The Headless Interrupts
+    // CHANGED: interrupt + sub-agents pages (backend/interrupts_server.py on 8284). The Headless Interrupts
     // page injects "ticketing", which no page registers; it points at the same harness interrupt agent.
     interrupt: new HttpAgent({ url: "http://localhost:8284/interrupt/" }),
     ticketing: new HttpAgent({ url: "http://localhost:8284/interrupt/" }),
@@ -35,7 +35,7 @@ const runtime = new CopilotRuntime({
 });
 // quickstart : copilot runtime end
 
-const port = Number(process.env["PORT"] ?? 8280); // HARNESS: runtime port 8280 (doc uses 8200; workspace port plan)
+const port = Number(process.env["PORT"] ?? 8280); // CHANGED: runtime port 8280 (doc uses 8200; workspace port plan)
 
 // quickstart : create copilot node listener start
 const copilotListener = createCopilotNodeListener({
@@ -43,7 +43,7 @@ const copilotListener = createCopilotNodeListener({
   basePath: "/api/copilotkit",
   cors: true,
 });
-// HARNESS: /auth/* goes to the Authentication guide's hooked runtime (auth-runtime.ts).
+// CHANGED: /auth/* goes to the Authentication guide's hooked runtime (auth-runtime.ts).
 createServer((req, res) => {
   if (req.url?.startsWith("/auth/")) {
     req.url = req.url.slice("/auth".length);

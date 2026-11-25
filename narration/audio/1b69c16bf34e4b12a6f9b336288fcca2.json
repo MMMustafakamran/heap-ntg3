@@ -1,0 +1,9 @@
+{
+ "text": "The default agent never pauses, so umm, even with my own agent it doesn't work the way the page says.",
+ "model": "s2.1-pro-free",
+ "refSha256": "2c9d0ecf4608feacc07c88e869cd4dec601481306a939b7be92fc1bff521a727",
+ "duration": 7.755,
+ "file": "1b69c16bf34e4b12a6f9b336288fcca2.mp3",
+ "clip": "ANTIGRAVITY-angular-19-UseInterrupt",
+ "at": "+"
+}

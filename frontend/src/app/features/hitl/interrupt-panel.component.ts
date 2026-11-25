@@ -66,7 +66,7 @@ export class InterruptPanelComponent {
   // version note while the snippet was uncompilable — but it no longer blocks.
   //
   // human in the loop : inject interrupt start
-  // HARNESS: doc injects "default" (the quickstart agent, which never pauses). The page shows no backend
+  // CHANGED: doc injects "default" (the quickstart agent, which never pauses). The page shows no backend
   // that emits an interrupt, so this points at the harness interrupt agent; verbatim copy in
   // frontend/doc-verbatim/use-interrupt/.
   protected readonly controller = injectInterrupt<ReviewRequest>('interrupt');

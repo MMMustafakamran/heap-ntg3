@@ -20,6 +20,7 @@ import { registerDocEvidence } from '../core/doc-evidence';
 import { attachImage } from './attach-image';
 import { type DocEvidence, showFinding } from './doc-evidence';
 import { glideClick, glideTo } from './glide-click';
+import { waitStep } from '../core/ui-log';
 
 // ---------------------------------------------------------------------------------------------
 // Findings shown at the end of ❌/⚠️ clips. `text` is matched on the rendered doc page.
@@ -95,9 +96,9 @@ export const FINDING_NOTES: Record<string, string> = {
   ].join('\n'),
   'use-interrupt': [
     "page says when the backend agent pauses injectInterrupt gives u the pending decision",
-    "following the page nothing pauses so nothing ever shows up",
-    "no antigravity backend that pauses is shown or linked anywhere",
-    "so injectInterrupt default never fires,i had to write my own interrupt agent to see the panel",
+    "following the page the interrupt doesnt complete the way the page says",
+    "no antigravity backend that pauses is shown or linked anywhere,default agent never pauses",
+    "i had to write my own interrupt agent just to try it",
   ].join('\n'),
   'clf-headless-ui': [
     "page says call copilotKit.core.runAgent with the agent and the headless chat sends ur message",
@@ -720,7 +721,7 @@ export const runInterruptAction: PageActionHandler = async (page, config, _root,
   const msgCount = await sendPrompt(page, config.prompt, { timeoutMs: 15000 });
   let decisionLost = '';
   const host = page.locator(config.id === 'use-interrupt' ? 'app-interrupt-panel section' : 'app-ticket-approval section').first();
-  const shown = await host.waitFor({ state: 'visible', timeout: 90000 }).then(() => true).catch(() => false);
+  const shown = await waitStep(page, host, 'interrupt UI', { timeoutMs: 90000 });
   let resumed = false;
   if (shown) {
     await glideTo(page, host, 2000);
