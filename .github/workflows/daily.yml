@@ -380,7 +380,7 @@ jobs:
             echo "up: :$port$path"
           done
 
-      - name: Cache static ffmpeg (before Record: the end-mark clamp needs ffprobe)
+      - name: "Cache static ffmpeg (before Record: the end-mark clamp needs ffprobe)"
         uses: actions/cache@v4
         with:
           path: ~/ffmpeg-static
