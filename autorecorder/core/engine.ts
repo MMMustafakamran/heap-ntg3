@@ -23,7 +23,7 @@ import {
   writeFailureLog,
   type LogSource,
 } from './failure-evidence';
-import { gitBashTitle, pickShell, runFailureTerminal } from './failure-terminal';
+import { gitBashTitle, pickLogs, pickShell, runFailureTerminal } from './failure-terminal';
 import { SERVER_ERROR_PATTERN, findServerTerminal, streamServerTerminal } from './server-terminal';
 import { trimClipHead } from './trim-head';
 import { generateIdeHtml, type IdeTabConfig } from './ide/generator';
@@ -1119,8 +1119,14 @@ export class RecordingEngine {
     // The server's own terminal when start-all.sh ran it in a PTY (.qa/tools/ptyrun.cjs):
     // the real output, live, nothing typed. Otherwise a shell reading the logs (below).
     const takeText = [error, ...consoleEntries.map((e) => `${e.text} ${e.source ?? ''}`)].join('\n');
+    // Rule: a terminal only when it shows this take's error. The failure is on screen in the
+    // demo (nothing rendered, a wrong reply) and no server printed an error: no terminal at all.
+    if (!pickLogs(logs, 3, takeText).grepLog) {
+      console.log('   🖥️  No server printed an error during this take: no terminal shown');
+      return;
+    }
     const server = findServerTerminal(logs, takeText);
-    if (server) {
+    if (server && server.hasError) {
       const abort = { aborted: false };
       let writes: Promise<unknown> = Promise.resolve();
       const write = (data: string): void => {

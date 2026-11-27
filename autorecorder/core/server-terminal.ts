@@ -31,6 +31,8 @@ export interface ServerTerminal {
   ptyFile: string;
   cols: number;
   rows: number;
+  /** A server this take touched printed an error (or crashed): only then is a terminal shown. */
+  hasError: boolean;
 }
 
 /** The server terminal for this take, or null when start-all.sh did not run servers in a PTY. */
@@ -52,6 +54,7 @@ export function findServerTerminal(logs: LogSource[], takeText = ''): ServerTerm
     ptyFile: `${src.path}.pty`,
     cols: meta.cols || 168,
     rows: meta.rows || 36,
+    hasError: Boolean(picked.grepLog),
   };
 }
 
