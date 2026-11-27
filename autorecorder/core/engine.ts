@@ -1151,7 +1151,7 @@ export class RecordingEngine {
             // terminal up to it with the wheel, as a person looking for it would.
             const found = (await page
               .evaluate(`window.__termFindLast && window.__termFindLast(${JSON.stringify(SERVER_ERROR_PATTERN)})`)
-              .catch(() => null)) as { linesUp: number; rowPx: number } | null;
+              .catch(() => null)) as { linesUp: number; line: number; viewportY: number; rowPx: number } | null;
             if (found && found.linesUp > 0) {
               const box = (await page
                 .evaluate(`(function(){var r=document.getElementById('term-host').getBoundingClientRect();return {x:r.left+r.width*0.45,y:r.top+r.height*0.5};})()`)
@@ -1159,8 +1159,18 @@ export class RecordingEngine {
               if (box) {
                 await humanGlide(page, box.x + between(-60, 60), box.y + between(-40, 40));
                 await sleep(between(250, 500));
-                await smoothWheelBurst(-found.linesUp * found.rowPx, (d) => page.mouse.wheel(0, d));
-                console.log(`   🖥️  Scrolled up ${found.linesUp} lines to the error`);
+                // Short wheel turns, checking where the terminal is after each one, until the error
+                // line sits near the top (xterm's pixels-per-line differs from the row height).
+                const target = Math.max(0, found.line - 2);
+                for (let turn = 0; turn < 12; turn++) {
+                  const y = Number(await page.evaluate('window.__termViewportY && window.__termViewportY()').catch(() => target));
+                  if (!(y > target)) break;
+                  const lines = Math.min(8, y - target);
+                  await smoothWheelBurst(-Math.max(1, Math.round(lines * found.rowPx * 0.5)), (d) => page.mouse.wheel(0, d));
+                  await sleep(between(120, 260));
+                }
+                const at = await page.evaluate('window.__termViewportY && window.__termViewportY()').catch(() => null);
+                console.log(`   🖥️  Scrolled up to the error (line ${found.line}, top row now ${at})`);
               }
             }
             // Hold on the screen so it can be read before the clip ends.

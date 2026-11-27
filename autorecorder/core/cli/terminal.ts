@@ -297,11 +297,13 @@ export function generateTerminalHtml(opts: TerminalRenderOptions): string {
       var line = b.getLine(i);
       if (line && re.test(line.translateToString(true))) {
         var row = document.querySelector('.xterm-rows > div');
-        return { linesUp: Math.max(0, b.viewportY - i + 2), rowPx: row ? row.getBoundingClientRect().height : 18 };
+        return { linesUp: Math.max(0, b.viewportY - i + 2), line: i, viewportY: b.viewportY, rowPx: row ? row.getBoundingClientRect().height : 18 };
       }
     }
     return null;
   };
+
+  window.__termViewportY = function () { return term.buffer.active.viewportY; };
 
   window.__castReplayDone = false;
   window.__castEventCount = EVENTS.length;
