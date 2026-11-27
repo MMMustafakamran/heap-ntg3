@@ -18,6 +18,12 @@ import { closeSync, existsSync, openSync, readFileSync, readSync, statSync } fro
 import { type LogSource } from './failure-evidence';
 import { pickLogs } from './failure-terminal';
 
+/** Log files of harness helpers, not servers the doc asks for. */
+const HELPER_LOG = /pool|doc-typecheck|record|start-all/i;
+
+/** What a person scrolls back to in a server terminal. */
+export const SERVER_ERROR_PATTERN = String.raw`\b(error|exception|traceback|fatal|failed)\b|\bTS\d{4}\b`;
+
 export interface ServerTerminal {
   /** Tab title: the command the terminal is running (ptyrun --name). */
   name: string;
@@ -29,10 +35,14 @@ export interface ServerTerminal {
 
 /** The server terminal for this take, or null when start-all.sh did not run servers in a PTY. */
 export function findServerTerminal(logs: LogSource[], takeText = ''): ServerTerminal | null {
-  const withPty = logs.filter((l) => existsSync(`${l.path}.pty`));
+  // Harness helpers (the model key pool) are not the doc's servers: never on camera.
+  const withPty = logs.filter((l) => existsSync(`${l.path}.pty`) && !HELPER_LOG.test(l.title));
   if (!withPty.length) return null;
   const picked = pickLogs(withPty, 3, takeText);
-  const src = picked.grepLog ?? picked.logs[picked.logs.length - 1] ?? withPty[0];
+  // No server printed an error: the agent backend, else the runtime, else what the take touched last.
+  const rank = (l: LogSource): number => (/backend|agent/i.test(l.title) ? 0 : /runtime/i.test(l.title) ? 1 : 2);
+  const fallback = [...(picked.logs.length ? picked.logs : withPty)].sort((a, b) => rank(a) - rank(b))[0];
+  const src = picked.grepLog ?? fallback;
   let meta: { name?: string; command?: string; cols?: number; rows?: number } = {};
   try {
     meta = JSON.parse(readFileSync(`${src.path}.pty.json`, 'utf8'));

@@ -24,14 +24,14 @@ import {
   type LogSource,
 } from './failure-evidence';
 import { gitBashTitle, pickShell, runFailureTerminal } from './failure-terminal';
-import { findServerTerminal, streamServerTerminal } from './server-terminal';
+import { SERVER_ERROR_PATTERN, findServerTerminal, streamServerTerminal } from './server-terminal';
 import { trimClipHead } from './trim-head';
 import { generateIdeHtml, type IdeTabConfig } from './ide/generator';
 import { closeNotepad, openNotepad, typeInNotepad } from './overlays/notepad';
 import { loadVoicePlan, voiceGate, voiceHasLine, voiceHoldMs, voiceTail } from './voice';
 import { setFast } from './fast';
 import { runState, startRunWatch } from './run-watch';
-import { firstCursorMoveS, getGlobalCursorPos, humanClick, humanGlide, humanScrollDown, resetIdle, restCursorSomewhere, sleep } from './overlays/cursor';
+import { firstCursorMoveS, getGlobalCursorPos, humanClick, humanGlide, humanScrollDown, resetIdle, restCursorSomewhere, sleep, smoothWheelBurst } from './overlays/cursor';
 import { between, jitter, pause, seedTake } from './overlays/human';
 import { carryCursorToNextPage, clickTaskbarApp, ensureOverlays, IDE_ROUTE_PATH, installOverlayInitScript, TERMINAL_ROUTE_PATH } from './overlays/taskbar';
 import { timeoutsFor } from './timeouts';
@@ -1147,6 +1147,22 @@ export class RecordingEngine {
             const run = await streamServerTerminal(server, write, { signal: abort });
             await writes;
             console.log(`   🖥️  Server terminal (${server.name}): ${run.bytes} bytes from ${basename(server.ptyFile)}`);
+            // The error may have scrolled above the screen (a rebuild printed after it): scroll the
+            // terminal up to it with the wheel, as a person looking for it would.
+            const found = (await page
+              .evaluate(`window.__termFindLast && window.__termFindLast(${JSON.stringify(SERVER_ERROR_PATTERN)})`)
+              .catch(() => null)) as { linesUp: number; rowPx: number } | null;
+            if (found && found.linesUp > 0) {
+              const box = (await page
+                .evaluate(`(function(){var r=document.getElementById('term-host').getBoundingClientRect();return {x:r.left+r.width*0.45,y:r.top+r.height*0.5};})()`)
+                .catch(() => null)) as { x: number; y: number } | null;
+              if (box) {
+                await humanGlide(page, box.x + between(-60, 60), box.y + between(-40, 40));
+                await sleep(between(250, 500));
+                await smoothWheelBurst(-found.linesUp * found.rowPx, (d) => page.mouse.wheel(0, d));
+                console.log(`   🖥️  Scrolled up ${found.linesUp} lines to the error`);
+              }
+            }
             // Hold on the screen so it can be read before the clip ends.
             await sleep(3500);
           })(),
