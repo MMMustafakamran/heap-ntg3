@@ -24,6 +24,7 @@ import {
   type LogSource,
 } from './failure-evidence';
 import { gitBashTitle, pickShell, runFailureTerminal } from './failure-terminal';
+import { findServerTerminal, streamServerTerminal } from './server-terminal';
 import { trimClipHead } from './trim-head';
 import { generateIdeHtml, type IdeTabConfig } from './ide/generator';
 import { closeNotepad, openNotepad, typeInNotepad } from './overlays/notepad';
@@ -1115,6 +1116,51 @@ export class RecordingEngine {
       return;
     }
     if (page.isClosed()) return;
+    // The server's own terminal when start-all.sh ran it in a PTY (.qa/tools/ptyrun.cjs):
+    // the real output, live, nothing typed. Otherwise a shell reading the logs (below).
+    const takeText = [error, ...consoleEntries.map((e) => `${e.text} ${e.source ?? ''}`)].join('\n');
+    const server = findServerTerminal(logs, takeText);
+    if (server) {
+      const abort = { aborted: false };
+      let writes: Promise<unknown> = Promise.resolve();
+      const write = (data: string): void => {
+        writes = writes
+          .then(() => page.evaluate(`window.__termWrite && window.__termWrite(${JSON.stringify(data)})`))
+          .catch(() => {});
+      };
+      try {
+        await Promise.race([
+          (async () => {
+            await sleep(800);
+            await this.openTerminalWindow(page, {
+              cast: {
+                header: { version: 2, width: server.cols, height: server.rows, timestamp: Math.floor(Date.now() / 1000), title: server.name },
+                events: [],
+              },
+              title: server.name,
+              live: true,
+              viaTaskbar: true,
+            });
+            // Grid fitted to the window; the server's PTY is narrower (ptyrun: 168 x 36), so nothing rewraps.
+            await page.evaluate('window.__termFit && window.__termFit()').catch(() => null);
+            await sleep(300);
+            const run = await streamServerTerminal(server, write, { signal: abort });
+            await writes;
+            console.log(`   🖥️  Server terminal (${server.name}): ${run.bytes} bytes from ${basename(server.ptyFile)}`);
+            // Hold on the screen so it can be read before the clip ends.
+            await sleep(3500);
+          })(),
+          sleep(60_000).then(() => {
+            throw new Error('server terminal did not finish in 60s');
+          }),
+        ]);
+        return;
+      } catch (e) {
+        abort.aborted = true;
+        console.warn(`   Evidence note: server terminal not shown: ${e instanceof Error ? e.message : e}`);
+        return;
+      }
+    }
     const shell = pickShell();
     if (!shell) {
       console.warn('   Evidence note: no bash/powershell found, terminal not shown on camera');
